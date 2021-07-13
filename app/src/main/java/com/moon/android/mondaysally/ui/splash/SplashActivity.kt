@@ -124,4 +124,12 @@ class SplashActivity : BaseActivity(), SplashListener {
 //            }
 //        }
     }
+
+    override fun initDataBinding() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initAfterBinding() {
+        TODO("Not yet implemented")
+    }
 }

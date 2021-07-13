@@ -34,6 +34,14 @@ class LoginActivity: BaseActivity(), LoginListener {
         }
     }
 
+    override fun initDataBinding() {
+        TODO("Not yet implemented")
+    }
+
+    override fun initAfterBinding() {
+        TODO("Not yet implemented")
+    }
+
     override fun onLoginStarted() {
         // 로딩바
     }
