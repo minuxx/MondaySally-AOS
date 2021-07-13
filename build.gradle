@@ -5,6 +5,19 @@ buildscript {
         google()
         mavenCentral()
     }
+    ext{
+        compileSdkVersion = 30
+        minSdkVersion = 21
+        targetSdkVersion = 30
+
+        kotlin_version = "1.4.32"
+        retrofit_version = "2.9.0"
+        okHttp_version = "4.9.0"
+        lifecycle_version = "2.2.0"
+        koin_version = "2.2.0"
+        paging_version = "3.0.0"
+    }
+
     dependencies {
         classpath "com.android.tools.build:gradle:4.2.2"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
