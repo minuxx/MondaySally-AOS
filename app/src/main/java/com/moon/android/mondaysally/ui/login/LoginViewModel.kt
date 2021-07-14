@@ -1,18 +1,15 @@
 package com.moon.android.mondaysally.ui.login
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.moon.android.mondaysally.data.entities.User
 import com.moon.android.mondaysally.data.remote.auth.listeners.LoginListener
-import com.moon.android.mondaysally.data.remote.auth.listeners.SplashListener
-import com.moon.android.mondaysally.data.repository.auth.AuthRepository
+import com.moon.android.mondaysally.data.repository.auth.AuthNetworkRepository
 import com.moon.android.mondaysally.utils.ApiException
 import com.moon.android.mondaysally.utils.Coroutines
 import com.moon.android.mondaysally.utils.SharedPreferencesManager
-import kotlinx.coroutines.delay
 
-class LoginViewModel(private val repository: AuthRepository, private val sharedPreferencesManager: SharedPreferencesManager): ViewModel() {
+class LoginViewModel(private val repository: AuthNetworkRepository, private val sharedPreferencesManager: SharedPreferencesManager): ViewModel() {
     var loginListener: LoginListener? = null
 
     val id: MutableLiveData<String> by lazy {

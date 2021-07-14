@@ -3,9 +3,9 @@ package com.moon.android.mondaysally.data.repository.auth
 import com.moon.android.mondaysally.data.entities.User
 import com.moon.android.mondaysally.data.remote.auth.AuthResponse
 import com.moon.android.mondaysally.data.remote.auth.AuthService
-import com.moon.android.mondaysally.data.repository.BaseRepository
+import com.moon.android.mondaysally.data.repository.BaseNetworkRepository
 
-class AuthRepository(private val authService: AuthService) : BaseRepository(){
+class AuthNetworkRepository(private val authService: AuthService) : BaseNetworkRepository(){
     suspend fun signUp(user: User): AuthResponse {
         return apiRequest { authService.signUp(user) }
     }

@@ -1,114 +1,51 @@
 package com.moon.android.mondaysally.ui.splash
 
-import android.content.Intent
 import android.os.Bundle
+import androidx.annotation.LayoutRes
 import com.moon.android.mondaysally.R
-import com.moon.android.mondaysally.data.entities.Auth
-import com.moon.android.mondaysally.data.remote.auth.listeners.SplashListener
+import com.moon.android.mondaysally.databinding.ActivitySplashBinding
 import com.moon.android.mondaysally.ui.BaseActivity
-import com.moon.android.mondaysally.ui.main.MainActivity
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 
 
-class SplashActivity : BaseActivity(), SplashListener {
-    private val viewModel: SplashViewModel by viewModel()
+class SplashActivity: BaseActivity<ActivitySplashBinding>() {
+
+    private lateinit var splashViewModel: SplashViewModel
+
+    @LayoutRes
+    override fun getLayoutResId() = R.layout.activity_splash
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
-        viewModel.splashListener = this
+//        setContentView(R.layout.activity_splash)
+        binding.lifecycleOwner = this;
+        binding.viewModel = getViewModel()
+        binding.viewModel?.let {
+            splashViewModel = it
+        }
     }
 
-    private fun startMainActivity(){
-        val intent = Intent(this@SplashActivity, MainActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+    override fun initDataBinding() {
 
-        startActivity(intent)
-        finish()
+
     }
 
-//    private fun startLoginActivity(){
-//        val intent = Intent(this@SplashActivity, LoginActivity::class.java)
+    override fun initAfterBinding() {
+    }
+
+//
+//    override fun onAutoLoginSuccessWithChannelUrl(message: String, channelUrl: String) {
+//        val intent = Intent(this@SplashActivity, MainActivity::class.java)
+//        intent.putExtra("groupChannelUrl",channelUrl)
+//
 //        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
-//        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+//        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP) //푸시알람으로는 반드시 새로 activity 만들어야함
 //
 //        startActivity(intent)
 //        finish()
 //    }
 
-
-//    private fun startOnBoardingActivity(){
-//        val intent = Intent(this@SplashActivity, OnBoardingActivity::class.java)
-//        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
-//        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-//
-//        startActivity(intent)
-//        finish()
-//    }
-
-    override fun onStarted() {
-
-    }
-
-    override fun onAutoLoginSuccess(message: String) {
-        startMainActivity()
-    }
-
-    override fun onAutoLoginSuccessWithChannelUrl(message: String, channelUrl: String) {
-        val intent = Intent(this@SplashActivity, MainActivity::class.java)
-        intent.putExtra("groupChannelUrl",channelUrl)
-
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP) //푸시알람으로는 반드시 새로 activity 만들어야함
-
-        startActivity(intent)
-        finish()
-    }
-
-    override fun onAutoLoginFailure(code: Int, message: String) {
-//        when(code){
-//            304, 305 -> startMiracleActivity()
-//            else -> startOnBoardingActivity()
-//        }
-    }
-
-    override fun onGetVersionSuccess(auth: Auth) {
-//        val version = BuildConfig.VERSION_NAME
-//
-//        if(!auth.isAvail){
-//            mFlag = FLAG_SERVER_CHECK
-//            showDialog(getString(R.string.dialog_title_server_check))
-//            return
-//        }
-//
-//        if(version != auth.androidVersion){
-//            mFlag = FLAG_VERSION_UPDATE
-//            showDialog(getString(R.string.dialog_title_version_update))
-//            return
-//        }
-//
-//        val channelUrl = intent.getStringExtra("groupChannelUrl")
-//        if(channelUrl == null){
-//            viewModel.autoLogin()
-//        } else {
-//            viewModel.autoLoginWithChannelUrl(channelUrl)
-//        }
-    }
-
-    override fun onGetVersionFailure(code: Int, message: String) {
-//        when(code){
-//            404 -> {
-//                mFlag = FLAG_NETWORK_ERROR
-//                showDialog(getString(R.string.network_error))
-//            }
-//        }
-    }
-
-    override fun onOKClicked() {
+//    override fun onOKClicked() {
 //        when(mFlag){
 //            FLAG_SERVER_CHECK,
 //            FLAG_NETWORK_ERROR -> {
@@ -123,13 +60,7 @@ class SplashActivity : BaseActivity(), SplashListener {
 //                finish()
 //            }
 //        }
-    }
+//    }
 
-    override fun initDataBinding() {
-        TODO("Not yet implemented")
-    }
 
-    override fun initAfterBinding() {
-        TODO("Not yet implemented")
-    }
 }

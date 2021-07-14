@@ -5,7 +5,7 @@ import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.Response
 
-abstract class BaseRepository {
+abstract class BaseNetworkRepository {
     suspend fun <T: Any> apiRequest(call: suspend () -> Response<T>) : T{
         val response = call.invoke()
 

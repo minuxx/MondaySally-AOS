@@ -2,14 +2,14 @@ package com.moon.android.mondaysally.ui.splash
 
 import androidx.lifecycle.ViewModel
 import com.moon.android.mondaysally.data.remote.auth.listeners.SplashListener
-import com.moon.android.mondaysally.data.repository.auth.AuthRepository
+import com.moon.android.mondaysally.data.repository.auth.AuthNetworkRepository
 import com.moon.android.mondaysally.utils.ApiException
 import com.moon.android.mondaysally.utils.Coroutines
 import com.moon.android.mondaysally.utils.SharedPreferencesManager
 
 import kotlinx.coroutines.delay
 
-class SplashViewModel(private val repository: AuthRepository, private val sharedPreferencesManager: SharedPreferencesManager) : ViewModel() {
+class SplashViewModel(private val repository: AuthNetworkRepository, private val sharedPreferencesManager: SharedPreferencesManager) : ViewModel() {
     var splashListener: SplashListener? = null
 
     init {

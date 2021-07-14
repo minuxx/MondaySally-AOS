@@ -1,21 +1,29 @@
 package com.moon.android.mondaysally.ui
 
 import android.content.Context
+import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.annotation.LayoutRes
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 
-open class BaseFragment: Fragment(), View.OnClickListener, DefaultDialog.WekitDialogClickListener {
-    override fun onClick(v: View?) {
+abstract class BaseFragment<T: ViewDataBinding> : Fragment() {
+    @LayoutRes
 
-    }
+    abstract fun getLayoutResId(): Int
 
-    fun showDialog(title: String, context: Context){
-        val dig = DefaultDialog(context)
-        dig.listener = this
-        dig.show(title)
-    }
+    protected lateinit var binding: T
+        private set
 
-    override fun onOKClicked() {
-
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return DataBindingUtil.inflate<T>(inflater, getLayoutResId(), container, false)
+            .apply { binding = this }.root
     }
 }
