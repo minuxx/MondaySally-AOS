@@ -6,5 +6,10 @@ class GlobalConstant {
         const val FIREBASE_STORAGE_URL = "gs://example.com/"
         const val DEBUG_TAG = "DEBUG://"
         const val FLAG_NETWORK_ERROR = 404
+
+        const val TAG = "MOBILE_TEMPLATE_APP"
+        const val X_ACCESS_TOKEN = "X-ACCESS-TOKEN"
+        const val USER = "USER"
     }
+
 }

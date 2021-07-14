@@ -2,8 +2,8 @@ package com.moon.android.mondaysally.di
 
 
 import com.moon.android.mondaysally.utils.SharedPreferencesManager
-import com.moon.android.mondaysally.utils.SharedPreferencesManager.Companion.X_ACCESS_TOKEN
 import com.moon.android.mondaysally.data.remote.auth.AuthService
+import com.moon.android.mondaysally.utils.GlobalConstant.Companion.X_ACCESS_TOKEN
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

@@ -4,13 +4,11 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
 import com.moon.android.mondaysally.data.entities.User
+import com.moon.android.mondaysally.utils.GlobalConstant.Companion.TAG
+import com.moon.android.mondaysally.utils.GlobalConstant.Companion.USER
+import com.moon.android.mondaysally.utils.GlobalConstant.Companion.X_ACCESS_TOKEN
 
 class SharedPreferencesManager(private val context: Context){
-    companion object{
-        const val TAG = "MOBILE_TEMPLATE_APP"
-        const val X_ACCESS_TOKEN = "X-ACCESS-TOKEN"
-        const val USER = "USER"
-    }
 
     fun getSharedPreferences() : SharedPreferences {
         return context.getSharedPreferences(TAG, Context.MODE_PRIVATE)

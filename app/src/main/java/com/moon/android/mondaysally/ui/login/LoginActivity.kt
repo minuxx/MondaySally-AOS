@@ -14,7 +14,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     private lateinit var loginViewModel: LoginViewModel
 
     @LayoutRes
-    override fun getLayoutResId() = R.layout.activity_main
+    override fun getLayoutResId() = R.layout.activity_login
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +30,5 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
     }
 
     override fun initAfterBinding() {
-        TODO("Not yet implemented")
     }
 }

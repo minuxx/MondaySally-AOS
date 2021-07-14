@@ -1,89 +1,83 @@
 package com.moon.android.mondaysally.ui.splash
 
-import androidx.lifecycle.ViewModel
-import com.moon.android.mondaysally.data.remote.auth.listeners.SplashListener
-import com.moon.android.mondaysally.data.repository.auth.AuthNetworkRepository
-import com.moon.android.mondaysally.utils.ApiException
-import com.moon.android.mondaysally.utils.Coroutines
-import com.moon.android.mondaysally.utils.SharedPreferencesManager
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.moon.android.mondaysally.data.repository.SharedPrefRepository
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-import kotlinx.coroutines.delay
+class SplashViewModel(application: Application) : AndroidViewModel(application) {
 
-class SplashViewModel(private val repository: AuthNetworkRepository, private val sharedPreferencesManager: SharedPreferencesManager) : ViewModel() {
-    var splashListener: SplashListener? = null
+    var sharedPrefRepository = SharedPrefRepository(application)
+
+    //view 에서 observe하고있을 변수
+    var isAutoLoginLive: MutableLiveData<Boolean> = MutableLiveData()
+
 
     init {
-        getVersion()
+//        isAutoLoginLive.value = false;
     }
 
-    fun autoLogin() {
-        splashListener?.onStarted()
-
-        Coroutines.main {
-            try {
-                delay(3000)
-                val authResponse = repository.autoLogin()
-
-                if(authResponse.isSuccess) {
-                    authResponse.auth?.let {
-                        splashListener?.onAutoLoginSuccess(authResponse.message)
-                        sharedPreferencesManager.saveJwtToken(authResponse.auth.jwtToken!!)
-                        return@main
-                    }
-                }else{
-                    splashListener?.onAutoLoginFailure(authResponse.code, authResponse.message)
-                }
-            } catch (e: ApiException) {
-                splashListener?.onAutoLoginFailure(404, e.message!!)
-            } catch (e: Exception){
-                splashListener?.onAutoLoginFailure(404, e.message!!)
-            }
-        }
+    fun isAutoLogin() {
+        val jwtToken = sharedPrefRepository.jwtToken
+        isAutoLoginLive.value = jwtToken != null
+//        viewModelScope.launch {
+//            val jwtToken = sharedPrefRepository.jwtToken
+//            withContext(Main) {
+//                isAutoLoginLive.value = jwtToken != null
+//            }
+//        }
     }
 
-    fun autoLoginWithChannelUrl(channelUrl:String){
-        Coroutines.main {
-            try {
-                delay(1000)
-                val authResponse = repository.autoLogin()
+//    fun autoLogin() {
+//        splashListener?.onStarted()
+//
+//        Coroutines.main {
+//            try {
+//                delay(3000)
+//                val authResponse = repository.autoLogin()
+//
+//                if(authResponse.isSuccess) {
+//                    authResponse.auth?.let {
+//                        splashListener?.onAutoLoginSuccess(authResponse.message)
+//                        sharedPreferencesManager.saveJwtToken(authResponse.auth.jwtToken!!)
+//                        return@main
+//                    }
+//                }else{
+//                    splashListener?.onAutoLoginFailure(authResponse.code, authResponse.message)
+//                }
+//            } catch (e: ApiException) {
+//                splashListener?.onAutoLoginFailure(404, e.message!!)
+//            } catch (e: Exception){
+//                splashListener?.onAutoLoginFailure(404, e.message!!)
+//            }
+//        }
+//    }
 
-                if(authResponse.isSuccess) {
-                    authResponse.auth?.let {
-                        splashListener?.onAutoLoginSuccessWithChannelUrl(authResponse.message,channelUrl)
-                        sharedPreferencesManager.saveJwtToken(authResponse.auth.jwtToken!!)
-                        return@main
-                    }
-                }else{
-                    splashListener?.onAutoLoginFailure(authResponse.code, authResponse.message)
-                }
-            } catch (e: ApiException) {
-                splashListener?.onAutoLoginFailure(404, e.message!!)
-            } catch (e: Exception){
-                splashListener?.onAutoLoginFailure(404, e.message!!)
-            }
-        }
-    }
 
-    private fun getVersion() {
-        splashListener?.onStarted()
-
-        Coroutines.main {
-            try {
-                val authResponse = repository.getVersion()
-
-                if(authResponse.isSuccess) {
-                    authResponse.auth?.let {
-                        splashListener?.onGetVersionSuccess(authResponse.auth)
-                        return@main
-                    }
-                }else{
-                    splashListener?.onGetVersionFailure(authResponse.code, authResponse.message)
-                }
-            } catch (e: ApiException) {
-                splashListener?.onGetVersionFailure(404, e.message!!)
-            } catch (e: Exception){
-                splashListener?.onGetVersionFailure(404, e.message!!)
-            }
-        }
-    }
+//    private fun getVersion() {
+//        splashListener?.onStarted()
+//
+//        Coroutines.main {
+//            try {
+//                val authResponse = repository.getVersion()
+//
+//                if (authResponse.isSuccess) {
+//                    authResponse.auth?.let {
+//                        splashListener?.onGetVersionSuccess(authResponse.auth)
+//                        return@main
+//                    }
+//                } else {
+//                    splashListener?.onGetVersionFailure(authResponse.code, authResponse.message)
+//                }
+//            } catch (e: ApiException) {
+//                splashListener?.onGetVersionFailure(404, e.message!!)
+//            } catch (e: Exception) {
+//                splashListener?.onGetVersionFailure(404, e.message!!)
+//            }
+//        }
+//    }
 }

@@ -1,25 +1,16 @@
 package com.moon.android.mondaysally.data.repository
 
 import android.content.Context
+import com.moon.android.mondaysally.utils.GlobalConstant
+import com.moon.android.mondaysally.utils.SharedPreferencesManager
 
-class SharedPrefRepository(private val context: Context) {
- 
-    private val userDao = mDatabase.userDao()
-    val allUsers: LiveData<List<UserEntity>> = userDao.getAlphabetizedUsers()
- 
-    companion object{
-        private var sInstance: SharedPrefRepository? = null
-        fun getInstance(database: AppDatabase): SharedPrefRepository {
-            return sInstance
-                    ?: synchronized(this){
-                        val instance = SharedPrefRepository(database)
-                        sInstance = instance
-                        instance
-                    }
-        }
+class SharedPrefRepository(context: Context) {
+    var sharedPreferencesManager: SharedPreferencesManager = SharedPreferencesManager(context)
+    val jwtToken: String? = sharedPreferencesManager.getSharedPreferences()
+        .getString(GlobalConstant.X_ACCESS_TOKEN, null)
+
+    fun saveJwtToken(jwtToken: String) {
+        sharedPreferencesManager.saveJwtToken(jwtToken);
     }
-    
-    suspend fun insert(userEntity: UserEntity) {
-        userDao.insert(userEntity)
-    }
+
 }
