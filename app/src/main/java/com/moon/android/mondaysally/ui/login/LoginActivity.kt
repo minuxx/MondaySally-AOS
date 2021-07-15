@@ -5,13 +5,13 @@ import androidx.annotation.LayoutRes
 import com.moon.android.mondaysally.R
 import com.moon.android.mondaysally.databinding.ActivityLoginBinding
 import com.moon.android.mondaysally.ui.BaseActivity
-import org.koin.androidx.viewmodel.ext.android.getViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
-    //    private val viewModel : LoginViewModel by viewModel()
-    private lateinit var loginViewModel: LoginViewModel
+//    val viewModel: LoginViewModel by viewModel()
+    private val loginViewModel : LoginViewModel by viewModel()
 
     @LayoutRes
     override fun getLayoutResId() = R.layout.activity_login
@@ -23,10 +23,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>() {
 
     override fun initDataBinding() {
         binding.lifecycleOwner = this;
-        binding.viewModel = getViewModel()
-        binding.viewModel?.let {
-            loginViewModel = it
-        }
+        binding.viewModel = loginViewModel
     }
 
     override fun initAfterBinding() {

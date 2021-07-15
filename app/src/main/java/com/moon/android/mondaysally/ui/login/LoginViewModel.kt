@@ -27,8 +27,6 @@ class LoginViewModel(private val repository: AuthNetworkRepository, private val 
     private fun getUser(): User = User(id= id.value.toString(),pw= pw.value.toString())
 
     fun login() {
-        loginListener?.onLoginStarted()
-
         val user = getUser()
 
         Coroutines.main {

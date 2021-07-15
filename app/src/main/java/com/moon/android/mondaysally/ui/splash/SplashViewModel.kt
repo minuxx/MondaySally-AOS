@@ -1,61 +1,51 @@
 package com.moon.android.mondaysally.ui.splash
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.ViewModel
 import com.moon.android.mondaysally.data.repository.SharedPrefRepository
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.moon.android.mondaysally.data.repository.auth.AuthNetworkRepository
+import com.moon.android.mondaysally.utils.Coroutines
 
-class SplashViewModel(application: Application) : AndroidViewModel(application) {
 
-    var sharedPrefRepository = SharedPrefRepository(application)
+class SplashViewModel(
+    private val sharedPrefRepository: SharedPrefRepository,
+    private val authNetworkRepository: AuthNetworkRepository
+) : ViewModel() {
 
     //view 에서 observe하고있을 변수
-    var isAutoLoginLive: MutableLiveData<Boolean> = MutableLiveData()
-
-
-    init {
-//        isAutoLoginLive.value = false;
-    }
+    var autoLoginResponse: MutableLiveData<Boolean> = MutableLiveData()
 
     fun isAutoLogin() {
         val jwtToken = sharedPrefRepository.jwtToken
-        isAutoLoginLive.value = jwtToken != null
-//        viewModelScope.launch {
-//            val jwtToken = sharedPrefRepository.jwtToken
-//            withContext(Main) {
-//                isAutoLoginLive.value = jwtToken != null
-//            }
-//        }
+        if (jwtToken != null) {
+            tokenCheck()
+        } else {
+            autoLoginResponse.value = false;
+        }
     }
 
-//    fun autoLogin() {
-//        splashListener?.onStarted()
-//
-//        Coroutines.main {
-//            try {
+    private fun tokenCheck() {
+        Coroutines.main {
+            try {
 //                delay(3000)
-//                val authResponse = repository.autoLogin()
-//
-//                if(authResponse.isSuccess) {
-//                    authResponse.auth?.let {
-//                        splashListener?.onAutoLoginSuccess(authResponse.message)
-//                        sharedPreferencesManager.saveJwtToken(authResponse.auth.jwtToken!!)
-//                        return@main
-//                    }
-//                }else{
-//                    splashListener?.onAutoLoginFailure(authResponse.code, authResponse.message)
-//                }
-//            } catch (e: ApiException) {
-//                splashListener?.onAutoLoginFailure(404, e.message!!)
-//            } catch (e: Exception){
-//                splashListener?.onAutoLoginFailure(404, e.message!!)
-//            }
-//        }
-//    }
+                val authResponse = authNetworkRepository.autoLogin()
+
+                if (authResponse.isSuccess) {
+                    authResponse.auth?.let {
+                        splashListener?.onAutoLoginSuccess(authResponse.message)
+                        sharedPreferencesManager.saveJwtToken(authResponse.auth.jwtToken!!)
+                        return@main
+                    }
+                } else {
+                    splashListener?.onAutoLoginFailure(authResponse.code, authResponse.message)
+                }
+            } catch (e: ApiException) {
+                splashListener?.onAutoLoginFailure(404, e.message!!)
+            } catch (e: Exception) {
+                splashListener?.onAutoLoginFailure(404, e.message!!)
+            }
+        }
+    }
 
 
 //    private fun getVersion() {
