@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MondaySally</string>
+
+<!--    에러처리-->
+    <string name="default_fail">네트워크연결이 원활하지 않습니다</string>
+
 </resources>

@@ -13,7 +13,7 @@ interface AuthService {
     @POST("users/login")
     suspend fun login(@Body user: User): Response<AuthResponse>
 
-    @GET("users/autologin")
+    @GET("users/auto-login")
     suspend fun autoLogin(): Response<AuthResponse>
 
     @GET("version")

@@ -25,11 +25,9 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     override fun initDataBinding() {
         binding.lifecycleOwner = this;
         binding.viewModel = splashViewModel
-    }
 
-    override fun initAfterBinding() {
-        splashViewModel.autoLoginResponse.observe(this, { islogin ->
-            if (splashViewModel.autoLoginResponse.value == true) {
+        splashViewModel.isAutoLogin.observe(this, { isAutologin ->
+            if (isAutologin) {
                 startActivityWithClear(MainActivity::class.java)
             } else {
                 startNextActivity(LoginActivity::class.java)
@@ -37,7 +35,17 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
             finish()
         })
 
-        splashViewModel.isAutoLogin();
+        splashViewModel.fail.observe(this, { fail ->
+            when(fail.code){
+                404 -> {
+                    showToast(getString(R.string.default_fail))
+                }
+            }
+        })
+    }
+
+    override fun initAfterBinding() {
+        splashViewModel.autoLoginCheck();
     }
 
 //

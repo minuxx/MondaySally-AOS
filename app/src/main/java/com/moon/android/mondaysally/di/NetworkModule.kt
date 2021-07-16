@@ -3,6 +3,7 @@ package com.moon.android.mondaysally.di
 
 import com.moon.android.mondaysally.utils.SharedPreferencesManager
 import com.moon.android.mondaysally.data.remote.auth.AuthService
+import com.moon.android.mondaysally.data.repository.SharedPrefRepository
 import com.moon.android.mondaysally.utils.GlobalConstant.Companion.X_ACCESS_TOKEN
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -13,17 +14,17 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-const val PRODUCTION_URL = "https://api.example.com/"
-const val TEST_URL = "https://test.example.com/"
-private val base_url: String = PRODUCTION_URL
+const val PRODUCTION_URL = "https://api.mondaysally.com/"
+const val TEST_URL = "https://test.mondaysally.com/"
+private val base_url: String = TEST_URL
 
 fun getBaseUrl() = base_url
 
 val networkModule: Module = module {
-    fun provideHeaderInterceptor(sharedPreferenceManager: SharedPreferencesManager) =
+    fun provideHeaderInterceptor(sharedPrefRepository: SharedPrefRepository) =
         Interceptor { chain ->
             val request = chain.request().newBuilder()
-                .addHeader(X_ACCESS_TOKEN, "${sharedPreferenceManager.getJwtToken()}")
+                .addHeader(X_ACCESS_TOKEN, "${sharedPrefRepository.jwtToken}")
                 .build()
 
             chain.proceed(request)

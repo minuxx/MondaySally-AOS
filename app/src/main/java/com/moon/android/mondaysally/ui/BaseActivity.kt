@@ -2,10 +2,12 @@ package com.moon.android.mondaysally.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.moon.android.mondaysally.R
 import com.moon.android.mondaysally.ui.main.MainActivity
 
 abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity(),
@@ -22,6 +24,10 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity(),
         val dig = DefaultDialog(this)
         dig.listener = this
         dig.show(title)
+    }
+
+    fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     open fun startNextActivity(activity: Class<*>?) {
@@ -57,7 +63,7 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity(),
 
     /**
      * 그 외에 설정할 것이 있으면 이곳에서 설정.
-     * 클릭 리스너도 이곳에서 설정.
+     * 클릭 리스너 등
      */
     protected abstract fun initAfterBinding()
 
