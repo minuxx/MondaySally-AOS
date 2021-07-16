@@ -9,7 +9,7 @@ data class Auth(
     @SerializedName(value = "profileImg") val profileImg: String = "",
     @SerializedName(value = "isNotice") val isNotice: Int = 0,
     @SerializedName(value = "androidVersion") val androidVersion: String = "",
-    @SerializedName(value = "iosVersion") val iosVersion: String = "",
-    @SerializedName(value = "isAvail") val isAvail: Boolean = true,
+    @SerializedName(value = "version") val version: String = "",
+    @SerializedName(value = "isAccessable") val isAccessable: Boolean = true,
     @SerializedName(value = "authenticNum") val authenticNum: Int = 0
 )

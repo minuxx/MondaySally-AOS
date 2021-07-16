@@ -13,9 +13,9 @@ interface AuthService {
     @POST("users/login")
     suspend fun login(@Body user: User): Response<AuthResponse>
 
-    @GET("users/auto-login")
+    @GET("/auto-login")
     suspend fun autoLogin(): Response<AuthResponse>
 
-    @GET("version")
+    @GET("/app/aos")
     suspend fun getVersion(): Response<AuthResponse>
 }

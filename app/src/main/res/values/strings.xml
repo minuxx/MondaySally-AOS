@@ -1,7 +1,13 @@
 <resources>
     <string name="app_name">MondaySally</string>
 
-<!--    에러처리-->
+    <!--에러처리-->
     <string name="default_fail">네트워크연결이 원활하지 않습니다</string>
+
+    <!--OnBoarding-->
+    <string name="onboarding_welcome_title">먼데이샐리에\n오신걸 환영합니다!</string>
+    <string name="onboarding_welcome_content">월요병 NO! 출근이 즐거워\n직장인들의 만병인 월요병 이제는 극복해보세요.</string>
+    <string name="onboarding_button">바로 시작하기></string>
+
 
 </resources>

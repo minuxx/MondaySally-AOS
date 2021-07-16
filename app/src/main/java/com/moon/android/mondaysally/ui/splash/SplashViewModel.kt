@@ -1,13 +1,13 @@
 package com.moon.android.mondaysally.ui.splash
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.moon.android.mondaysally.data.remote.Fail
 import com.moon.android.mondaysally.data.repository.SharedPrefRepository
 import com.moon.android.mondaysally.data.repository.auth.AuthNetworkRepository
 import com.moon.android.mondaysally.utils.ApiException
-import com.moon.android.mondaysally.utils.Coroutines
+import kotlinx.coroutines.launch
 
 
 class SplashViewModel(
@@ -15,65 +15,53 @@ class SplashViewModel(
     private val authNetworkRepository: AuthNetworkRepository
 ) : ViewModel() {
 
-    //view 에서 observe하고있을 변수
-    var isAutoLogin: MutableLiveData<Boolean> = MutableLiveData()
+    var serverAccessible: MutableLiveData<Boolean> = MutableLiveData()
+    var autoLogin: MutableLiveData<Boolean> = MutableLiveData()
     var fail: MutableLiveData<Fail> = MutableLiveData()
 
     fun autoLoginCheck() {
         val jwtToken = sharedPrefRepository.jwtToken
-        tokenCheck()
-//        if (jwtToken != null) {
-//            tokenCheck()
-//        } else {
-//            isAutoLogin.value = false
-//        }
-    }
-
-    private fun tokenCheck() {
-        Log.d("통신", "start")
-        Coroutines.main {
-            try {
-//                delay(3000)
-                val authResponse = authNetworkRepository.autoLogin()
-                Log.d("통신", authResponse.message)
-                if (authResponse.isSuccess) {
-                    authResponse.auth?.let {
-                        isAutoLogin.value = true
-                        sharedPrefRepository.saveJwtToken(authResponse.auth.jwtToken!!)
-                        return@main
-                    }
-                } else {
-                    fail.value = Fail(authResponse.message, authResponse.code)
-                }
-            } catch (e: ApiException) {
-                fail.value = Fail(e.message!!, 404)
-            } catch (e: Exception) {
-                fail.value = Fail(e.message!!, 404)
-            }
+        if (jwtToken != null) {
+            tokenCheck()
+        } else {
+            autoLogin.value = false
         }
     }
 
+    private fun tokenCheck() = viewModelScope.launch {
+        try {
+            val authResponse = authNetworkRepository.autoLogin()
+            if (authResponse.isSuccess) {
+                authResponse.auth?.let {
+                    autoLogin.value = true
+                    sharedPrefRepository.saveJwtToken(authResponse.auth.jwtToken!!)
+                }
+            } else {
+                fail.value = Fail(authResponse.message, authResponse.code)
+            }
+        } catch (e: ApiException) {
+            fail.value = Fail(e.message!!, 404)
+        } catch (e: Exception) {
+            fail.value = Fail(e.message!!, 404)
+        }
+    }
 
-//    private fun getVersion() {
-//        splashListener?.onStarted()
-//
-//        Coroutines.main {
-//            try {
-//                val authResponse = repository.getVersion()
-//
-//                if (authResponse.isSuccess) {
-//                    authResponse.auth?.let {
-//                        splashListener?.onGetVersionSuccess(authResponse.auth)
-//                        return@main
-//                    }
-//                } else {
-//                    splashListener?.onGetVersionFailure(authResponse.code, authResponse.message)
-//                }
-//            } catch (e: ApiException) {
-//                splashListener?.onGetVersionFailure(404, e.message!!)
-//            } catch (e: Exception) {
-//                splashListener?.onGetVersionFailure(404, e.message!!)
-//            }
-//        }
-//    }
+    fun serverVersionCheck() = viewModelScope.launch {
+        try {
+            val authResponse = authNetworkRepository.getVersion()
+            if (authResponse.code == 200) {
+                authResponse.auth?.let {
+                    serverAccessible.value = true
+                    autoLoginCheck()
+                }
+            } else {
+                fail.value = Fail(authResponse.message, authResponse.code)
+            }
+        } catch (e: ApiException) {
+            fail.value = Fail(e.message!!, 404)
+        } catch (e: Exception) {
+            fail.value = Fail(e.message!!, 404)
+        }
+    }
+
 }

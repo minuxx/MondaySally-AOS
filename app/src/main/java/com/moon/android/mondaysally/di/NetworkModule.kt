@@ -1,7 +1,6 @@
 package com.moon.android.mondaysally.di
 
 
-import com.moon.android.mondaysally.utils.SharedPreferencesManager
 import com.moon.android.mondaysally.data.remote.auth.AuthService
 import com.moon.android.mondaysally.data.repository.SharedPrefRepository
 import com.moon.android.mondaysally.utils.GlobalConstant.Companion.X_ACCESS_TOKEN
@@ -15,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 const val PRODUCTION_URL = "https://api.mondaysally.com/"
-const val TEST_URL = "https://test.mondaysally.com/"
+const val TEST_URL = "https://test.mondaysally.com"
 private val base_url: String = TEST_URL
 
 fun getBaseUrl() = base_url
