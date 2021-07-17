@@ -7,6 +7,7 @@ import com.moon.android.mondaysally.ui.BaseActivity
 import com.moon.android.mondaysally.ui.login.LoginActivity
 import com.moon.android.mondaysally.ui.main.MainActivity
 import com.moon.android.mondaysally.ui.onboarding.OnBoardingActivity
+import com.moon.android.mondaysally.ui.tutorial.TutorialActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -21,11 +22,26 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         binding.lifecycleOwner = this;
         binding.viewModel = splashViewModel
 
+        splashViewModel.serverAccessible.observe(this, { serverAccessible ->
+            if (serverAccessible) {
+                splashViewModel.firstLaunchCheck()
+            }
+        })
+
+        splashViewModel.firstLaunch.observe(this, { firstLaunch ->
+            if (firstLaunch) {
+                startActivityWithClear(TutorialActivity::class.java)
+                finish()
+            } else {
+                splashViewModel.autoLoginCheck()
+            }
+        })
+
         splashViewModel.autoLogin.observe(this, { isAutologin ->
             if (isAutologin) {
                 startActivityWithClear(MainActivity::class.java)
             } else {
-                startNextActivity(OnBoardingActivity::class.java)
+                startNextActivity(LoginActivity::class.java)
             }
             finish()
         })
@@ -38,14 +54,17 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 //            402	"서버 긴급점검 중입니다."
 //            404	"네트워크 오류가 발생했습니다."
             when(fail.code){
-                341, 388, 389, 402 -> {
+                341, 388, 389 -> {
                     showToast(fail.message)
+                }
+                402 -> {
+                    showToast(getString(R.string.default_fail))
                 }
                 404 -> {
                     showToast(getString(R.string.default_fail))
                 }
             }
-            startNextActivity(LoginActivity::class.java)
+            finish()
         })
     }
 

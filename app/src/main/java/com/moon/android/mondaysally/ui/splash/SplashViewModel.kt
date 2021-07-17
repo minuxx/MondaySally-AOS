@@ -16,6 +16,7 @@ class SplashViewModel(
 ) : ViewModel() {
 
     var serverAccessible: MutableLiveData<Boolean> = MutableLiveData()
+    var firstLaunch: MutableLiveData<Boolean> = MutableLiveData()
     var autoLogin: MutableLiveData<Boolean> = MutableLiveData()
     var fail: MutableLiveData<Fail> = MutableLiveData()
 
@@ -52,7 +53,6 @@ class SplashViewModel(
             if (authResponse.code == 200) {
                 authResponse.auth?.let {
                     serverAccessible.value = true
-                    autoLoginCheck()
                 }
             } else {
                 fail.value = Fail(authResponse.message, authResponse.code)
@@ -62,6 +62,11 @@ class SplashViewModel(
         } catch (e: Exception) {
             fail.value = Fail(e.message!!, 404)
         }
+    }
+
+    fun firstLaunchCheck() {
+        val isFirstLaunch = sharedPrefRepository.isFirstLaunch
+        firstLaunch.value = isFirstLaunch
     }
 
 }

@@ -10,6 +10,10 @@ class GlobalConstant {
         const val TAG = "MOBILE_TEMPLATE_APP"
         const val X_ACCESS_TOKEN = "X-ACCESS-TOKEN"
         const val USER = "USER"
+
+        //SharedPref Key
+        const val FIRST_LAUNCH = "FIRST-LAUNCH"
+
     }
 
 }
