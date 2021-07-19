@@ -1,12 +1,12 @@
 package com.moon.android.mondaysally.data.repository
 
 import android.content.Context
-import android.text.BoringLayout
 import com.moon.android.mondaysally.utils.GlobalConstant
 import com.moon.android.mondaysally.utils.SharedPreferencesManager
 
 class SharedPrefRepository(context: Context) {
     var sharedPreferencesManager: SharedPreferencesManager = SharedPreferencesManager(context)
+
     val jwtToken: String? = sharedPreferencesManager.getSharedPreferences()
         .getString(GlobalConstant.X_ACCESS_TOKEN, null)
 
@@ -17,4 +17,9 @@ class SharedPrefRepository(context: Context) {
         sharedPreferencesManager.saveJwtToken(jwtToken);
     }
 
+    fun noMoreTutorial() {
+        sharedPreferencesManager.getSharedPreferences().edit()
+            .putBoolean(GlobalConstant.FIRST_LAUNCH, false)
+            .apply()
+    }
 }

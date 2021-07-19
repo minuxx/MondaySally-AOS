@@ -10,6 +10,7 @@
     <string name="onboarding_button">바로 시작하기></string>
 
     <!--튜토리얼-->
+    <string name="tutorial_start">시작하기</string>
     <string name="tutorial_skip">건너뛰기</string>
     <string name="tutorial_title_1">출퇴근 시간에 따른 포인트</string>
     <string name="tutorial_title_2">클로버로 기프트 신청</string>

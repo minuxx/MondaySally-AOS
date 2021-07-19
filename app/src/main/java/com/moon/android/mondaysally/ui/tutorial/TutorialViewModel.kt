@@ -1,12 +1,13 @@
 package com.moon.android.mondaysally.ui.tutorial
 
 import androidx.lifecycle.ViewModel
+import com.moon.android.mondaysally.data.repository.SharedPrefRepository
 
 
-class TutorialViewModel() : ViewModel() {
+class TutorialViewModel(private val sharedPrefRepository: SharedPrefRepository) : ViewModel() {
 
-    fun nextStepClicked() {
-
+    fun noMoreTutorial() {
+        sharedPrefRepository.noMoreTutorial()
     }
 
 }

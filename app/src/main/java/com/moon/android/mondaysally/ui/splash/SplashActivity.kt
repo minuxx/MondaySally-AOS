@@ -1,5 +1,6 @@
 package com.moon.android.mondaysally.ui.splash
 
+import android.util.Log
 import androidx.annotation.LayoutRes
 import com.moon.android.mondaysally.R
 import com.moon.android.mondaysally.databinding.ActivitySplashBinding
@@ -64,6 +65,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                     showToast(getString(R.string.default_fail))
                 }
             }
+            Log.d("네트워크: ", fail.message)
             finish()
         })
     }

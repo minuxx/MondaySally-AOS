@@ -13,6 +13,7 @@ class GlobalConstant {
 
         //SharedPref Key
         const val FIRST_LAUNCH = "FIRST-LAUNCH"
+        const val NO_MORE_TUTORIAL = "NO-MORE-TUTORIAL"
 
     }
 

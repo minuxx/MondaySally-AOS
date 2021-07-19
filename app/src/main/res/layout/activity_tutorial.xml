@@ -18,26 +18,36 @@
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/activity_tutorial_vp2"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="170dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
+            android:id="@+id/activity_tutorial_btn_skip"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginHorizontal="15dp"
-            android:layout_marginBottom="43dp"
             android:background="@drawable/background_round_orange"
             android:fontFamily="@font/roboto_medium"
             android:text="@string/tutorial_skip"
+            android:layout_marginBottom="40dp"
             android:textColor="@color/white"
-            android:textSize="17sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintBottom_toTopOf="@+id/activity_tutorial_indicator"
+            android:textSize="17sp" />
+
+        <me.relex.circleindicator.CircleIndicator3
+            android:id="@+id/activity_tutorial_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="28dp"
+            app:ci_drawable_unselected="@drawable/radius_very_light_gray"
+            app:ci_drawable="@drawable/radius_pinksh_orange"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
