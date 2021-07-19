@@ -19,11 +19,11 @@ class ViewPagerAdapter(
 
     override fun createFragment(position: Int): Fragment {
         if (position == 0) {
-            return TutorialImageFragment(R.drawable.illust_point, titleList[0], contentList[0])
+            return TutorialFragment(R.drawable.illust_point, titleList[0], contentList[0])
         } else if (position == 1) {
-            return TutorialImageFragment(R.drawable.illust_point, titleList[1], contentList[1])
+            return TutorialFragment(R.drawable.illust_point, titleList[1], contentList[1])
         } else {
-            return TutorialImageFragment(R.drawable.illust_twinkle, titleList[2], contentList[2])
+            return TutorialFragment(R.drawable.illust_twinkle, titleList[2], contentList[2])
         }
     }
 }
