@@ -23,6 +23,8 @@
         <activity android:name=".ui.main.MainActivity"/>
         <activity android:name=".ui.onboarding.OnBoardingActivity"/>
         <activity android:name=".ui.tutorial.TutorialActivity"/>
+        <activity android:name=".ui.team_code.TeamCodeActivity"/>
+
     </application>
 
 </manifest>

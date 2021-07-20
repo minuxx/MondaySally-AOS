@@ -8,6 +8,7 @@ import com.moon.android.mondaysally.ui.BaseActivity
 import com.moon.android.mondaysally.ui.login.LoginActivity
 import com.moon.android.mondaysally.ui.main.MainActivity
 import com.moon.android.mondaysally.ui.onboarding.OnBoardingActivity
+import com.moon.android.mondaysally.ui.team_code.TeamCodeActivity
 import com.moon.android.mondaysally.ui.tutorial.TutorialActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -31,6 +32,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
         splashViewModel.firstLaunch.observe(this, { firstLaunch ->
             if (firstLaunch) {
+                startActivityWithClear(TeamCodeActivity::class.java)
                 startActivityWithClear(TutorialActivity::class.java)
                 finish()
             } else {

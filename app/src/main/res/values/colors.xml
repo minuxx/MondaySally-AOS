@@ -10,4 +10,6 @@
     <color name="pinkish_orange">#ffff784e</color>
     <color name="brown_grey">#ff7b7b7b</color>
     <color name="very_light_gray">#f0f0f0</color>
+    <color name="brown_grey_2">#afafaf</color>
+    <color name="greyish_brown">#585858</color>
 </resources>
