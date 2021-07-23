@@ -1,14 +1,15 @@
 package com.moon.android.mondaysally.data.repository.auth
 
+import com.moon.android.mondaysally.data.entities.Code
 import com.moon.android.mondaysally.data.entities.User
 import com.moon.android.mondaysally.data.remote.auth.AuthResponse
 import com.moon.android.mondaysally.data.remote.auth.AuthService
 import com.moon.android.mondaysally.data.repository.BaseNetworkRepository
 
 class AuthNetworkRepository(private val authService: AuthService) : BaseNetworkRepository(){
-    suspend fun signUp(user: User): AuthResponse {
-        return apiRequest { authService.signUp(user) }
-    }
+//    suspend fun signUp(user: User): AuthResponse {
+//        return apiRequest { authService.signUp(user) }
+//    }
 
     suspend fun login(user: User): AuthResponse {
         return apiRequest { authService.login(user) }
@@ -18,7 +19,7 @@ class AuthNetworkRepository(private val authService: AuthService) : BaseNetworkR
         return apiRequest { authService.autoLogin() }
     }
 
-    suspend fun getVersion(): AuthResponse {
-        return apiRequest { authService.getVersion() }
+    suspend fun checkTeamCode(code: Code): AuthResponse {
+        return apiRequest { authService.checkTeamCode(code) }
     }
 }

@@ -2,13 +2,13 @@ package com.moon.android.mondaysally.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import com.moon.android.mondaysally.R
-import com.moon.android.mondaysally.ui.main.MainActivity
+import com.moon.android.mondaysally.utils.GlobalConstant
 
 abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity(),
     DefaultDialog.WekitDialogClickListener {
@@ -41,6 +41,17 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity(),
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
+    }
+
+    open fun animateViewShake(view: View) {
+        view.animate()
+            .withEndAction{
+                // here you can clear the fields after the shake
+            }
+            .xBy(-20f)
+            .setInterpolator(GlobalConstant.decayingSineWave)
+            .setDuration(300)
+            .start()
     }
 
     override fun onOKClicked() {

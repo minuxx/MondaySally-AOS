@@ -21,7 +21,7 @@ class ViewPagerAdapter(
         if (position == 0) {
             return TutorialFragment(R.drawable.illust_point, titleList[0], contentList[0])
         } else if (position == 1) {
-            return TutorialFragment(R.drawable.illust_point, titleList[1], contentList[1])
+            return TutorialFragment(R.drawable.illust_clover_gift, titleList[1], contentList[1])
         } else {
             return TutorialFragment(R.drawable.illust_twinkle, titleList[2], contentList[2])
         }

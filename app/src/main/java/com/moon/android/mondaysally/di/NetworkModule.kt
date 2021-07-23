@@ -2,6 +2,7 @@ package com.moon.android.mondaysally.di
 
 
 import com.moon.android.mondaysally.data.remote.auth.AuthService
+import com.moon.android.mondaysally.data.remote.common.CommonService
 import com.moon.android.mondaysally.data.repository.SharedPrefRepository
 import com.moon.android.mondaysally.utils.GlobalConstant.Companion.X_ACCESS_TOKEN
 import okhttp3.Interceptor
@@ -52,10 +53,14 @@ val networkModule: Module = module {
     fun provideAuthService(retrofit: Retrofit): AuthService =
         retrofit.create(AuthService::class.java)
 
+    fun provideCommonService(retrofit: Retrofit): CommonService =
+        retrofit.create(CommonService::class.java)
 
     single { provideHeaderInterceptor(get()) }
     single { provideHttpLoggingInterceptor() }
     single { provideOkHttpClient(get(), get()) }
     single { provideRetrofit(get()) }
     single { provideAuthService(get()) }
+    single { provideCommonService(get()) }
+
 }

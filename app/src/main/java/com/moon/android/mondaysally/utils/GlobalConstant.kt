@@ -1,5 +1,7 @@
 package com.moon.android.mondaysally.utils
 
+import android.animation.TimeInterpolator
+
 class GlobalConstant {
     companion object{
         //common
@@ -15,6 +17,14 @@ class GlobalConstant {
         const val FIRST_LAUNCH = "FIRST-LAUNCH"
         const val NO_MORE_TUTORIAL = "NO-MORE-TUTORIAL"
 
+
+        //Animation
+        const val FREQ = 1.5f
+        const val DECAY = 1f
+        val decayingSineWave = TimeInterpolator { input ->
+            val raw = Math.sin(FREQ * input * 2 * Math.PI)
+            (raw * Math.exp((-input * DECAY).toDouble())).toFloat()
+        }
     }
 
 }

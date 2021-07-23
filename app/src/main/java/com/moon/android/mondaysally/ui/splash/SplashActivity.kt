@@ -7,7 +7,6 @@ import com.moon.android.mondaysally.databinding.ActivitySplashBinding
 import com.moon.android.mondaysally.ui.BaseActivity
 import com.moon.android.mondaysally.ui.login.LoginActivity
 import com.moon.android.mondaysally.ui.main.MainActivity
-import com.moon.android.mondaysally.ui.onboarding.OnBoardingActivity
 import com.moon.android.mondaysally.ui.team_code.TeamCodeActivity
 import com.moon.android.mondaysally.ui.tutorial.TutorialActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -73,6 +72,8 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     }
 
     override fun initAfterBinding() {
-        splashViewModel.serverVersionCheck()
+//        splashViewModel.serverVersionCheck()
+        splashViewModel.firstLaunchCheck()
+
     }
 }

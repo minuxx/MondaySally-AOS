@@ -7,6 +7,8 @@
         <variable
             name="viewModel"
             type="com.moon.android.mondaysally.ui.team_code.TeamCodeViewModel" />
+
+        <import type="android.text.TextUtils" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -50,11 +52,12 @@
             android:layout_height="53dp"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="15dp"
-            android:background="@drawable/bg_round_white_gray"
+            android:background="@drawable/bg_edittext_gray_orange"
             android:fontFamily="@font/roboto_light"
             android:hint="@string/team_code_hint"
-            android:inputType="numberDecimal"
+            android:inputType="text"
             android:paddingStart="15dp"
+            android:text="@={viewModel.teamCode}"
             android:textColor="@color/black"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -65,13 +68,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="13dp"
             android:fontFamily="@font/roboto_light"
             android:text="@string/team_code_guide"
             android:textColor="@color/greyish_brown"
             android:textSize="13sp"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="13dp"
             app:layout_constraintTop_toBottomOf="@+id/activity_team_code_et_input" />
+
+        <Button
+            android:id="@+id/activity_team_code_btn_guide"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/bg_btn_gray_orange"
+            android:enabled="@{!TextUtils.isEmpty(viewModel.teamCode)}"
+            android:fontFamily="@font/roboto_medium"
+            android:onClick="@{() -> viewModel.whenBtnDoneClicked()}"
+            android:text="@string/team_code_btn_done"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

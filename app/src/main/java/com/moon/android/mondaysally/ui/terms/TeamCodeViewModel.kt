@@ -1,6 +1,5 @@
-package com.moon.android.mondaysally.ui.team_code
+package com.moon.android.mondaysally.ui.terms
 
-import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,7 +12,7 @@ import com.moon.android.mondaysally.utils.ApiException
 import kotlinx.coroutines.launch
 
 
-class TeamCodeViewModel(
+class TermsViewModel(
     private val authNetworkRepository: AuthNetworkRepository
 ) : ViewModel() {
 
@@ -22,28 +21,12 @@ class TeamCodeViewModel(
     var goNextActivity: MutableLiveData<Boolean> = MutableLiveData()
     var fail: MutableLiveData<Fail> = MutableLiveData()
 
-    private fun checkTeamCode(code: String) = viewModelScope.launch {
-        try {
-            val authResponse = authNetworkRepository.checkTeamCode(Code(code))
-            if (authResponse.code == 200) {
-                authResponse.auth?.let {
-                    goNextActivity.value = true
-                }
-            } else {
-                fail.value = Fail(authResponse.message, authResponse.code)
-            }
-        } catch (e: ApiException) {
-            fail.value = Fail(e.message!!, 404)
-        } catch (e: Exception) {
-            fail.value = Fail(e.message!!, 404)
-        }
-    }
 
     fun whenBtnDoneClicked() {
         teamCode.get()?.let {
 //            Log.d("체크", it)
-            checkTeamCode(it)
         }
     }
+
 
 }

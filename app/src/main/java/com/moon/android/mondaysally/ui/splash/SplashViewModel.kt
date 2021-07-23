@@ -1,18 +1,21 @@
 package com.moon.android.mondaysally.ui.splash
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.moon.android.mondaysally.data.remote.Fail
 import com.moon.android.mondaysally.data.repository.SharedPrefRepository
 import com.moon.android.mondaysally.data.repository.auth.AuthNetworkRepository
+import com.moon.android.mondaysally.data.repository.common.CommonNetworkRepository
 import com.moon.android.mondaysally.utils.ApiException
 import kotlinx.coroutines.launch
 
 
 class SplashViewModel(
     private val sharedPrefRepository: SharedPrefRepository,
-    private val authNetworkRepository: AuthNetworkRepository
+    private val authNetworkRepository: AuthNetworkRepository,
+    private val commonNetworkRepository: CommonNetworkRepository
 ) : ViewModel() {
 
     var serverAccessible: MutableLiveData<Boolean> = MutableLiveData()
@@ -49,7 +52,7 @@ class SplashViewModel(
 
     fun serverVersionCheck() = viewModelScope.launch {
         try {
-            val authResponse = authNetworkRepository.getVersion()
+            val authResponse = commonNetworkRepository.getVersion()
             if (authResponse.code == 200) {
                 authResponse.auth?.let {
                     serverAccessible.value = true
