@@ -43,7 +43,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
             if (isAutologin) {
                 startActivityWithClear(MainActivity::class.java)
             } else {
-                startNextActivity(LoginActivity::class.java)
+                startNextActivity(TeamCodeActivity::class.java)
             }
             finish()
         })

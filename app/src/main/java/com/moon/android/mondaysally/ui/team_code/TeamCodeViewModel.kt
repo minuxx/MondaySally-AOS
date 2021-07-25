@@ -1,6 +1,5 @@
 package com.moon.android.mondaysally.ui.team_code
 
-import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,7 +13,8 @@ import kotlinx.coroutines.launch
 
 
 class TeamCodeViewModel(
-    private val authNetworkRepository: AuthNetworkRepository
+    private val authNetworkRepository: AuthNetworkRepository,
+    private val sharedPrefRepository: SharedPrefRepository
 ) : ViewModel() {
 
     var teamCode = ObservableField("")
@@ -27,6 +27,7 @@ class TeamCodeViewModel(
             val authResponse = authNetworkRepository.checkTeamCode(Code(code))
             if (authResponse.code == 200) {
                 authResponse.auth?.let {
+                    authResponse.auth.jwtToken?.let { it2 -> sharedPrefRepository.saveJwtToken(it2) }
                     goNextActivity.value = true
                 }
             } else {

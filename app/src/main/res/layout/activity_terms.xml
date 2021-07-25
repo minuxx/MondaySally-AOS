@@ -31,11 +31,12 @@
             android:id="@+id/activity_terms_tv_agree"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="11dp"
+            android:layout_marginTop="1dp"
             android:fontFamily="@font/roboto_bold"
             android:text="@string/terms_agree"
             android:textColor="@color/black"
             android:textSize="22sp"
+
             app:layout_constraintStart_toStartOf="@id/activity_terms_iv_logo"
             app:layout_constraintTop_toBottomOf="@id/activity_terms_iv_logo" />
 
@@ -53,22 +54,56 @@
             android:id="@+id/activity_terms_btn_all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="31dp"
+            android:layout_marginTop="15dp"
             android:background="@color/white"
+            android:onClick="@{() -> viewModel.whenAllAgreeBtnClicked()}"
+            android:padding="16dp"
             android:src="@drawable/check_box_off_gray"
-            app:layout_constraintStart_toStartOf="@id/activity_terms_tv_agree"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/activity_terms_tv_agree" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/terms_all_agree"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:onClick="@{() -> viewModel.whenAllAgreeBtnClicked()}"
+            app:layout_constraintBottom_toBottomOf="@id/activity_terms_btn_all"
+            app:layout_constraintStart_toEndOf="@id/activity_terms_btn_all"
+            app:layout_constraintTop_toTopOf="@id/activity_terms_btn_all"
+            app:layout_constraintVertical_bias="0.47" />
+
+        <View
+            android:id="@+id/activity_terms_view_line"
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"
+            android:background="@color/very_light_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/activity_terms_btn_all" />
+
+        <ImageButton
+            android:id="@+id/activity_terms_btn_service"
+            android:layout_width="18dp"
+            android:layout_height="17dp"
+            android:layout_marginTop="31dp"
+            android:background="@color/white"
+            android:onClick="@{() -> viewModel.whenServiceBtnClicked()}"
+            android:src="@drawable/check_box_off_gray"
+            app:layout_constraintStart_toStartOf="@id/activity_terms_tv_agree"
+            app:layout_constraintTop_toBottomOf="@id/activity_terms_view_line" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="7dp"
-            android:fontFamily="@font/roboto_light"
-            android:text="@string/terms_check_1"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/terms_service_title"
             android:textColor="@color/black"
             android:textSize="13sp"
             app:layout_constraintStart_toEndOf="@id/activity_terms_btn_all"
-            app:layout_constraintTop_toTopOf="@id/activity_terms_btn_all" />
+            app:layout_constraintTop_toTopOf="@id/activity_terms_btn_service" />
 
         <Button
             android:id="@+id/activity_team_code_btn_guide"
@@ -77,21 +112,21 @@
             android:layout_marginHorizontal="15dp"
             android:layout_marginBottom="40dp"
             android:background="@drawable/bg_btn_gray_orange"
-            android:enabled="@{!TextUtils.isEmpty(viewModel.teamCode)}"
+            android:enabled="@{viewModel.allAgree.booleanValue()}"
             android:fontFamily="@font/roboto_medium"
-            android:onClick="@{() -> viewModel.whenBtnDoneClicked()}"
-            android:text="@string/team_code_btn_done"
+            android:onClick="@{() -> viewModel.whenOkBtnClicked()}"
+            android:text="@string/ok"
             android:textColor="@color/white"
             android:textSize="17sp"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:layout_editor_absoluteX="16dp" />
 
         <TextView
             android:id="@+id/activity_team_code_tv_service_terms"
             android:layout_width="match_parent"
             android:layout_height="106dp"
             android:layout_marginHorizontal="11dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="10.7dp"
             android:background="@drawable/bg_edittext_gray_orange"
             android:lineSpacingExtra="7sp"
             android:padding="15dp"
@@ -100,11 +135,55 @@
             android:scrollbarStyle="outsideInset"
             android:scrollbarThumbVertical="@color/pinkish_orange"
             android:scrollbars="vertical"
-            android:text="@string/terms_service"
+            android:text="@string/terms_service_content"
+            android:textColor="@color/brown_grey"
+            android:textSize="12sp"
+            android:fontFamily="@font/roboto_light"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/activity_terms_btn_service" />
+
+        <ImageButton
+            android:id="@+id/activity_terms_btn_privacy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="27.7dp"
+            android:background="@color/white"
+            android:onClick="@{() -> viewModel.whenPrivacyBtnClicked()}"
+            android:src="@drawable/check_box_off_gray"
+            app:layout_constraintStart_toStartOf="@id/activity_terms_tv_agree"
+            app:layout_constraintTop_toBottomOf="@id/activity_team_code_tv_service_terms" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/terms_privacy_title"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            app:layout_constraintStart_toEndOf="@id/activity_terms_btn_all"
+            app:layout_constraintTop_toTopOf="@id/activity_terms_btn_privacy" />
+
+        <TextView
+            android:id="@+id/activity_team_code_tv_privacy_terms"
+            android:layout_width="match_parent"
+            android:layout_height="106dp"
+            android:layout_marginHorizontal="11dp"
+            android:layout_marginTop="10.7dp"
+            android:background="@drawable/bg_edittext_gray_orange"
+            android:lineSpacingExtra="7sp"
+            android:padding="15dp"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:scrollbarFadeDuration="0"
+            android:scrollbarStyle="outsideInset"
+            android:scrollbarThumbVertical="@color/pinkish_orange"
+            android:scrollbars="vertical"
+            android:text="@string/terms_service_content"
+            android:fontFamily="@font/roboto_light"
             android:textColor="@color/brown_grey"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/activity_terms_btn_all" />
+            app:layout_constraintTop_toBottomOf="@id/activity_terms_btn_privacy" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,4 +1,4 @@
-package com.moon.android.mondaysally.ui.terms
+package com.moon.android.mondaysally.ui.welcome
 
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
@@ -12,21 +12,16 @@ import com.moon.android.mondaysally.utils.ApiException
 import kotlinx.coroutines.launch
 
 
-class TermsViewModel(
-    private val authNetworkRepository: AuthNetworkRepository
-) : ViewModel() {
-
-    var teamCode = ObservableField("")
+class WelcomeViewModel : ViewModel() {
 
     var goNextActivity: MutableLiveData<Boolean> = MutableLiveData()
-    var fail: MutableLiveData<Fail> = MutableLiveData()
+    var allAgree: MutableLiveData<Boolean> = MutableLiveData()
+    var serviceAgree: MutableLiveData<Boolean> = MutableLiveData()
+    var privacyAgree: MutableLiveData<Boolean> = MutableLiveData()
 
 
-    fun whenBtnDoneClicked() {
-        teamCode.get()?.let {
-//            Log.d("체크", it)
-        }
+    fun whenGoHomeBtnClicked() {
+        serviceAgree.value = serviceAgree.value != true
+//        allCheck()
     }
-
-
 }

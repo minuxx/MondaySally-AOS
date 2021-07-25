@@ -29,7 +29,7 @@ class TutorialActivity : BaseActivity<ActivityTutorialBinding>() {
         val titles = listOf(
             getString(R.string.tutorial_title_1),
             getString(R.string.tutorial_title_2),
-            getString(R.string.tutorial_title_1)
+            getString(R.string.tutorial_title_3)
         )
         val contents = listOf(
             getString(R.string.tutorial_content_1),
@@ -63,7 +63,7 @@ class TutorialActivity : BaseActivity<ActivityTutorialBinding>() {
 
     override fun initAfterBinding() {
 //        일단 테스트해야하므로 주석
-//        tutorialViewModel.noMoreTutorial()
+        tutorialViewModel.noMoreTutorial()
 
         viewPagerTutorialFragment.registerOnPageChangeCallback(object : OnPageChangeCallback() {
             override fun onPageScrolled(

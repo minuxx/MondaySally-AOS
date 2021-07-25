@@ -1,6 +1,5 @@
 package com.moon.android.mondaysally.ui.splash
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -36,10 +35,7 @@ class SplashViewModel(
         try {
             val authResponse = authNetworkRepository.autoLogin()
             if (authResponse.isSuccess) {
-                authResponse.auth?.let {
-                    autoLogin.value = true
-                    sharedPrefRepository.saveJwtToken(authResponse.auth.jwtToken!!)
-                }
+                autoLogin.value = true
             } else {
                 fail.value = Fail(authResponse.message, authResponse.code)
             }

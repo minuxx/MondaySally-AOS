@@ -4,8 +4,9 @@ import androidx.annotation.LayoutRes
 import com.moon.android.mondaysally.R
 import com.moon.android.mondaysally.databinding.ActivityTeamCodeBinding
 import com.moon.android.mondaysally.ui.BaseActivity
-import com.moon.android.mondaysally.ui.login.LoginActivity
 import com.moon.android.mondaysally.ui.terms.TermsActivity
+import com.moon.android.mondaysally.ui.terms.TermsViewModel
+import com.moon.android.mondaysally.ui.welcome.WelcomeActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
