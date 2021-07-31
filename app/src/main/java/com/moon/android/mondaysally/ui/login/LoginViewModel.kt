@@ -3,11 +3,11 @@ package com.moon.android.mondaysally.ui.login
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.moon.android.mondaysally.data.entities.User
-import com.moon.android.mondaysally.data.repository.auth.AuthNetworkRepository
+import com.moon.android.mondaysally.data.repository.auth.HomeNetworkRepository
 import com.moon.android.mondaysally.utils.SharedPreferencesManager
 
 class LoginViewModel(
-    private val repository: AuthNetworkRepository,
+    private val repository: HomeNetworkRepository,
     private val sharedPreferencesManager: SharedPreferencesManager
 ) : ViewModel() {
     val id: MutableLiveData<String> by lazy {

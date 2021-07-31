@@ -7,9 +7,6 @@ import com.moon.android.mondaysally.data.remote.auth.AuthService
 import com.moon.android.mondaysally.data.repository.BaseNetworkRepository
 
 class AuthNetworkRepository(private val authService: AuthService) : BaseNetworkRepository(){
-//    suspend fun signUp(user: User): AuthResponse {
-//        return apiRequest { authService.signUp(user) }
-//    }
 
     suspend fun login(user: User): AuthResponse {
         return apiRequest { authService.login(user) }

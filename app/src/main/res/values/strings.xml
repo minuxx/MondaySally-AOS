@@ -5,7 +5,7 @@
     <string name="more">더보기 ></string>
 
     <!--바탐 메뉴-->
-    <string name="menu_home">홈œ</string>
+    <string name="menu_home">홈</string>
     <string name="menu_shop">기프트샵</string>
     <string name="menu_twinkle">트윙클</string>
 
@@ -66,7 +66,14 @@
     <string name="home_gift_history">기프트 히스토리</string>
     <string name="home_twinkle_ranking">트윙클 랭킹</string>
     <string name="home_now_on_member">현재 출근 멤버</string>
+    <string name="home_now_on_member_working">근무중</string>
     <string name="home_gold">1등</string>
     <string name="home_silver">2등</string>
     <string name="home_bronze">3등</string>
+
+
+
+    <string name="gift_history_confirm">승인\n완료</string>
+    <string name="gift_history_hold">승인\n보류</string>
+    <string name="gift_history_rejected">승인\n거부</string>
 </resources>

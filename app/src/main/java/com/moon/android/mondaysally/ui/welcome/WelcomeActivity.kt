@@ -19,7 +19,7 @@ class WelcomeActivity : BaseActivity<ActivityWelcomeBinding>() {
 
     override fun initDataBinding() {
         binding.lifecycleOwner = this;
-//        binding.viewModel = welcomeViewModel
+        binding.viewModel = welcomeViewModel
 
         welcomeViewModel.goNextActivity.observe(this, { goNextActivity ->
             if (goNextActivity) {

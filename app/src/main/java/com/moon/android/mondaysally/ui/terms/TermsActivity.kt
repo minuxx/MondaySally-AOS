@@ -24,7 +24,7 @@ class TermsActivity : BaseActivity<ActivityTermsBinding>() {
 
         termsViewModel.goNextActivity.observe(this, { goNextActivity ->
             if (goNextActivity) {
-                startNextActivity(WelcomeActivity::class.java)
+                startActivityWithClear(WelcomeActivity::class.java)
             }
         })
 

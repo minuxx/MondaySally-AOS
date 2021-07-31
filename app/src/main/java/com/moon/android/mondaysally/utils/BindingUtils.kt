@@ -15,14 +15,14 @@ object BindingUtils {
 //        recyclerView.adapter?.notifyDataSetChanged()
 //    }
 
-//    @BindingAdapter("urlImage")
-//    @JvmStatic
-//    fun ImageView.setUrlImage(url: String) {
-//        url.let {
-//            Glide.with(this)
-//                .load(url)
-//                .transform(CenterCrop(), RoundedCorners(30))
-//                .into(this)
-//        }
-//    }
+    @BindingAdapter("urlImage")
+    @JvmStatic
+    fun ImageView.setUrlImage(url: String) {
+        url.let {
+            Glide.with(this)
+                .load(url)
+                .transform(CenterCrop(), RoundedCorners(30))
+                .into(this)
+        }
+    }
 }
