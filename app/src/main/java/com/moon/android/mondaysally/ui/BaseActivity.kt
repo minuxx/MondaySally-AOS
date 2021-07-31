@@ -8,10 +8,13 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.moon.android.mondaysally.R
 import com.moon.android.mondaysally.utils.GlobalConstant
 
 abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity(),
     DefaultDialog.WekitDialogClickListener {
+
+    lateinit var lottieDialog: LottieDialog
 
     @LayoutRes
     abstract fun getLayoutResId(): Int
@@ -45,7 +48,7 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity(),
 
     open fun animateViewShake(view: View) {
         view.animate()
-            .withEndAction{
+            .withEndAction {
                 // here you can clear the fields after the shake
             }
             .xBy(-20f)
@@ -60,11 +63,40 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_none)
+        lottieDialog = LottieDialog(this)
         binding = DataBindingUtil.setContentView(this, getLayoutResId())
         initDataBinding()
         initAfterBinding()
     }
 
+    override fun finish() {
+        super.finish()
+        overridePendingTransition(R.anim.slide_none, R.anim.slide_out_right)
+    }
+
+
+    open fun showLottieDialog() {
+        if (isFinishing) {
+            return
+        }
+        lottieDialog.show()
+//        lottieDialog.let {
+//            if (!lottieDialog.isShowing) {
+//            뒤로가기로 끌 수 없게하기
+//            lottieDialog.setCancelable(false);
+//                lottieDialog.show()
+//            }
+//        }
+    }
+
+    open fun hideLottieDialog() {
+        lottieDialog.let {
+            if (lottieDialog?.isShowing == true) {
+                lottieDialog?.dismiss()
+            }
+        }
+    }
 
     /**
      * 데이터 바인딩 및 observe 설정.

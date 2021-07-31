@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.moon.android.mondaysally.ui.main.home.HomeViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/splash_root_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/fragment_home_title_view"
+                android:layout_width="match_parent"
+                android:layout_height="57dp"
+                android:background="@color/white"
+                android:elevation="12dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="15dp"
+                    android:src="@drawable/logo_mondaysally_left_wordmark" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_header_right_qr_gray" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="10dp"
+                    android:padding="6dp"
+                    android:src="@drawable/ic_header_right_mypage_gray" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/fragment_home_tv_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="26dp"
+                android:fontFamily="@font/roboto_bold"
+                android:text="XXX님"
+                android:textColor="@color/black"
+                android:textSize="23sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/fragment_home_title_view" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_light"
+                android:text="의"
+                android:textColor="@color/black"
+                android:textSize="21sp"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_home_tv_nickname"
+                app:layout_constraintStart_toEndOf="@id/fragment_home_tv_nickname" />
+
+            <TextView
+                android:id="@+id/fragment_home_tv_total_time_is"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:fontFamily="@font/roboto_light"
+                android:text="@string/home_total_work_time_is"
+                android:textColor="@color/black"
+                android:textSize="21sp"
+                app:layout_constraintStart_toStartOf="@id/fragment_home_tv_nickname"
+                app:layout_constraintTop_toBottomOf="@id/fragment_home_tv_nickname" />
+
+            <TextView
+                android:id="@+id/fragment_home_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="총 '"
+                android:textColor="@color/black"
+                android:textSize="21sp"
+                app:layout_constraintStart_toStartOf="@id/fragment_home_tv_nickname"
+                app:layout_constraintTop_toBottomOf="@id/fragment_home_tv_total_time_is" />
+
+            <TextView
+                android:id="@+id/fragment_home_tv_output_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:text="100"
+                android:textColor="@color/black"
+                android:textSize="21sp"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_home_total"
+                app:layout_constraintStart_toEndOf="@id/fragment_home_total" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:text="'시간 입니다. ☀️"
+                android:textColor="@color/black"
+                android:textSize="21sp"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_home_tv_output_time"
+                app:layout_constraintStart_toEndOf="@id/fragment_home_tv_output_time" />
+
+            <ImageView
+                android:id="@+id/fragment_home_iv_profile"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/ic_tab_giftshop_off_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/fragment_home_tv_nickname" />
+
+
+            <View
+                android:id="@+id/fragment_home_line_1"
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:layout_marginHorizontal="17dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/very_light_gray"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_home_tv_output_time" />
+
+            <LinearLayout
+                android:id="@+id/fragment_home_linear_total_clover"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="15.6dp"
+                android:background="@drawable/bg_round_pinkish_red"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_home_line_1">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="21dp"
+                    android:layout_marginTop="31dp"
+                    android:layout_marginBottom="31dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="@string/home_total_clover"
+                    android:textColor="@color/white"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="100"
+                    android:textColor="@color/white"
+                    android:textSize="17sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginEnd="25dp"
+                    android:src="@drawable/ic_clover_white" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/fragment_home_linear_now_clover"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="9dp"
+                android:background="@drawable/bg_round_pinkish_sand_yellow"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_home_linear_total_clover">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="21dp"
+                    android:layout_marginTop="31dp"
+                    android:layout_marginBottom="31dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="@string/home_now_clover"
+                    android:textColor="@color/white"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="100"
+                    android:textColor="@color/white"
+                    android:textSize="17sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginEnd="25dp"
+                    android:src="@drawable/ic_clover_white" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/fragment_home_linear_use_clover"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="9dp"
+                android:background="@drawable/bg_round_pinkish_perrywinkle"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_home_linear_now_clover">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="21dp"
+                    android:layout_marginTop="31dp"
+                    android:layout_marginBottom="31dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="@string/home_use_clover"
+                    android:textColor="@color/white"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="100"
+                    android:textColor="@color/white"
+                    android:textSize="17sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginEnd="25dp"
+                    android:src="@drawable/ic_clover_white" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/fragment_home_line_2"
+                android:layout_width="match_parent"
+                android:layout_height="7dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/very_light_gray"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_home_linear_use_clover" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/home_gift_history"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_home_line_2" />
+
+            <TextView
+                android:id="@+id/fragment_home_tv_more_gift_history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/roboto_light"
+                android:text="@string/more"
+                android:textColor="@color/greyish_brown"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_home_line_2" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/fragment_home_rv_gift_history"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_home_tv_more_gift_history" />
+
+            <View
+                android:id="@+id/fragment_home_line_3"
+                android:layout_width="match_parent"
+                android:layout_height="0.8dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/very_light_gray"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_home_rv_gift_history" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/home_twinkle_ranking"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_home_line_3" />
+
+            <TextView
+                android:id="@+id/fragment_home_tv_more_raking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/roboto_light"
+                android:text="@string/more"
+                android:textColor="@color/greyish_brown"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_home_line_3" />
+
+            <LinearLayout
+                android:id="@+id/fragment_home_linear_ranking"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_home_tv_more_raking">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="7dp"
+                        android:background="@drawable/bg_circle_round_orange"
+                        android:fontFamily="@font/roboto_regular"
+                        android:paddingStart="6dp"
+                        android:paddingTop="1.5dp"
+                        android:paddingEnd="6dp"
+                        android:paddingBottom="1.5dp"
+                        android:text="@string/home_gold"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/bg_circle_white_gray"
+                        android:padding="4dp"
+                        android:src="@color/pinkish_orange" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="@string/home_gold"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="7dp"
+                        android:background="@drawable/bg_circle_round_white_orange"
+                        android:fontFamily="@font/roboto_regular"
+                        android:paddingStart="6dp"
+                        android:paddingTop="1.5dp"
+                        android:paddingEnd="6dp"
+                        android:paddingBottom="1.5dp"
+                        android:text="@string/home_silver"
+                        android:textColor="@color/pinkish_orange"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/bg_circle_white_gray"
+                        android:padding="4dp"
+                        android:src="@color/pinkish_orange" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="@string/home_gold"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="7dp"
+                        android:background="@drawable/bg_circle_round_white_orange"
+                        android:fontFamily="@font/roboto_regular"
+                        android:paddingStart="6dp"
+                        android:paddingTop="1.5dp"
+                        android:paddingEnd="6dp"
+                        android:paddingBottom="1.5dp"
+                        android:text="@string/home_bronze"
+                        android:textColor="@color/pinkish_orange"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/bg_circle_white_gray"
+                        android:padding="4dp"
+                        android:src="@color/pinkish_orange" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="@string/home_gold"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/fragment_home_line_4"
+                android:layout_width="match_parent"
+                android:layout_height="7dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/very_light_gray"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_home_linear_ranking" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</layout>

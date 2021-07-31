@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/fragHome"
+        android:icon="@drawable/ic_tab_home_off_gray"
+        android:title="@string/menu_home" />
+    <item
+        android:id="@+id/fragCalendar"
+        android:icon="@drawable/ic_tab_giftshop_off_gray"
+        android:title="@string/menu_shop" />
+    <item
+        android:id="@+id/fragContract"
+        android:icon="@drawable/ic_tab_twinkle_off_gray"
+        android:title="@string/menu_twinkle" />
+</menu>

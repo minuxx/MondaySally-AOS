@@ -1,6 +1,10 @@
 package com.moon.android.mondaysally.di
 
 import com.moon.android.mondaysally.ui.login.LoginViewModel
+import com.moon.android.mondaysally.ui.main.MainViewModel
+import com.moon.android.mondaysally.ui.main.home.HomeViewModel
+import com.moon.android.mondaysally.ui.main.shop.ShopViewModel
+import com.moon.android.mondaysally.ui.main.twinkle.TwinkleViewModel
 import com.moon.android.mondaysally.ui.onboarding.OnBoardingViewModel
 import com.moon.android.mondaysally.ui.splash.SplashViewModel
 import com.moon.android.mondaysally.ui.team_code.TeamCodeViewModel
@@ -20,4 +24,8 @@ val viewModelModule = module {
     viewModel { TeamCodeViewModel(get(), get()) }
     viewModel { TermsViewModel() }
     viewModel { WelcomeViewModel() }
+    viewModel { MainViewModel() }
+    viewModel { HomeViewModel() }
+    viewModel { ShopViewModel() }
+    viewModel { TwinkleViewModel() }
 }

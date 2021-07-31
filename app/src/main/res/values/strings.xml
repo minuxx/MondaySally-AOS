@@ -2,6 +2,12 @@
     <string name="app_name">MondaySally</string>
 
     <string name="ok">확인</string>
+    <string name="more">더보기 ></string>
+
+    <!--바탐 메뉴-->
+    <string name="menu_home">홈œ</string>
+    <string name="menu_shop">기프트샵</string>
+    <string name="menu_twinkle">트윙클</string>
 
     <!--에러처리-->
     <string name="default_fail">네트워크연결이 원활하지 않습니다</string>
@@ -51,4 +57,16 @@
     <string name="welcome_go_home">홈으로 가기</string>
     <string name="welcome_title">귀하의 입사를 축하드립니다!</string>
     <string name="welcome_content">먼데이샐리를 통해 보다 더\n즐거운 회사생활을 경험해보세요.</string>
+
+    <!--홈-->
+    <string name="home_total_work_time_is">누적 근무 시간은</string>
+    <string name="home_total_clover">누적 클로버</string>
+    <string name="home_now_clover">현재 클로버</string>
+    <string name="home_use_clover">사용 클로버</string>
+    <string name="home_gift_history">기프트 히스토리</string>
+    <string name="home_twinkle_ranking">트윙클 랭킹</string>
+    <string name="home_now_on_member">현재 출근 멤버</string>
+    <string name="home_gold">1등</string>
+    <string name="home_silver">2등</string>
+    <string name="home_bronze">3등</string>
 </resources>

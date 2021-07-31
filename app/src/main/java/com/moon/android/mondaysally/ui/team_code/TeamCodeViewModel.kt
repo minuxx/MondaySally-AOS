@@ -20,6 +20,7 @@ class TeamCodeViewModel(
     var teamCode = ObservableField("")
 
     var goNextActivity: MutableLiveData<Boolean> = MutableLiveData()
+    var loading: MutableLiveData<Boolean> = MutableLiveData()
     var fail: MutableLiveData<Fail> = MutableLiveData()
 
     private fun checkTeamCode(code: String) = viewModelScope.launch {
@@ -43,6 +44,7 @@ class TeamCodeViewModel(
     fun whenBtnDoneClicked() {
         teamCode.get()?.let {
 //            Log.d("체크", it)
+            loading.value = true
             checkTeamCode(it)
         }
     }
