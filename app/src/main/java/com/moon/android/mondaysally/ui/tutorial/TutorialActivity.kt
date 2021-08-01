@@ -63,7 +63,7 @@ class TutorialActivity : BaseActivity<ActivityTutorialBinding>() {
 
     override fun initAfterBinding() {
 //        일단 테스트해야하므로 주석
-//        tutorialViewModel.noMoreTutorial()
+        tutorialViewModel.noMoreTutorial()
 
         viewPagerTutorialFragment.registerOnPageChangeCallback(object : OnPageChangeCallback() {
             override fun onPageScrolled(

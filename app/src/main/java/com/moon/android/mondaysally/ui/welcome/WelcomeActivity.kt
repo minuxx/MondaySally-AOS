@@ -23,7 +23,7 @@ class WelcomeActivity : BaseActivity<ActivityWelcomeBinding>() {
 
         welcomeViewModel.goNextActivity.observe(this, { goNextActivity ->
             if (goNextActivity) {
-                startNextActivity(MainActivity::class.java)
+                startActivityWithClear(MainActivity::class.java)
             }
         })
     }

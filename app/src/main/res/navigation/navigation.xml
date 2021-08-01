@@ -1,19 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/fragHome">
+    android:id="@+id/main_activity_navgraph"
+    app:startDestination="@id/homeFragment">
     <fragment
-        android:id="@+id/fragHome"
+        android:id="@+id/homeFragment"
         android:name="com.moon.android.mondaysally.ui.main.home.HomeFragment"
-        tools:layout="@layout/fragment_home" />
+        android:label="homeFragment" />
     <fragment
-        android:id="@+id/fragShop"
+        android:id="@+id/shopFragment"
         android:name="com.moon.android.mondaysally.ui.main.shop.ShopFragment"
+        android:label="shopFragment"
         tools:layout="@layout/fragment_shop" />
     <fragment
-        android:id="@+id/fragTwinkle"
+        android:id="@+id/twinkleFragment"
         android:name="com.moon.android.mondaysally.ui.main.twinkle.TwinkleFragment"
+        android:label="twinkleFragment"
         tools:layout="@layout/fragment_twinkle" />
-</navigation>
 
+</navigation>

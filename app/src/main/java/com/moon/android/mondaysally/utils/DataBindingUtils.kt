@@ -4,17 +4,29 @@ import android.annotation.SuppressLint
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.moon.android.mondaysally.R
 import com.moon.android.mondaysally.data.entities.GiftHistory
 import com.moon.android.mondaysally.data.entities.Member
 import com.moon.android.mondaysally.ui.main.home.GiftHistoryAdapter
 import com.moon.android.mondaysally.ui.main.home.MemberListAdapter
 
-object RecyclerViewDataBindingUtils {
+object DataBindingUtils {
+
+    @BindingAdapter("bind_common_image")
+    @JvmStatic
+    fun ImageView.setImageCommon(url: String?) {
+        url.let {
+            Glide.with(this)
+                .load(url).placeholder(R.drawable.bg_round_white_gray)
+                .error(R.drawable.bg_round_white_gray)
+                .centerCrop()
+                .into(this)
+        }
+    }
 
     @BindingAdapter("bind_gift_history")
     @JvmStatic
@@ -44,6 +56,7 @@ object RecyclerViewDataBindingUtils {
                 .load(url).placeholder(R.drawable.bg_round_white_gray)
                 .error(R.drawable.bg_round_white_gray)
                 .centerCrop()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
 //                .transform(CenterCrop(), RoundedCorners(30))
                 .into(this)
         }

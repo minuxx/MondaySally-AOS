@@ -70,6 +70,8 @@
     <string name="home_gold">1등</string>
     <string name="home_silver">2등</string>
     <string name="home_bronze">3등</string>
+    <string name="home_no_history">아직 사용하신 히스토리가 없어요</string>
+    <string name="home_no_member">현재 근무중인 멤버가 없어요</string>
 
 
 
