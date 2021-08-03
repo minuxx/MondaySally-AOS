@@ -7,6 +7,7 @@ import com.moon.android.mondaysally.R
 import com.moon.android.mondaysally.databinding.ActivityTermsBinding
 import com.moon.android.mondaysally.ui.BaseActivity
 import com.moon.android.mondaysally.ui.login.LoginActivity
+import com.moon.android.mondaysally.ui.main.MainActivity
 import com.moon.android.mondaysally.ui.welcome.WelcomeActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -24,7 +25,8 @@ class TermsActivity : BaseActivity<ActivityTermsBinding>() {
 
         termsViewModel.goNextActivity.observe(this, { goNextActivity ->
             if (goNextActivity) {
-                startActivityWithClear(WelcomeActivity::class.java)
+                startActivityWithClear(MainActivity::class.java)
+                startNextActivity(WelcomeActivity::class.java)
             }
         })
 

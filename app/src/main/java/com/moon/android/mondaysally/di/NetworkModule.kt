@@ -1,9 +1,11 @@
 package com.moon.android.mondaysally.di
 
 
+import android.util.Log
 import com.moon.android.mondaysally.data.remote.auth.AuthService
 import com.moon.android.mondaysally.data.remote.common.CommonService
 import com.moon.android.mondaysally.data.remote.home.HomeService
+import com.moon.android.mondaysally.data.remote.shop.GiftService
 import com.moon.android.mondaysally.data.repository.SharedPrefRepository
 import com.moon.android.mondaysally.utils.GlobalConstant.Companion.X_ACCESS_TOKEN
 import okhttp3.Interceptor
@@ -27,8 +29,9 @@ val networkModule: Module = module {
             val request = chain.request().newBuilder()
                 .addHeader(X_ACCESS_TOKEN, "${sharedPrefRepository.jwtToken}")
                 .build()
-
+            Log.d("X_ACCESS_TOKEN", "${sharedPrefRepository.jwtToken}")
             chain.proceed(request)
+
         }
 
     fun provideHttpLoggingInterceptor() =
@@ -60,6 +63,9 @@ val networkModule: Module = module {
     fun provideHomeService(retrofit: Retrofit): HomeService =
         retrofit.create(HomeService::class.java)
 
+    fun provideGiftService(retrofit: Retrofit): GiftService =
+        retrofit.create(GiftService::class.java)
+
     single { provideHeaderInterceptor(get()) }
     single { provideHttpLoggingInterceptor() }
     single { provideOkHttpClient(get(), get()) }
@@ -67,5 +73,5 @@ val networkModule: Module = module {
     single { provideAuthService(get()) }
     single { provideCommonService(get()) }
     single { provideHomeService(get()) }
-
+    single { provideGiftService(get()) }
 }

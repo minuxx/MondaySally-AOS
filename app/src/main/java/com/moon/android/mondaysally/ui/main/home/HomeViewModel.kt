@@ -1,14 +1,12 @@
 package com.moon.android.mondaysally.ui.main.home
 
 import android.util.Log
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import androidx.lifecycle.MutableLiveData
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.moon.android.mondaysally.data.entities.GiftHistory
-import com.moon.android.mondaysally.data.entities.Home
+import com.moon.android.mondaysally.data.entities.HomeResult
 import com.moon.android.mondaysally.data.entities.Member
 import com.moon.android.mondaysally.data.remote.Fail
 import com.moon.android.mondaysally.data.repository.auth.HomeNetworkRepository
@@ -19,7 +17,8 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(private val homeNetworkRepository: HomeNetworkRepository) : ViewModel() {
 
-    var homeResult: MutableLiveData<Home> = MutableLiveData()
+    var homeResultResult: MutableLiveData<HomeResult> = MutableLiveData()
+    var isLoading: MutableLiveData<Boolean> = MutableLiveData()
 
     val giftHistoryList = ListLiveData<GiftHistory>()
     val memberList = ListLiveData<Member>()
@@ -27,12 +26,16 @@ class HomeViewModel(private val homeNetworkRepository: HomeNetworkRepository) : 
 
     fun getHomeData() = viewModelScope.launch {
         try {
+            isLoading.value = true
             val homeResponse = homeNetworkRepository.getHome()
+            isLoading.value = false
             if (homeResponse.code == 200) {
                 homeResponse.result?.let {
+                    giftHistoryList.clear()
+                    memberList.clear()
                     giftHistoryList.addAll(homeResponse.result.giftHistory)
                     memberList.addAll(homeResponse.result.workingMemberlist)
-                    homeResult.value = homeResponse.result
+                    homeResultResult.value = homeResponse.result
                     Log.d("네트워크", homeResponse.result.toString())
                 }
             } else {

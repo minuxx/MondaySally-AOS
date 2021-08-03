@@ -9,17 +9,29 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class ShopFragment() :
     BaseFragment<FragmentShopBinding>() {
 
-    private val tutorialViewModel: ShopViewModel by viewModel()
+    private val shopViewModel: ShopViewModel by viewModel()
 
     override fun getLayoutResId() = R.layout.fragment_shop
 
     override fun initDataBinding() {
-        binding.lifecycleOwner = activity;
-        binding.viewModel = tutorialViewModel
+        binding.lifecycleOwner = this;
+        binding.viewModel = shopViewModel
+
+        shopViewModel.giftTotalCount.observe(this, { giftTotalCount ->
+
+        })
+
+        shopViewModel.isLoading.observe(this, { isLoading ->
+            if (isLoading) {
+            } else {
+            }
+        })
+
+        binding.fragmentShopRvGift.adapter = GiftShopAdapter()
     }
 
     override fun initAfterBinding() {
-
+        shopViewModel.getGiftList1()
     }
 
 }

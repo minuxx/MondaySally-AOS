@@ -8,11 +8,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.moon.android.mondaysally.R
+import com.moon.android.mondaysally.data.entities.Gift
 import com.moon.android.mondaysally.data.entities.GiftHistory
 import com.moon.android.mondaysally.data.entities.Member
 import com.moon.android.mondaysally.ui.main.home.GiftHistoryAdapter
 import com.moon.android.mondaysally.ui.main.home.MemberListAdapter
+import com.moon.android.mondaysally.ui.main.shop.GiftShopAdapter
 
 object DataBindingUtils {
 
@@ -21,11 +24,30 @@ object DataBindingUtils {
     fun ImageView.setImageCommon(url: String?) {
         url.let {
             Glide.with(this)
-                .load(url).placeholder(R.drawable.bg_round_white_gray)
-                .error(R.drawable.bg_round_white_gray)
+                .load(url).placeholder(R.drawable.illust_sally_blank_1_1)
+                .error(R.drawable.illust_sally_blank_1_1)
                 .centerCrop()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(this)
         }
+    }
+
+    @BindingAdapter("bind_common_image_square")
+    @JvmStatic
+    fun ImageView.setImageCommonSquare(url: String?) {
+        url.let {
+            Glide.with(this)
+                .load(url).placeholder(R.drawable.illust_sally_blank_1_1)
+                .error(R.drawable.illust_sally_blank_1_1)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(this)
+        }
+    }
+
+    @BindingAdapter("bind_common_text")
+    @JvmStatic
+    fun bindCommonText(textView: TextView, text: String) {
+        textView.text = text
     }
 
     @BindingAdapter("bind_gift_history")
@@ -53,8 +75,8 @@ object DataBindingUtils {
     fun ImageView.setUrlImage(url: String?) {
         url.let {
             Glide.with(this)
-                .load(url).placeholder(R.drawable.bg_round_white_gray)
-                .error(R.drawable.bg_round_white_gray)
+                .load(url).placeholder(R.drawable.illust_sally_blank_1_1)
+                .error(R.drawable.illust_sally_blank_1_1)
                 .centerCrop()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
 //                .transform(CenterCrop(), RoundedCorners(30))
@@ -78,5 +100,16 @@ object DataBindingUtils {
     @JvmStatic
     fun bindMemberName(textView: TextView, nickname: String?, department: String?) {
         textView.text = "$nickname / $department"
+    }
+
+    @BindingAdapter("bind_gift_shop")
+    @JvmStatic
+    fun bindGiftShopList(recyclerView: RecyclerView, items: MutableList<Gift>) {
+        if (recyclerView.adapter == null) {
+            val adapter = GiftShopAdapter()
+            recyclerView.adapter = adapter
+        }
+        (recyclerView.adapter as GiftShopAdapter).items = items
+        recyclerView.adapter?.notifyDataSetChanged()
     }
 }

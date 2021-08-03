@@ -2,7 +2,7 @@ package com.moon.android.mondaysally.data.entities
 
 import com.google.gson.annotations.SerializedName
 
-data class Home(
+data class HomeResult(
     @SerializedName(value = "nickname") val nickname: String = "",
     @SerializedName(value = "companyIdx") val companyIdx: Int,
     @SerializedName(value = "logoImgUrl") val logoImgUrl: String = "",

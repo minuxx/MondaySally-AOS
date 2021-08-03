@@ -25,7 +25,7 @@ val viewModelModule = module {
     viewModel { TermsViewModel() }
     viewModel { WelcomeViewModel() }
     viewModel { MainViewModel() }
-    viewModel { ShopViewModel() }
+    viewModel { ShopViewModel(get()) }
     viewModel { TwinkleViewModel() }
     viewModel { HomeViewModel(get()) }
 }
