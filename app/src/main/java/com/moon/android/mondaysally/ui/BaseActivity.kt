@@ -40,9 +40,8 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity(),
 
     open fun startActivityWithClear(activity: Class<*>?) {
         val intent = Intent(this, activity)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+//        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }
 

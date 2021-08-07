@@ -9,4 +9,8 @@ class GiftNetworkRepository(private val giftService: GiftService) : BaseNetworkR
     suspend fun getGiftList(page: Int): GiftResponse {
         return apiRequest { giftService.getGiftList(page) }
     }
+
+    suspend fun getGiftDetail(idx: Int): GiftResponse {
+        return apiRequest { giftService.getGiftDetail(idx) }
+    }
 }

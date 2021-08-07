@@ -1,10 +1,12 @@
 package com.moon.android.mondaysally.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -31,7 +33,6 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
             .apply { binding = this }.root
     }
 
-
     override fun onStart() {
         super.onStart()
         initDataBinding()
@@ -51,6 +52,13 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
      */
     protected abstract fun initAfterBinding()
 
+    open fun startNextActivity(activity: Class<*>?) {
+        activity?.let{
+            val iT = Intent(context, activity)
+            startActivity(iT)
+        }
+    }
+
     fun setCircleImageByGlide(iv: ImageView, url: String){
         Glide.with(this)
             .load(url).placeholder(R.drawable.bg_round_white_gray)
@@ -59,5 +67,11 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
             .circleCrop()
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(iv)
+    }
+
+    fun showToast(message: String) {
+        activity?.let{
+            Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
+        }
     }
 }

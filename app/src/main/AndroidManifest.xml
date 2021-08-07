@@ -39,6 +39,7 @@
             <!--            </intent-filter>-->
         </activity>
         <activity android:name=".ui.welcome.WelcomeActivity" />
+        <activity android:name=".ui.main.shop.shop_detail.ShopDetailActivity"/>
     </application>
 
 </manifest>

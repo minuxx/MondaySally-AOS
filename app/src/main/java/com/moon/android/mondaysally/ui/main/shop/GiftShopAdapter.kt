@@ -38,6 +38,11 @@ class GiftShopAdapter() : ListAdapter<Gift, GiftShopAdapter.ViewHolder>(GiftDiff
         fun bind(member: Gift) {
             binding.model = member
             binding.executePendingBindings()
+            binding.itemGiftShopIv.setOnClickListener {
+                onItemClickListener?.let { click ->
+                    click(member)
+                }
+            }
         }
     }
 

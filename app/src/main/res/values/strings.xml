@@ -80,4 +80,7 @@
 
     <!--기프트샵-->
     <string name="shop_all_gift">전체 기프트</string>
+    <string name="shop_option_select">옵션 선택</string>
+    <string name="shop_apply">신청하기</string>
+    <string name="shop_item_comment">*아이템은 1일 1회 한도로 구매 가능합니다.</string>
 </resources>

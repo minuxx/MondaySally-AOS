@@ -1,8 +1,8 @@
 package com.moon.android.mondaysally.ui.main.home
 
+import android.util.Log
 import android.view.View.*
 import com.moon.android.mondaysally.R
-import com.moon.android.mondaysally.data.entities.Gift
 import com.moon.android.mondaysally.databinding.FragmentHomeBinding
 import com.moon.android.mondaysally.ui.BaseFragment
 import com.moon.android.mondaysally.utils.GridItemDecoration
@@ -71,6 +71,20 @@ class HomeFragment() :
         binding.fragmentHomeSwipeRefresh.setColorSchemeResources(
             R.color.pinkish_orange
         )
+
+        homeViewModel.fail.observe(this, { fail ->
+            when(fail.code){
+                341, 388, 389 -> {
+                    showToast(fail.message)
+                }
+                402 -> {
+                    showToast(getString(R.string.default_fail))
+                }
+                404 -> {
+                    showToast(getString(R.string.default_fail))
+                }
+            }
+        })
     }
 
     override fun initAfterBinding() {
@@ -78,8 +92,8 @@ class HomeFragment() :
             //리로딩
             homeViewModel.getHomeData()
             //완료되면 아래코드
-
         }
+
         homeViewModel.getHomeData()
     }
 

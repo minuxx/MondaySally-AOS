@@ -16,7 +16,7 @@
     <color name="very_light_gray2">#e5e5e5</color>
     <color name="bottom_font_gray">#c4c4c4</color>
     <color name="no_gray_font">#bdbdbd</color>
-
+    <color name="text_dim_gray">#acacac</color>
 
     <color name="pinkish_red">#ff7c59</color>
     <color name="sand_yellow">#ffd465</color>

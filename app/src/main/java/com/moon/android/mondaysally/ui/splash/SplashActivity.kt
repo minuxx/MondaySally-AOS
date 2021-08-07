@@ -32,7 +32,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         splashViewModel.firstLaunch.observe(this, { firstLaunch ->
             if (firstLaunch) {
                 startActivityWithClear(TeamCodeActivity::class.java)
-                startActivityWithClear(TutorialActivity::class.java)
+                startNextActivity(TutorialActivity::class.java)
                 finish()
             } else {
                 splashViewModel.autoLoginCheck()
@@ -72,8 +72,8 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     }
 
     override fun initAfterBinding() {
-//        splashViewModel.serverVersionCheck()
-        splashViewModel.firstLaunchCheck()
+        splashViewModel.serverVersionCheck()
+//        splashViewModel.firstLaunchCheck()
 
     }
 }
