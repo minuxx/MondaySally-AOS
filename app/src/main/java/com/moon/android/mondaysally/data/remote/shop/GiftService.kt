@@ -1,9 +1,8 @@
 package com.moon.android.mondaysally.data.remote.shop
 
+import com.moon.android.mondaysally.data.entities.GiftPostBody
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface GiftService {
     @GET("/gift")
@@ -11,4 +10,7 @@ interface GiftService {
 
     @GET("/gift/{idx}")
     suspend fun getGiftDetail(@Path("idx") idx: Int): Response<GiftResponse>
+
+    @POST("/gift")
+    suspend fun postGift(@Body giftPostBody: GiftPostBody): Response<GiftResponse>
 }

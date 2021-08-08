@@ -15,6 +15,40 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fragment_home_title_view"
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/activity_shop_detail_iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:onClick="@{() -> viewModel.whenBtnBackClicked()}"
+                android:padding="15dp"
+                android:src="@drawable/ic_chevron_0_left_gray"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/menu_shop"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -25,41 +59,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 tools:context=".ui.main.MainActivity">
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/fragment_home_title_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="57dp"
-                    android:background="@color/white"
-                    android:orientation="horizontal"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                        android:id="@+id/activity_shop_detail_iv_back"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:onClick="@{() -> viewModel.whenBtnBackClicked()}"
-                        android:padding="15dp"
-                        android:src="@drawable/ic_chevron_0_left_gray"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_medium"
-                        android:text="@string/menu_shop"
-                        android:textColor="@color/black"
-                        android:textSize="17sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <ImageView
                     android:id="@+id/activity_shop_detail_iv_gift"
@@ -108,7 +107,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="23dp"
-                    android:layout_marginBottom="16dp"
                     android:fontFamily="@font/roboto_regular"
                     android:text="@string/shop_option_select"
                     android:textColor="@color/black"
@@ -124,8 +122,8 @@
                     app:container_enable_drag="false"
                     app:horizontal_interval="10dp"
                     app:tag_clickable="true"
-                    app:tag_theme="pure_teal"
-                    app:vertical_interval="10dp" />
+                    app:tag_theme="none"
+                    app:vertical_interval="8dp" />
 
                 <View
                     android:layout_width="wrap_content"

@@ -14,7 +14,12 @@ import kotlinx.coroutines.launch
 
 class ShopViewModel(private val giftNetworkRepository: GiftNetworkRepository) : ViewModel() {
 
+    //GiftDetail
     var giftIndex: MutableLiveData<Int> = MutableLiveData()
+    var giftOption: MutableLiveData<GiftOption> = MutableLiveData()
+    var optionIndex: MutableLiveData<Int> = MutableLiveData()
+
+    //GiftList
     var giftResult: MutableLiveData<GiftResult> = MutableLiveData()
     var giftTotalCount: MutableLiveData<Int> = MutableLiveData()
     var isLoading: MutableLiveData<Boolean> = MutableLiveData()
@@ -57,10 +62,37 @@ class ShopViewModel(private val giftNetworkRepository: GiftNetworkRepository) : 
                 fail.value = Fail(giftResponse.message, giftResponse.code)
             }
         } catch (e: ApiException) {
-            Log.d("네트워크에러", e.toString())
             fail.value = Fail(e.message!!, 404)
         } catch (e: Exception) {
-            Log.d("네트워크에러", e.toString())
+            fail.value = Fail(e.message!!, 404)
+        }
+    }
+
+    private fun postGift() = viewModelScope.launch {
+        try {
+            val body: GiftPostBody
+            if (giftIndex.value != null && giftOption.value != null) {
+                body = GiftPostBody(giftIndex.value!!, giftOption.value!!.usedClover)
+            } else {
+                fail.value = Fail("", 404)
+                return@launch
+            }
+            Log.d("네트워크", body.toString())
+/*
+            val giftResponse = giftNetworkRepository.postGift(body)
+            Log.d("네트워크", giftResponse.result.toString())
+            if (giftResponse.code == 200) {
+                giftResponse.result?.let {
+                    giftResult.value = giftResponse.result
+                }
+            } else {
+                fail.value = Fail(giftResponse.message, giftResponse.code)
+            }
+
+ */
+        } catch (e: ApiException) {
+            fail.value = Fail(e.message!!, 404)
+        } catch (e: Exception) {
             fail.value = Fail(e.message!!, 404)
         }
     }
@@ -70,6 +102,6 @@ class ShopViewModel(private val giftNetworkRepository: GiftNetworkRepository) : 
     }
 
     fun whenBtnApplyClicked() {
-
+        postGift()
     }
 }

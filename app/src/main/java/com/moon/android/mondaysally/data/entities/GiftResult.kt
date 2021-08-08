@@ -10,9 +10,15 @@ data class GiftResult(
     @SerializedName(value = "info") val info: String,
     @SerializedName(value = "rule") val rule: String,
     @SerializedName(value = "options") val options: ArrayList<GiftOption>,
+    @SerializedName(value = "idx") val idx: Int,
 )
 
 data class GiftOption(
     @SerializedName(value = "usedClover") val usedClover: Int,
     @SerializedName(value = "money") val money: Int,
+)
+
+data class GiftPostBody(
+    @SerializedName(value = "giftIdx") val giftIdx: Int,
+    @SerializedName(value = "usedClover") val usedClover: Int,
 )

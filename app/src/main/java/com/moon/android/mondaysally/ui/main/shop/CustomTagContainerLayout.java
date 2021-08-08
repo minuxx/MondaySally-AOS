@@ -1,6 +1,7 @@
 package com.moon.android.mondaysally.ui.main.shop;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 
 import com.moon.android.mondaysally.data.entities.GiftOption;

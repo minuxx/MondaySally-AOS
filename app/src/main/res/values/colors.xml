@@ -17,8 +17,11 @@
     <color name="bottom_font_gray">#c4c4c4</color>
     <color name="no_gray_font">#bdbdbd</color>
     <color name="text_dim_gray">#acacac</color>
+    <color name="option_border_gray">#acacac</color>
 
     <color name="pinkish_red">#ff7c59</color>
     <color name="sand_yellow">#ffd465</color>
     <color name="perry_winkle">#8ba1ed</color>
+
+    <color name="ttt">#33FF7669</color>
 </resources>
