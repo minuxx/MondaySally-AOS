@@ -1,6 +1,5 @@
 package com.moon.android.mondaysally.ui.splash
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

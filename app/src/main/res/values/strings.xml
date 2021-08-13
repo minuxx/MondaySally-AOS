@@ -8,7 +8,7 @@
     <string name="menu_home">홈</string>
     <string name="menu_shop">기프트샵</string>
     <string name="menu_twinkle">트윙클</string>
-
+    <string name="go_home">홈으로</string>
     <!--에러처리-->
     <string name="default_fail">네트워크연결이 원활하지 않습니다</string>
 
@@ -83,4 +83,8 @@
     <string name="shop_option_select">옵션 선택</string>
     <string name="shop_apply">신청하기</string>
     <string name="shop_item_comment">*아이템은 1일 1회 한도로 구매 가능합니다.</string>
+    <string name="shop_gift_done">기프트 신청이 완료되었습니다.</string>
+    <string name="shop_gift_done_comment">기프트 신청 처리는\n평균 2-3일 정도가 소요됩니다.</string>
+    <string name="shop_go_twinkle">트윙클 쓰러가기</string>
+
 </resources>

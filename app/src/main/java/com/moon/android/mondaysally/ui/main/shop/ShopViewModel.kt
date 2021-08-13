@@ -18,12 +18,17 @@ class ShopViewModel(private val giftNetworkRepository: GiftNetworkRepository) : 
     var giftIndex: MutableLiveData<Int> = MutableLiveData()
     var giftOption: MutableLiveData<GiftOption> = MutableLiveData()
     var optionIndex: MutableLiveData<Int> = MutableLiveData()
+    var isOptionSelected: MutableLiveData<Boolean> = MutableLiveData()
 
     //GiftList
     var giftResult: MutableLiveData<GiftResult> = MutableLiveData()
+    var postSuccess: MutableLiveData<Boolean> = MutableLiveData()
+    var finishActivity: MutableLiveData<Boolean> = MutableLiveData()
     var giftTotalCount: MutableLiveData<Int> = MutableLiveData()
     var isLoading: MutableLiveData<Boolean> = MutableLiveData()
-    var finishActivity: MutableLiveData<Boolean> = MutableLiveData()
+
+    //ApplyDone
+    var goHome: MutableLiveData<Boolean> = MutableLiveData()
 
     val giftList = ListLiveData<Gift>()
     var fail: MutableLiveData<Fail> = MutableLiveData()
@@ -77,19 +82,14 @@ class ShopViewModel(private val giftNetworkRepository: GiftNetworkRepository) : 
                 fail.value = Fail("", 404)
                 return@launch
             }
-            Log.d("네트워크", body.toString())
-/*
             val giftResponse = giftNetworkRepository.postGift(body)
-            Log.d("네트워크", giftResponse.result.toString())
             if (giftResponse.code == 200) {
                 giftResponse.result?.let {
-                    giftResult.value = giftResponse.result
+                    postSuccess.value = true
                 }
             } else {
                 fail.value = Fail(giftResponse.message, giftResponse.code)
             }
-
- */
         } catch (e: ApiException) {
             fail.value = Fail(e.message!!, 404)
         } catch (e: Exception) {
@@ -103,5 +103,9 @@ class ShopViewModel(private val giftNetworkRepository: GiftNetworkRepository) : 
 
     fun whenBtnApplyClicked() {
         postGift()
+    }
+
+    fun whenTvGoHomeClicked() {
+        goHome.value = true
     }
 }

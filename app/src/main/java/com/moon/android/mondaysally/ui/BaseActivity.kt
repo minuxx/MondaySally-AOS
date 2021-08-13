@@ -1,9 +1,11 @@
 package com.moon.android.mondaysally.ui
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -109,5 +111,11 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity(),
      */
     protected abstract fun initAfterBinding()
 
+    open val startForResult =
+        this.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                result.data?.getStringExtra("")
+            }
+        }
 
 }

@@ -7,6 +7,7 @@ import com.moon.android.mondaysally.R
 import com.moon.android.mondaysally.databinding.ActivityShopDetailBinding
 import com.moon.android.mondaysally.ui.BaseActivity
 import com.moon.android.mondaysally.ui.main.shop.ShopViewModel
+import com.moon.android.mondaysally.ui.main.shop.shop_apply_done.ShopApplyDoneActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -21,32 +22,27 @@ class ShopDetailActivity : BaseActivity<ActivityShopDetailBinding>() {
         context = this;
         binding.lifecycleOwner = this;
         binding.viewModel = shopViewModel
+        setTagView()
 
-        shopViewModel.finishActivity.observe(this, { finishActivity ->
-            finish()
+        shopViewModel.postSuccess.observe(this, { postSuccess ->
+            if (postSuccess)
+                startNextActivity(ShopApplyDoneActivity::class.java)
         })
 
-        shopViewModel.giftResult.observe(this, { giftResult ->
+        shopViewModel.finishActivity.observe(this, { finishActivity ->
+            if (finishActivity)
+                finish()
+        })
+
+        shopViewModel.giftResult.observe(this, {
             binding.activityShopDetailTagOption.setOption(shopViewModel.giftResult.value?.options)
         })
 
         shopViewModel.optionIndex.observe(this, { optionIndex ->
+            shopViewModel.isOptionSelected.value = true
             optionTagViewOff(optionIndex)
             optionTagViewOn(optionIndex)
         })
-
-        binding.activityShopDetailTagOption.borderColor = getColor(R.color.translate)
-        binding.activityShopDetailTagOption.backgroundColor = getColor(R.color.translate)
-
-        binding.activityShopDetailTagOption.tagBorderRadius = 8.0F
-        binding.activityShopDetailTagOption.tagTextColor = getColor(R.color.text_dim_gray)
-        binding.activityShopDetailTagOption.tagBorderColor = getColor(R.color.option_border_gray)
-        binding.activityShopDetailTagOption.borderWidth = 1 * resources.displayMetrics.density
-        binding.activityShopDetailTagOption.tagBackgroundColor = getColor(R.color.white)
-        binding.activityShopDetailTagOption.tagTypeface =
-            ResourcesCompat.getFont(this, R.font.roboto_light)
-        binding.activityShopDetailTagOption.tagTextSize =
-            13 * resources.displayMetrics.scaledDensity
 
         binding.activityShopDetailTagOption.setOnTagClickListener(object : OnTagClickListener {
             override fun onTagClick(position: Int, text: String) {
@@ -99,25 +95,40 @@ class ShopDetailActivity : BaseActivity<ActivityShopDetailBinding>() {
         shopViewModel.getGiftDetail(intent.getIntExtra("idx", 0))
     }
 
-    fun optionTagViewOff(position: Int) {
+    private fun optionTagViewOff(position: Int) {
+        binding.activityShopDetailTagOption.setOption(shopViewModel.giftResult.value?.options)
         shopViewModel.giftResult.value?.options?.forEachIndexed { index, option ->
 //            if (index != position) {
-                binding.activityShopDetailTagOption.getTagView(index)
-                    .setTagBorderColor(getColor(R.color.option_border_gray))
-                binding.activityShopDetailTagOption.getTagView(index)
-                    .setTagTextColor(getColor(R.color.option_border_gray))
-                binding.activityShopDetailTagOption.getTagView(index)
-                    .setTypeface(ResourcesCompat.getFont(context, R.font.roboto_light))
+            binding.activityShopDetailTagOption.getTagView(index)
+                .setTagBorderColor(getColor(R.color.option_border_gray))
+            binding.activityShopDetailTagOption.getTagView(index)
+                .setTagTextColor(getColor(R.color.option_border_gray))
+            binding.activityShopDetailTagOption.getTagView(index)
+                .setTypeface(ResourcesCompat.getFont(context, R.font.roboto_light))
 //            }
         }
     }
 
-    fun optionTagViewOn(position: Int) {
+    private fun optionTagViewOn(position: Int) {
         binding.activityShopDetailTagOption.getTagView(position)
             .setTagBorderColor(getColor(R.color.pinkish_orange))
         binding.activityShopDetailTagOption.getTagView(position)
             .setTagTextColor(getColor(R.color.pinkish_orange))
         binding.activityShopDetailTagOption.getTagView(position)
             .setTypeface(ResourcesCompat.getFont(context, R.font.roboto_regular))
+    }
+
+    private fun setTagView(){
+        binding.activityShopDetailTagOption.borderColor = getColor(R.color.translate)
+        binding.activityShopDetailTagOption.backgroundColor = getColor(R.color.translate)
+        binding.activityShopDetailTagOption.tagBorderRadius = 8.0F
+        binding.activityShopDetailTagOption.tagTextColor = getColor(R.color.text_dim_gray)
+        binding.activityShopDetailTagOption.tagBorderColor = getColor(R.color.option_border_gray)
+        binding.activityShopDetailTagOption.borderWidth = 1 * resources.displayMetrics.density
+        binding.activityShopDetailTagOption.tagBackgroundColor = getColor(R.color.white)
+        binding.activityShopDetailTagOption.tagTypeface =
+            ResourcesCompat.getFont(this, R.font.roboto_light)
+        binding.activityShopDetailTagOption.tagTextSize =
+            13 * resources.displayMetrics.scaledDensity
     }
 }
