@@ -1,4 +1,4 @@
-package com.moon.android.mondaysally.data.repository.common
+package com.moon.android.mondaysally.data.repository.network
 
 import com.moon.android.mondaysally.data.remote.common.CommonResponse
 import com.moon.android.mondaysally.data.remote.common.CommonService

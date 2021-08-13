@@ -1,11 +1,13 @@
 package com.moon.android.mondaysally.ui.main.shop.shop_detail
 
 import android.content.Context
+import android.util.Log
 import androidx.core.content.res.ResourcesCompat
 import co.lujun.androidtagview.TagView.OnTagClickListener
 import com.moon.android.mondaysally.R
 import com.moon.android.mondaysally.databinding.ActivityShopDetailBinding
 import com.moon.android.mondaysally.ui.BaseActivity
+import com.moon.android.mondaysally.ui.SallyDialog
 import com.moon.android.mondaysally.ui.main.shop.ShopViewModel
 import com.moon.android.mondaysally.ui.main.shop.shop_apply_done.ShopApplyDoneActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -23,6 +25,20 @@ class ShopDetailActivity : BaseActivity<ActivityShopDetailBinding>() {
         binding.lifecycleOwner = this;
         binding.viewModel = shopViewModel
         setTagView()
+
+        shopViewModel.showDialog.observe(this, { showDialog ->
+            if (showDialog) {
+                showSallyDialog(
+                    this,
+                    getString(R.string.shop_apply_check),
+                    getString(R.string.ok),
+                    object : SallyDialog.DialogClickListener {
+                        override fun onOKClicked() {
+                            shopViewModel.postGift()
+                        }
+                    })
+            }
+        })
 
         shopViewModel.postSuccess.observe(this, { postSuccess ->
             if (postSuccess)
@@ -118,7 +134,7 @@ class ShopDetailActivity : BaseActivity<ActivityShopDetailBinding>() {
             .setTypeface(ResourcesCompat.getFont(context, R.font.roboto_regular))
     }
 
-    private fun setTagView(){
+    private fun setTagView() {
         binding.activityShopDetailTagOption.borderColor = getColor(R.color.translate)
         binding.activityShopDetailTagOption.backgroundColor = getColor(R.color.translate)
         binding.activityShopDetailTagOption.tagBorderRadius = 8.0F

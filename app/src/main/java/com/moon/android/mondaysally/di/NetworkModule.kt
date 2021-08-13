@@ -6,6 +6,7 @@ import com.moon.android.mondaysally.data.remote.auth.AuthService
 import com.moon.android.mondaysally.data.remote.common.CommonService
 import com.moon.android.mondaysally.data.remote.home.HomeService
 import com.moon.android.mondaysally.data.remote.shop.GiftService
+import com.moon.android.mondaysally.data.remote.twinkke.TwinkleService
 import com.moon.android.mondaysally.data.repository.SharedPrefRepository
 import com.moon.android.mondaysally.utils.GlobalConstant.Companion.X_ACCESS_TOKEN
 import okhttp3.Interceptor
@@ -66,6 +67,9 @@ val networkModule: Module = module {
     fun provideGiftService(retrofit: Retrofit): GiftService =
         retrofit.create(GiftService::class.java)
 
+    fun provideTwinkleService(retrofit: Retrofit): TwinkleService =
+        retrofit.create(TwinkleService::class.java)
+
     single { provideHeaderInterceptor(get()) }
     single { provideHttpLoggingInterceptor() }
     single { provideOkHttpClient(get(), get()) }
@@ -74,4 +78,5 @@ val networkModule: Module = module {
     single { provideCommonService(get()) }
     single { provideHomeService(get()) }
     single { provideGiftService(get()) }
+    single { provideTwinkleService(get()) }
 }

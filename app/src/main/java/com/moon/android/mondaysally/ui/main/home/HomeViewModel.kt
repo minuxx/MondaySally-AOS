@@ -9,7 +9,7 @@ import com.moon.android.mondaysally.data.entities.GiftHistory
 import com.moon.android.mondaysally.data.entities.HomeResult
 import com.moon.android.mondaysally.data.entities.Member
 import com.moon.android.mondaysally.data.remote.Fail
-import com.moon.android.mondaysally.data.repository.auth.HomeNetworkRepository
+import com.moon.android.mondaysally.data.repository.network.HomeNetworkRepository
 import com.moon.android.mondaysally.utils.ApiException
 import com.moon.android.mondaysally.utils.ListLiveData
 import kotlinx.coroutines.launch

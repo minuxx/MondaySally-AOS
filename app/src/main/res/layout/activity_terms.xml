@@ -51,12 +51,13 @@
 
         <ImageButton
             android:id="@+id/activity_terms_btn_all"
-            android:layout_width="52dp"
-            android:layout_height="51dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:background="@color/translate"
             android:onClick="@{() -> viewModel.whenAllAgreeBtnClicked()}"
-            android:padding="16dp"
+            android:paddingStart="16dp"
+            android:padding="7.8dp"
             android:src="@drawable/check_box_off_gray"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/activity_terms_tv_agree" />
@@ -96,7 +97,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="7dp"
             android:fontFamily="@font/roboto_medium"
             android:text="@string/terms_service_title"
             android:textColor="@color/black"

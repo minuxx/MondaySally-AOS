@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.moon.android.mondaysally.data.remote.Fail
 import com.moon.android.mondaysally.data.repository.SharedPrefRepository
-import com.moon.android.mondaysally.data.repository.auth.AuthNetworkRepository
-import com.moon.android.mondaysally.data.repository.common.CommonNetworkRepository
+import com.moon.android.mondaysally.data.repository.network.AuthNetworkRepository
+import com.moon.android.mondaysally.data.repository.network.CommonNetworkRepository
 import com.moon.android.mondaysally.utils.ApiException
 import kotlinx.coroutines.launch
 

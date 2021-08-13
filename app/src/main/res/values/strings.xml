@@ -86,5 +86,8 @@
     <string name="shop_gift_done">기프트 신청이 완료되었습니다.</string>
     <string name="shop_gift_done_comment">기프트 신청 처리는\n평균 2-3일 정도가 소요됩니다.</string>
     <string name="shop_go_twinkle">트윙클 쓰러가기</string>
+    <string name="shop_apply_check">신청하시겠습니까?</string>
 
+    <!--트윙클-->
+    <string name="twinkle_my_twinkle">내 트윙클 현황</string>
 </resources>

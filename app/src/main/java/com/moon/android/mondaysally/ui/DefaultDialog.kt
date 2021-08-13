@@ -7,12 +7,13 @@ import android.widget.TextView
 
 class DefaultDialog(context: Context) {
     private val dlg = Dialog(context)   //부모 액티비티의 context 가 들어감
-    private lateinit var mTvTitle : TextView
-    private lateinit var btnOK : TextView
-//    private lateinit var btnCancel : Button
-    var listener : WekitDialogClickListener? = null
+    private lateinit var mTvTitle: TextView
+    private lateinit var btnOK: TextView
 
-    fun show(title : String) {
+    //    private lateinit var btnCancel : Button
+    var listener: WekitDialogClickListener? = null
+
+    fun show(title: String) {
         dlg.window?.setBackgroundDrawableResource(android.R.color.transparent)
         dlg.requestWindowFeature(Window.FEATURE_NO_TITLE)
 //        dlg.setContentView(R.layout.dialog_wekit_v1)

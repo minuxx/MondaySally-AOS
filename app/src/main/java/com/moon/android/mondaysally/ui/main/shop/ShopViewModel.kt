@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.moon.android.mondaysally.data.entities.*
 import com.moon.android.mondaysally.data.remote.Fail
-import com.moon.android.mondaysally.data.repository.gift.GiftNetworkRepository
+import com.moon.android.mondaysally.data.repository.network.GiftNetworkRepository
 import com.moon.android.mondaysally.utils.ApiException
 import com.moon.android.mondaysally.utils.ListLiveData
 import kotlinx.coroutines.launch
@@ -19,6 +19,7 @@ class ShopViewModel(private val giftNetworkRepository: GiftNetworkRepository) : 
     var giftOption: MutableLiveData<GiftOption> = MutableLiveData()
     var optionIndex: MutableLiveData<Int> = MutableLiveData()
     var isOptionSelected: MutableLiveData<Boolean> = MutableLiveData()
+    var showDialog: MutableLiveData<Boolean> = MutableLiveData()
 
     //GiftList
     var giftResult: MutableLiveData<GiftResult> = MutableLiveData()
@@ -42,7 +43,6 @@ class ShopViewModel(private val giftNetworkRepository: GiftNetworkRepository) : 
                     giftList.clear()
                     giftList.addAll(giftResponse.result.gifts)
                     giftTotalCount.value = giftResponse.result.totalCount
-                    Log.d("네트워크", giftResponse.result.toString())
                 }
             } else {
                 fail.value = Fail(giftResponse.message, giftResponse.code)
@@ -73,7 +73,7 @@ class ShopViewModel(private val giftNetworkRepository: GiftNetworkRepository) : 
         }
     }
 
-    private fun postGift() = viewModelScope.launch {
+    fun postGift() = viewModelScope.launch {
         try {
             val body: GiftPostBody
             if (giftIndex.value != null && giftOption.value != null) {
@@ -102,7 +102,8 @@ class ShopViewModel(private val giftNetworkRepository: GiftNetworkRepository) : 
     }
 
     fun whenBtnApplyClicked() {
-        postGift()
+        showDialog.value = true
+//        postGift()
     }
 
     fun whenTvGoHomeClicked() {

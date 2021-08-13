@@ -65,6 +65,7 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
             .error(R.drawable.bg_round_white_gray)
             .centerCrop()
             .circleCrop()
+            .thumbnail(0.1f)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(iv)
     }

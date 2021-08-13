@@ -24,8 +24,8 @@ val viewModelModule = module {
     viewModel { TeamCodeViewModel(get(), get()) }
     viewModel { TermsViewModel() }
     viewModel { WelcomeViewModel() }
-    single { MainViewModel() }
+    viewModel { MainViewModel() }
     viewModel { ShopViewModel(get()) }
-    viewModel { TwinkleViewModel() }
+    viewModel { TwinkleViewModel(get()) }
     viewModel { HomeViewModel(get()) }
 }

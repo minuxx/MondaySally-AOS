@@ -1,6 +1,7 @@
 package com.moon.android.mondaysally.ui
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -13,10 +14,10 @@ import androidx.databinding.ViewDataBinding
 import com.moon.android.mondaysally.R
 import com.moon.android.mondaysally.utils.GlobalConstant
 
-abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity(),
-    DefaultDialog.WekitDialogClickListener {
+abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
 
-    lateinit var lottieDialog: LottieDialog
+    private var lottieDialog: LottieDialog? = null
+    private var sallyDialog: SallyDialog? = null
 
     @LayoutRes
     abstract fun getLayoutResId(): Int
@@ -25,10 +26,18 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity(),
         private set
 
 
-    fun showDialog(title: String) {
-        val dig = DefaultDialog(this)
-        dig.listener = this
-        dig.show(title)
+    fun showSallyDialog(
+        context: Context,
+        content: String,
+        btnText: String,
+        listener: SallyDialog.DialogClickListener
+    ) {
+        if (isFinishing) {
+            return
+        }
+        sallyDialog = SallyDialog(context, content, btnText)
+        sallyDialog?.setOnChangeListener(listener)
+        sallyDialog?.show()
     }
 
     fun showToast(message: String) {
@@ -58,10 +67,6 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity(),
             .start()
     }
 
-    override fun onOKClicked() {
-
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_none)
@@ -81,7 +86,7 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity(),
         if (isFinishing) {
             return
         }
-        lottieDialog.show()
+        lottieDialog?.show()
 //        lottieDialog.let {
 //            if (!lottieDialog.isShowing) {
 //            뒤로가기로 끌 수 없게하기

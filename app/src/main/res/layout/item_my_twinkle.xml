@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.moon.android.mondaysally.data.entities.MyTwinkle" />
+    </data>
+
+    <FrameLayout
+        android:id="@+id/item_my_twinkle"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginBottom="18dp"
+        android:layout_marginStart="16dp">
+
+        <ImageView
+            android:id="@+id/item_my_twinkle_iv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/bg_circle_white_gray"
+            bind_common_image_circle="@{model.imgUrl}"
+            android:padding="3dp"
+            android:src="@drawable/illust_welcome_sally" />
+
+        <ImageView
+            android:id="@+id/item_my_twinkle_iv_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/ic_unproven_twinkle_circle_orange"
+            android:src="@drawable/illust_welcome_sally" />
+
+        <ImageView
+            android:id="@+id/item_my_twinkle_iv_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/ic_unproven_twinkle_orange" />
+
+    </FrameLayout>
+</layout>

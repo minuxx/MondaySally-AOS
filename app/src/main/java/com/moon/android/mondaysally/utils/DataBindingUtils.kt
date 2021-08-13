@@ -13,9 +13,11 @@ import com.moon.android.mondaysally.R
 import com.moon.android.mondaysally.data.entities.Gift
 import com.moon.android.mondaysally.data.entities.GiftHistory
 import com.moon.android.mondaysally.data.entities.Member
+import com.moon.android.mondaysally.data.entities.MyTwinkle
 import com.moon.android.mondaysally.ui.main.home.GiftHistoryAdapter
 import com.moon.android.mondaysally.ui.main.home.MemberListAdapter
 import com.moon.android.mondaysally.ui.main.shop.GiftShopAdapter
+import com.moon.android.mondaysally.ui.main.twinkle.MyTwinkleAdapter
 
 object DataBindingUtils {
 
@@ -27,6 +29,7 @@ object DataBindingUtils {
                 .load(url).placeholder(R.drawable.illust_sally_blank_1_1)
                 .error(R.drawable.illust_sally_blank_1_1)
                 .centerCrop()
+                .thumbnail(0.1f)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(this)
         }
@@ -40,6 +43,22 @@ object DataBindingUtils {
                 .load(url).placeholder(R.drawable.illust_sally_blank_1_1)
                 .error(R.drawable.illust_sally_blank_1_1)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .thumbnail(0.1f)
+                .into(this)
+        }
+    }
+
+    @BindingAdapter("bind_common_image_circle")
+    @JvmStatic
+    fun ImageView.setImageCommonCircle(url: String?) {
+        url.let {
+            Glide.with(this)
+                .load(url).placeholder(R.drawable.illust_sally_blank_1_1)
+                .error(R.drawable.illust_sally_blank_1_1)
+                .centerCrop()
+                .circleCrop()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .thumbnail(0.1f)
                 .into(this)
         }
     }
@@ -79,7 +98,7 @@ object DataBindingUtils {
                 .error(R.drawable.illust_sally_blank_1_1)
                 .centerCrop()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-//                .transform(CenterCrop(), RoundedCorners(30))
+                .thumbnail(0.1f)
                 .into(this)
         }
     }
@@ -110,6 +129,17 @@ object DataBindingUtils {
             recyclerView.adapter = adapter
         }
         (recyclerView.adapter as GiftShopAdapter).items = items
+        recyclerView.adapter?.notifyDataSetChanged()
+    }
+
+    @BindingAdapter("bind_my_twinkle")
+    @JvmStatic
+    fun bindMyTwinkleList(recyclerView: RecyclerView, items: MutableList<MyTwinkle>) {
+        if (recyclerView.adapter == null) {
+            val adapter = MyTwinkleAdapter()
+            recyclerView.adapter = adapter
+        }
+        (recyclerView.adapter as MyTwinkleAdapter).items = items
         recyclerView.adapter?.notifyDataSetChanged()
     }
 }

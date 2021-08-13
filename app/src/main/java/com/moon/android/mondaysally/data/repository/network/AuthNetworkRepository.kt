@@ -1,4 +1,4 @@
-package com.moon.android.mondaysally.data.repository.auth
+package com.moon.android.mondaysally.data.repository.network
 
 import com.moon.android.mondaysally.data.entities.Code
 import com.moon.android.mondaysally.data.entities.User
