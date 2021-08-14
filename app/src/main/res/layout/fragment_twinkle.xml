@@ -10,57 +10,65 @@
             type="com.moon.android.mondaysally.ui.main.twinkle.TwinkleViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/splash_root_layout"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/fragment_twinkle_swipe_refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/fragment_shop_tv_all_gift"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="19dp"
-            android:fontFamily="@font/roboto_medium"
-            android:text="@string/twinkle_my_twinkle"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/fragment_twinkle_rv_my_twinkle"
-            bind_my_twinkle="@{viewModel.myTwinkleList}"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:scrollbars="none"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_shop_tv_all_gift"
-            tools:listitem="@layout/item_my_twinkle" />
+            android:layout_height="wrap_content">
 
-        <View
-            android:id="@+id/fragment_twinkle_line"
-            android:layout_width="match_parent"
-            android:layout_height="7dp"
-            android:background="@color/very_light_gray"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_twinkle_rv_my_twinkle" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/splash_root_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-<!--        <androidx.recyclerview.widget.RecyclerView-->
-<!--            android:id="@+id/fragment_twinkle_rv_timeline"-->
-<!--            bind_gift_history="@{viewModel.twinkleList}"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:scrollbars="none"-->
-<!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/fragment_twinkle_line"-->
-<!--            tools:listitem="@layout/item_twinkle" />-->
+                <TextView
+                    android:id="@+id/fragment_shop_tv_all_gift"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="19dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="@string/twinkle_my_twinkle"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/fragment_twinkle_rv_my_twinkle"
+                    bind_my_twinkle="@{viewModel.myTwinkleList}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:scrollbars="none"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/fragment_shop_tv_all_gift"
+                    tools:listitem="@layout/item_my_twinkle" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <View
+                    android:id="@+id/fragment_twinkle_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="7dp"
+                    android:background="@color/very_light_gray"
+                    app:layout_constraintTop_toBottomOf="@+id/fragment_twinkle_rv_my_twinkle" />
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/fragment_twinkle_rv_timeline"
+                    bind_twinkle="@{viewModel.twinkleList}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:scrollbars="none"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/fragment_twinkle_line"
+                    tools:listitem="@layout/item_twinkle" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

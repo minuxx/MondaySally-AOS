@@ -14,27 +14,26 @@
         android:id="@+id/item_my_twinkle"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="13dp"
-        android:layout_marginBottom="18dp"
-        android:layout_marginStart="16dp">
+        android:layout_marginBottom="18dp">
 
         <ImageView
             android:id="@+id/item_my_twinkle_iv"
+            bind_common_image_circle="@{model.imgUrl}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/bg_circle_white_gray"
-            bind_common_image_circle="@{model.imgUrl}"
-            android:padding="3dp"
-            android:src="@drawable/illust_welcome_sally" />
+            android:padding="3dp" />
 
         <ImageView
             android:id="@+id/item_my_twinkle_iv_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            bind_my_twinkle_bg="@{model.isProved()}"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/ic_unproven_twinkle_circle_orange"
-            android:src="@drawable/illust_welcome_sally" />
+            android:background="@drawable/ic_unproven_twinkle_circle_orange" />
 
         <ImageView
             android:id="@+id/item_my_twinkle_iv_star"

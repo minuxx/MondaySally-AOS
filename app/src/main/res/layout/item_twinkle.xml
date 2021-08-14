@@ -7,29 +7,29 @@
 
         <variable
             name="model"
-            type="com.moon.android.mondaysally.data.entities.Member" />
+            type="com.moon.android.mondaysally.data.entities.Twinkle" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+        android:id="@+id/item_twinkle"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="18dp">
+        android:layout_width="match_parent"
+        android:layout_marginTop="15dp">
 
         <ImageView
             android:id="@+id/item_twinkle_iv_profile"
+            bind_common_image_circle="@{model.imgUrl}"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
-            bind_common_image="@{}"
-            android:layout_marginTop="15dp"
             android:background="@drawable/bg_circle_my_tiwnkle"
             android:padding="1dp"
-            android:src="@drawable/illust_welcome_sally"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/item_twinkle_tv_nickname"
+            bind_common_text="@{model.nickname}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -43,19 +43,46 @@
         <TextView
             android:id="@+id/item_twinkle_tv_gift"
             android:layout_width="wrap_content"
+            bind_common_text="@{model.name}"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_regular"
             android:textColor="@color/twinkle_gift_grey"
             android:textSize="13sp"
             app:layout_constraintStart_toStartOf="@id/item_twinkle_tv_nickname"
-            app:layout_constraintTop_toBottomOf="@id/item_twinkle_tv_nickname"
+            app:layout_constraintBottom_toBottomOf="@+id/item_twinkle_iv_profile"
             tools:text="ㅇㅇ" />
+
+        <TextView
+            android:id="@+id/item_twinkle_tv_clover"
+            bind_common_text="@{Integer.toString(model.usedClover)}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:fontFamily="@font/roboto_regular"
+            android:textColor="@color/twinkle_gift_grey"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="@+id/item_twinkle_iv_profile"
+            app:layout_constraintStart_toEndOf="@id/item_twinkle_tv_gift"
+            tools:text="90" />
+
+        <ImageView
+            android:id="@+id/item_twinkle_iv_clover"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_clover_gray"
+            android:layout_marginStart="1dp"
+            app:layout_constraintStart_toEndOf="@id/item_twinkle_tv_clover"
+            app:layout_constraintTop_toTopOf="@id/item_twinkle_tv_clover"
+            app:layout_constraintBottom_toBottomOf="@id/item_twinkle_tv_clover"/>
+
 
         <ImageView
             android:id="@+id/item_twinkle_iv_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp"
             android:src="@drawable/ic_like_on_orange"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -64,11 +91,72 @@
             android:id="@+id/item_twinkle_iv_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/illust_clover_gift"
-            app:layout_constraintDimensionRatio="1:1"
+            bind_large_image="@{model.twinkleImg}"
             android:layout_marginTop="12dp"
-            app:layout_constraintTop_toBottomOf="@id/item_twinkle_iv_profile"
-            />
+            android:src="@drawable/illust_clover_gift"
+            android:adjustViewBounds="true"
+            app:layout_constraintTop_toBottomOf="@id/item_twinkle_iv_profile" />
+
+        <TextView
+            android:id="@+id/item_twinkle_tv_like"
+            bind_twinkle_tv_like="@{model.likenum}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:fontFamily="@font/roboto_regular"
+            android:textColor="@color/twinkle_gift_grey"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@id/item_twinkle_iv_profile"
+            app:layout_constraintTop_toBottomOf="@+id/item_twinkle_iv_main"
+            tools:text="좋아요 87개" />
+
+        <TextView
+            android:id="@+id/item_twinkle_tv_comment"
+            bind_twinkle_tv_comment="@{model.commentnum}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:fontFamily="@font/roboto_regular"
+            android:textColor="@color/twinkle_gift_grey"
+            android:textSize="14sp"
+            app:layout_constraintStart_toEndOf="@id/item_twinkle_tv_like"
+            app:layout_constraintTop_toTopOf="@+id/item_twinkle_tv_like"
+            tools:text="댓글 3개" />
+
+        <TextView
+            android:id="@+id/item_twinkle_tv_content"
+            bind_common_text="@{model.content}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="9dp"
+            android:fontFamily="@font/roboto_regular"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_twinkle_tv_like"
+            tools:text="그동안 열심히 일한 보람이 있네요! 드디어 쌓아왔던 포..." />
+
+        <TextView
+            android:id="@+id/item_twinkle_tv_date"
+            bind_common_text="@{model.date}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:fontFamily="@font/roboto_light"
+            android:textColor="@color/twinkle_date_grey"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="@id/item_twinkle_iv_profile"
+            app:layout_constraintTop_toBottomOf="@id/item_twinkle_tv_content"
+            tools:text="2020.02.02" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"
+            android:layout_marginTop="24dp"
+            android:background="@color/very_light_gray"
+            app:layout_constraintTop_toBottomOf="@+id/item_twinkle_tv_date" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

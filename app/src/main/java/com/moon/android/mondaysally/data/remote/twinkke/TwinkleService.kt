@@ -8,8 +8,8 @@ interface TwinkleService {
     @GET("/prove")
     suspend fun getMyTwinkleList(@Query("page") page: Int): Response<TwinkleResponse>
 
-//    @GET("/gift/{idx}")
-//    suspend fun getGiftDetail(@Path("idx") idx: Int): Response<TwinkleResponse>
+    @GET("/twinkle")
+    suspend fun getTwinkleList(@Query("page") page: Int): Response<TwinkleResponse>
 //
 //    @POST("/gift")
 //    suspend fun postGift(@Body giftPostBody: GiftPostBody): Response<TwinkleResponse>

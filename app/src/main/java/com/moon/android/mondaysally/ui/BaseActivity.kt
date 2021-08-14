@@ -25,21 +25,6 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
     protected lateinit var binding: T
         private set
 
-
-    fun showSallyDialog(
-        context: Context,
-        content: String,
-        btnText: String,
-        listener: SallyDialog.DialogClickListener
-    ) {
-        if (isFinishing) {
-            return
-        }
-        sallyDialog = SallyDialog(context, content, btnText)
-        sallyDialog?.setOnChangeListener(listener)
-        sallyDialog?.show()
-    }
-
     fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
@@ -51,7 +36,6 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
 
     open fun startActivityWithClear(activity: Class<*>?) {
         val intent = Intent(this, activity)
-//        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
     }
@@ -81,17 +65,31 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         overridePendingTransition(R.anim.slide_none, R.anim.slide_out_right)
     }
 
-
-    open fun showLottieDialog() {
+    fun showSallyDialog(
+        context: Context,
+        content: String,
+        btnText: String,
+        listener: SallyDialog.DialogClickListener
+    ) {
         if (isFinishing) {
             return
         }
+        sallyDialog = SallyDialog(context, content, btnText)
+        sallyDialog?.setOnChangeListener(listener)
+        sallyDialog?.show()
+    }
+
+    open fun showLottieDialog(context: Context) {
+        if (isFinishing) {
+            return
+        }
+        lottieDialog = LottieDialog(context)
         lottieDialog?.show()
 //        lottieDialog.let {
-//            if (!lottieDialog.isShowing) {
-//            뒤로가기로 끌 수 없게하기
-//            lottieDialog.setCancelable(false);
-//                lottieDialog.show()
+//            if (lottieDialog!!.isShowing) {
+////            뒤로가기로 끌 수 없게하기
+//            lottieDialog!!.setCancelable(false);
+//                lottieDialog!!.show()
 //            }
 //        }
     }

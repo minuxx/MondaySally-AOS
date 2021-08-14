@@ -60,18 +60,6 @@ class HomeFragment() :
                 binding.fragmentHomeSwipeRefresh.isRefreshing = false;
         })
 
-        binding.fragmentHomeRvGiftHistory.adapter = GiftHistoryAdapter()
-        binding.fragmentHomeRvNowOn.adapter = MemberListAdapter()
-        context?.let { GridItemDecoration(it) }?.let {
-            binding.fragmentHomeRvNowOn.addItemDecoration(
-                it
-            )
-        }
-
-        binding.fragmentHomeSwipeRefresh.setColorSchemeResources(
-            R.color.pinkish_orange
-        )
-
         homeViewModel.fail.observe(this, { fail ->
             when(fail.code){
                 341, 388, 389 -> {
@@ -85,14 +73,28 @@ class HomeFragment() :
                 }
             }
         })
-    }
 
-    override fun initAfterBinding() {
+        binding.fragmentHomeRvGiftHistory.adapter = GiftHistoryAdapter()
+        binding.fragmentHomeRvNowOn.adapter = MemberListAdapter()
+        context?.let { GridItemDecoration(it) }?.let {
+            binding.fragmentHomeRvNowOn.addItemDecoration(
+                it
+            )
+        }
+
+        binding.fragmentHomeSwipeRefresh.setColorSchemeResources(
+            R.color.pinkish_orange
+        )
         binding.fragmentHomeSwipeRefresh.setOnRefreshListener {
             //리로딩
             homeViewModel.getHomeData()
             //완료되면 아래코드
         }
+
+    }
+
+    override fun initAfterBinding() {
+
 
         homeViewModel.getHomeData()
     }

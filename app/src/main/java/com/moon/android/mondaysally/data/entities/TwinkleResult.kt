@@ -2,8 +2,9 @@ package com.moon.android.mondaysally.data.entities
 
 import com.google.gson.annotations.SerializedName
 
-data class MyTwinkleResult(
-    @SerializedName(value = "giftLogs") val giftLogs: ArrayList<MyTwinkle>,
+data class TwinkleResult(
+    @SerializedName(value = "giftLogs") val giftLogs: List<MyTwinkle>,
+    @SerializedName(value = "twinkles") val twinkles: ArrayList<Twinkle>,
 )
 
 data class MyTwinkle(
@@ -16,7 +17,16 @@ data class MyTwinkle(
 
 data class Twinkle(
     @SerializedName(value = "usedClover") val usedClover: Int,
-    @SerializedName(value = "money") val money: Int,
+    @SerializedName(value = "name") val name: String,
+    @SerializedName(value = "nickname") val nickname: String,
+    @SerializedName(value = "imgUrl") val imgUrl: String,
+    @SerializedName(value = "idx") val idx: Int,
+    @SerializedName(value = "twinkleImg") val twinkleImg: String,
+    @SerializedName(value = "isHearted") val isHearted: String,
+    @SerializedName(value = "date") val date: String,
+    @SerializedName(value = "content") val content: String,
+    @SerializedName(value = "likenum") val likenum: Int,
+    @SerializedName(value = "commentnum") val commentnum: Int,
 
 //    "idx": 2, // 트윙클 아이디
 //    "imgUrl": "https://firebasestorage.googleapis.com/v0/b/modaysally.appspot.com/o/test%2Fprofile%2F8510FE91-1352-4562-B52A-293BA7DD1AD9?alt=media&token=3fa626c9-29c3-4ca1-ae90-3308d1a0a596",
@@ -30,8 +40,3 @@ data class Twinkle(
 //"likenum": 2,
 //"commentnum": 3
 )
-//
-//data class GiftPostBody(
-//    @SerializedName(value = "giftIdx") val giftIdx: Int,
-//    @SerializedName(value = "usedClover") val usedClover: Int,
-//)

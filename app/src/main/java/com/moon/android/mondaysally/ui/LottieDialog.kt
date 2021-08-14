@@ -12,10 +12,12 @@ import java.util.*
 class LottieDialog(mContext: Context) : Dialog(
     mContext
 ) {
-    override fun onCreate(savedInstanceState: Bundle) {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dialog_lottie)
         /* Set Window */
+
         Objects.requireNonNull(window)!!.setBackgroundDrawable(
             ColorDrawable(
                 Color.TRANSPARENT
@@ -26,4 +28,5 @@ class LottieDialog(mContext: Context) : Dialog(
             WindowManager.LayoutParams.WRAP_CONTENT
         )
     }
+
 }

@@ -16,6 +16,8 @@ import kotlinx.coroutines.launch
 
 class TwinkleViewModel(private val giftNetworkRepository: TwinkleNetworkRepository) : ViewModel() {
 
+    var isLoading: MutableLiveData<Boolean> = MutableLiveData()
+
     val myTwinkleList = ListLiveData<MyTwinkle>()
     val twinkleList = ListLiveData<Twinkle>()
     var fail: MutableLiveData<Fail> = MutableLiveData()
@@ -23,7 +25,6 @@ class TwinkleViewModel(private val giftNetworkRepository: TwinkleNetworkReposito
     fun _getMyTwinkleList() = viewModelScope.launch {
         try {
             val myTwinkleResponse = giftNetworkRepository.getMyTwinkleList(1)
-            Log.d("네트워크", myTwinkleResponse.result.toString())
             if (myTwinkleResponse.code == 200) {
                 myTwinkleResponse.result?.let {
                     myTwinkleList.clear()
@@ -35,9 +36,26 @@ class TwinkleViewModel(private val giftNetworkRepository: TwinkleNetworkReposito
         } catch (e: ApiException) {
             fail.value = Fail(e.message!!, 404)
         } catch (e: Exception) {
-            Log.d("네트워크", e.toString())
             fail.value = Fail(e.message!!, 404)
         }
     }
 
+    fun _getTwinkleList() = viewModelScope.launch {
+        try {
+            val twinkleResponse = giftNetworkRepository.getTwinkleList(1)
+            isLoading.value = false
+            if (twinkleResponse.code == 200) {
+                twinkleResponse.result?.let {
+                    twinkleList.clear()
+                    twinkleList.addAll(twinkleResponse.result.twinkles)
+                }
+            } else {
+                fail.value = Fail(twinkleResponse.message, twinkleResponse.code)
+            }
+        } catch (e: ApiException) {
+            fail.value = Fail(e.message!!, 404)
+        } catch (e: Exception) {
+            fail.value = Fail(e.message!!, 404)
+        }
+    }
 }

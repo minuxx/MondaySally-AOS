@@ -1,6 +1,8 @@
 package com.moon.android.mondaysally.utils
 
 import android.annotation.SuppressLint
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -8,16 +10,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestOptions
 import com.moon.android.mondaysally.R
-import com.moon.android.mondaysally.data.entities.Gift
-import com.moon.android.mondaysally.data.entities.GiftHistory
-import com.moon.android.mondaysally.data.entities.Member
-import com.moon.android.mondaysally.data.entities.MyTwinkle
+import com.moon.android.mondaysally.data.entities.*
 import com.moon.android.mondaysally.ui.main.home.GiftHistoryAdapter
 import com.moon.android.mondaysally.ui.main.home.MemberListAdapter
 import com.moon.android.mondaysally.ui.main.shop.GiftShopAdapter
 import com.moon.android.mondaysally.ui.main.twinkle.MyTwinkleAdapter
+import com.moon.android.mondaysally.ui.main.twinkle.TwinkleAdapter
 
 object DataBindingUtils {
 
@@ -26,10 +25,10 @@ object DataBindingUtils {
     fun ImageView.setImageCommon(url: String?) {
         url.let {
             Glide.with(this)
-                .load(url).placeholder(R.drawable.illust_sally_blank_1_1)
+                .load(url)
                 .error(R.drawable.illust_sally_blank_1_1)
                 .centerCrop()
-                .thumbnail(0.1f)
+                .thumbnail(0.3f)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(this)
         }
@@ -53,12 +52,28 @@ object DataBindingUtils {
     fun ImageView.setImageCommonCircle(url: String?) {
         url.let {
             Glide.with(this)
-                .load(url).placeholder(R.drawable.illust_sally_blank_1_1)
+                .load(url)
+                .override(200, 200)
                 .error(R.drawable.illust_sally_blank_1_1)
                 .centerCrop()
                 .circleCrop()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .thumbnail(0.1f)
+                .into(this)
+        }
+    }
+
+    @BindingAdapter("bind_large_image")
+    @JvmStatic
+    fun ImageView.setLargeImageCommon(url: String?) {
+        url.let {
+            Glide.with(this)
+                .load(url)
+                .override(700, 700)
+                .error(R.drawable.illust_sally_blank_1_1)
+                .centerCrop()
+                .thumbnail(0.3f)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(this)
         }
     }
@@ -141,5 +156,49 @@ object DataBindingUtils {
         }
         (recyclerView.adapter as MyTwinkleAdapter).items = items
         recyclerView.adapter?.notifyDataSetChanged()
+    }
+
+    @BindingAdapter("bind_twinkle")
+    @JvmStatic
+    fun bindTwinkleList(recyclerView: RecyclerView, items: MutableList<Twinkle>) {
+        if (recyclerView.adapter == null) {
+            val adapter = TwinkleAdapter()
+            recyclerView.adapter = adapter
+        }
+        (recyclerView.adapter as TwinkleAdapter).items = items
+        recyclerView.adapter?.notifyDataSetChanged()
+    }
+
+    @BindingAdapter("bind_my_twinkle_bg")
+    @JvmStatic
+    fun bindTwinkleBg(imageView: ImageView, isProved: String) {
+        if (isProved.equals("Y"))
+            imageView.visibility = GONE
+        else
+            imageView.visibility = VISIBLE
+    }
+
+    @BindingAdapter("bind_twinkle_iv_heart")
+    @JvmStatic
+    fun bindTwinkleHeart(imageView: ImageView, isHearted: String) {
+        if (isHearted.equals("Y"))
+            imageView.setImageResource(R.drawable.ic_like_on_orange)
+        else
+            imageView.setImageResource(R.drawable.ic_like_off_gray)
+
+    }
+
+    @BindingAdapter("bind_twinkle_tv_comment")
+    @JvmStatic
+    fun bindTwinkleComment(textView: TextView, commentnum: Int) {
+        val text = "댓글 ${commentnum}개"
+        textView.text = text
+    }
+
+    @BindingAdapter("bind_twinkle_tv_like")
+    @JvmStatic
+    fun bindTwinkleLike(textView: TextView, likenum: Int) {
+        val text = "좋아요 ${likenum}개"
+        textView.text = text
     }
 }

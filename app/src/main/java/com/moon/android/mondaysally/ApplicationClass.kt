@@ -26,7 +26,7 @@ class ApplicationClass : Application(){
             modules(
                 utilityModule,
                 viewModelModule,
-                networkModule,
+                    networkModule,
                 repositoryModule
             )
         }
