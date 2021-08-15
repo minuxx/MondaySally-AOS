@@ -11,14 +11,14 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
+        android:layout_width="99dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="5dp">
 
         <View
             android:id="@+id/item_member_status"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:layout_width="13dp"
+            android:layout_height="13dp"
             android:background="@drawable/bg_circle_perrywinkle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,11 +32,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:fontFamily="@font/roboto_regular"
-            tools:text="문영진 / 개발자"
             android:textColor="@color/black"
             android:textSize="13sp"
             app:layout_constraintStart_toEndOf="@+id/item_member_status"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="문영진 / 개발자" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

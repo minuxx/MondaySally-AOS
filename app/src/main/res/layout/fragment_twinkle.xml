@@ -40,7 +40,6 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/fragment_twinkle_rv_my_twinkle"
-                    bind_my_twinkle="@{viewModel.myTwinkleList}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -59,7 +58,6 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/fragment_twinkle_rv_timeline"
-                    bind_twinkle="@{viewModel.twinkleList}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"

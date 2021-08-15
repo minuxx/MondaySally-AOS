@@ -11,10 +11,11 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.paging.CombinedLoadStates
+import androidx.paging.LoadState
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.moon.android.mondaysally.R
-import com.moon.android.mondaysally.utils.DataBindingUtils.setImageCommon
 
 abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
     @LayoutRes
@@ -71,9 +72,17 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
     }
 
     fun showToast(message: String) {
-        activity?.let{
+        activity?.let {
             Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
         }
     }
 
+    fun getErrorState(loadState: CombinedLoadStates): LoadState.Error? {
+        return when {
+            loadState.prepend is LoadState.Error -> loadState.prepend as LoadState.Error
+            loadState.append is LoadState.Error -> loadState.append as LoadState.Error
+            loadState.refresh is LoadState.Error -> loadState.refresh as LoadState.Error
+            else -> null
+        }
+    }
 }

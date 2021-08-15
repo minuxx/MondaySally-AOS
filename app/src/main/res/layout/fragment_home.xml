@@ -368,7 +368,7 @@
                             android:layout_marginBottom="5dp"
                             android:background="@drawable/bg_circle_white_gray"
                             android:padding="4dp"
-                            android:src="@color/pinkish_orange" />
+                            android:src="@drawable/illust_sally_blank_1_1" />
 
                         <TextView
                             android:id="@+id/fragment_home_tv_twinkle_first"
@@ -410,7 +410,7 @@
                             android:layout_marginBottom="5dp"
                             android:background="@drawable/bg_circle_white_gray"
                             android:padding="4dp"
-                            android:src="@color/pinkish_orange" />
+                            android:src="@drawable/illust_sally_blank_1_1" />
 
                         <TextView
                             android:id="@+id/fragment_home_tv_twinkle_second"
@@ -452,7 +452,7 @@
                             android:layout_marginBottom="5dp"
                             android:background="@drawable/bg_circle_white_gray"
                             android:padding="4dp"
-                            android:src="@color/pinkish_orange" />
+                            android:src="@drawable/illust_sally_blank_1_1" />
 
                         <TextView
                             android:id="@+id/fragment_home_tv_twinkle_third"

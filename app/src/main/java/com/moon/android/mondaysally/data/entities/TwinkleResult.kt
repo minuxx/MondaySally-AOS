@@ -3,8 +3,8 @@ package com.moon.android.mondaysally.data.entities
 import com.google.gson.annotations.SerializedName
 
 data class TwinkleResult(
-    @SerializedName(value = "giftLogs") val giftLogs: List<MyTwinkle>,
-    @SerializedName(value = "twinkles") val twinkles: ArrayList<Twinkle>,
+    @SerializedName(value = "giftLogs") val giftLogs: ArrayList<MyTwinkle>?,
+    @SerializedName(value = "twinkles") val twinkles: ArrayList<Twinkle>?,
 )
 
 data class MyTwinkle(
@@ -39,4 +39,11 @@ data class Twinkle(
 //"content": "그동안 열심히 한 보람이 있네요! 드디어 쌓아왔던 포인트로 가족들에게 쐈습니다 ㅎㅎ 덕분에 가족들에게 좋은 소리들었네요! 다들 포인트 잘 활용해보세요~!",
 //"likenum": 2,
 //"commentnum": 3
+)
+
+data class TwinkleRank(
+    @SerializedName(value = "ranking") val ranking: Int,
+    @SerializedName(value = "imgUrl") val imgUrl: String = "",
+    @SerializedName(value = "nickname") val nickname: String = "",
+    @SerializedName(value = "currentClover") val currentClover: Int,
 )

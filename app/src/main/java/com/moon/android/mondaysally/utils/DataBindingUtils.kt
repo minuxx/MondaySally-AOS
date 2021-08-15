@@ -14,9 +14,6 @@ import com.moon.android.mondaysally.R
 import com.moon.android.mondaysally.data.entities.*
 import com.moon.android.mondaysally.ui.main.home.GiftHistoryAdapter
 import com.moon.android.mondaysally.ui.main.home.MemberListAdapter
-import com.moon.android.mondaysally.ui.main.shop.GiftShopAdapter
-import com.moon.android.mondaysally.ui.main.twinkle.MyTwinkleAdapter
-import com.moon.android.mondaysally.ui.main.twinkle.TwinkleAdapter
 
 object DataBindingUtils {
 
@@ -134,39 +131,6 @@ object DataBindingUtils {
     @JvmStatic
     fun bindMemberName(textView: TextView, nickname: String?, department: String?) {
         textView.text = "$nickname / $department"
-    }
-
-    @BindingAdapter("bind_gift_shop")
-    @JvmStatic
-    fun bindGiftShopList(recyclerView: RecyclerView, items: MutableList<Gift>) {
-        if (recyclerView.adapter == null) {
-            val adapter = GiftShopAdapter()
-            recyclerView.adapter = adapter
-        }
-        (recyclerView.adapter as GiftShopAdapter).items = items
-        recyclerView.adapter?.notifyDataSetChanged()
-    }
-
-    @BindingAdapter("bind_my_twinkle")
-    @JvmStatic
-    fun bindMyTwinkleList(recyclerView: RecyclerView, items: MutableList<MyTwinkle>) {
-        if (recyclerView.adapter == null) {
-            val adapter = MyTwinkleAdapter()
-            recyclerView.adapter = adapter
-        }
-        (recyclerView.adapter as MyTwinkleAdapter).items = items
-        recyclerView.adapter?.notifyDataSetChanged()
-    }
-
-    @BindingAdapter("bind_twinkle")
-    @JvmStatic
-    fun bindTwinkleList(recyclerView: RecyclerView, items: MutableList<Twinkle>) {
-        if (recyclerView.adapter == null) {
-            val adapter = TwinkleAdapter()
-            recyclerView.adapter = adapter
-        }
-        (recyclerView.adapter as TwinkleAdapter).items = items
-        recyclerView.adapter?.notifyDataSetChanged()
     }
 
     @BindingAdapter("bind_my_twinkle_bg")

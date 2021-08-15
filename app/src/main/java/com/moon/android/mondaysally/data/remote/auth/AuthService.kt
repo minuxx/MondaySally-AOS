@@ -13,7 +13,4 @@ interface AuthService {
 
     @POST("/code")
     suspend fun checkTeamCode(@Body code: Code): Response<AuthResponse>
-
-    @POST("users/login")
-    suspend fun login(@Body user: User): Response<AuthResponse>
 }

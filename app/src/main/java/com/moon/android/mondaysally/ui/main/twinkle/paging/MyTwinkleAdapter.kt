@@ -1,19 +1,17 @@
-package com.moon.android.mondaysally.ui.main.twinkle
+package com.moon.android.mondaysally.ui.main.twinkle.paging
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.moon.android.mondaysally.R
 import com.moon.android.mondaysally.data.entities.MyTwinkle
 import com.moon.android.mondaysally.databinding.ItemMyTwinkleBinding
 
 class MyTwinkleAdapter() :
-    ListAdapter<MyTwinkle, MyTwinkleAdapter.ViewHolder>(GiftHistoryDiffUtil) {
-
-    var items = mutableListOf<MyTwinkle>()
+    PagingDataAdapter<MyTwinkle, MyTwinkleAdapter.ViewHolder>(GiftHistoryDiffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -22,16 +20,12 @@ class MyTwinkleAdapter() :
         return ViewHolder(binding)
     }
 
-    override fun getItemCount(): Int {
-        return items.size
-    }
-
     override fun getItemViewType(position: Int): Int {
         return R.layout.item_my_twinkle
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(myTwinkle = getItem(position)!!)
     }
 
     inner class ViewHolder(private val binding: ItemMyTwinkleBinding) :

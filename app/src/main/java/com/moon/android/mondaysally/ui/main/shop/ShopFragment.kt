@@ -1,16 +1,18 @@
 package com.moon.android.mondaysally.ui.main.shop
 
 import android.content.Intent
-import android.widget.RelativeLayout
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
+import android.view.View.GONE
+import android.view.View.VISIBLE
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import com.moon.android.mondaysally.R
 import com.moon.android.mondaysally.databinding.FragmentShopBinding
 import com.moon.android.mondaysally.ui.BaseFragment
-import com.moon.android.mondaysally.ui.main.home.GiftHistoryAdapter
+import com.moon.android.mondaysally.ui.main.shop.paging.GiftShopAdapter
 import com.moon.android.mondaysally.ui.main.shop.shop_detail.ShopDetailActivity
 import com.moon.android.mondaysally.utils.GridItemDecoration_15_15
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -18,6 +20,7 @@ class ShopFragment() :
     BaseFragment<FragmentShopBinding>() {
 
     private val shopViewModel: ShopViewModel by viewModel()
+    private lateinit var giftShopAdapter: GiftShopAdapter
 
     override fun getLayoutResId() = R.layout.fragment_shop
 
@@ -26,19 +29,11 @@ class ShopFragment() :
         binding.viewModel = shopViewModel
 
         shopViewModel.giftTotalCount.observe(this, { giftTotalCount ->
-            //GridView높이 동적으로 측정해서 조정해주기 필요함
-//            val measuredHeight: Int = binding.fragmentShopRvGift.measuredHeight
-//            val params: ViewGroup.LayoutParams = binding.fragmentShopRvGift.layoutParams
-//            val row = giftTotalCount.div(2)
-//            params.height = measuredHeight * (row)
-//            binding.fragmentShopRvGift.layoutParams = params
-//            binding.fragmentShopRvGift.requestLayout()
+
         })
 
         shopViewModel.isLoading.observe(this, { isLoading ->
-            if (isLoading) {
-            } else {
-            }
+
         })
 
         val giftShopAdapter = GiftShopAdapter()
@@ -57,24 +52,39 @@ class ShopFragment() :
                 it
             )
         }
-
-        shopViewModel.fail.observe(this, { fail ->
-            when (fail.code) {
-                341, 388, 389 -> {
-                    showToast(fail.message)
-                }
-                402 -> {
-                    showToast(getString(R.string.default_fail))
-                }
-                404 -> {
-                    showToast(getString(R.string.default_fail))
-                }
-            }
-        })
     }
 
     override fun initAfterBinding() {
-        shopViewModel.getGiftList1()
+        giftShopAdapter = GiftShopAdapter()
+        binding.fragmentShopRvGift.adapter = giftShopAdapter
+
+        giftShopAdapter.addLoadStateListener { loadState ->
+            when (loadState.refresh) {
+                is LoadState.Loading -> {
+                }
+                is LoadState.NotLoading -> {
+                    if (giftShopAdapter.itemCount == 0) {
+                        binding.fragmentShopTvNoData.visibility = VISIBLE
+                    } else {
+                        binding.fragmentShopTvNoData.visibility = GONE
+                    }
+                }
+                is LoadState.Error -> {
+                    getErrorState(loadState)?.let {
+                        showToast(getString(R.string.default_fail))
+                    }
+                }
+            }
+        }
+
+        loadData()
     }
 
+    private fun loadData() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            shopViewModel.giftShopFlow.collectLatest { pagingData ->
+                giftShopAdapter.submitData(pagingData)
+            }
+        }
+    }
 }

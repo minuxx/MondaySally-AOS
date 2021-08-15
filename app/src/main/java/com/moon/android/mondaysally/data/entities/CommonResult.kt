@@ -2,6 +2,10 @@ package com.moon.android.mondaysally.data.entities
 
 import com.google.gson.annotations.SerializedName
 
+data class Code(
+    @SerializedName(value = "code") val code: String = "",
+)
+
 data class Auth(
     @SerializedName(value = "jwt") val jwtToken: String?,
     @SerializedName(value = "fcmToken") val fcmToken: String?,
@@ -13,3 +17,4 @@ data class Auth(
     @SerializedName(value = "isAccessable") val isAccessable: Boolean = true,
     @SerializedName(value = "authenticNum") val authenticNum: Int = 0
 )
+

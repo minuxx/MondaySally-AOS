@@ -1,16 +1,16 @@
-package com.moon.android.mondaysally.ui.main.shop
+package com.moon.android.mondaysally.ui.main.shop.paging
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.moon.android.mondaysally.R
 import com.moon.android.mondaysally.data.entities.Gift
 import com.moon.android.mondaysally.databinding.ItemGiftShopBinding
 
-class GiftShopAdapter() : ListAdapter<Gift, GiftShopAdapter.ViewHolder>(GiftDiffUtil) {
+class GiftShopAdapter() : PagingDataAdapter<Gift, GiftShopAdapter.ViewHolder>(GiftDiffUtil) {
 
     var items = mutableListOf<Gift>()
 
@@ -21,26 +21,22 @@ class GiftShopAdapter() : ListAdapter<Gift, GiftShopAdapter.ViewHolder>(GiftDiff
         return ViewHolder(binding)
     }
 
-    override fun getItemCount(): Int {
-        return items.size
-    }
-
     override fun getItemViewType(position: Int): Int {
         return R.layout.item_gift_shop
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(giftShop = getItem(position)!!)
     }
 
     inner class ViewHolder(private val binding: ItemGiftShopBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(member: Gift) {
-            binding.model = member
+        fun bind(giftShop: Gift) {
+            binding.model = giftShop
             binding.executePendingBindings()
             binding.itemGiftShopIv.setOnClickListener {
                 onItemClickListener?.let { click ->
-                    click(member)
+                    click(giftShop)
                 }
             }
         }
