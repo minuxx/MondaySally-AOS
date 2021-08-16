@@ -5,6 +5,22 @@ import com.google.gson.annotations.SerializedName
 data class TwinkleResult(
     @SerializedName(value = "giftLogs") val giftLogs: ArrayList<MyTwinkle>?,
     @SerializedName(value = "twinkles") val twinkles: ArrayList<Twinkle>?,
+
+    //TwinkleDetail
+    @SerializedName(value = "isWriter") val isWriter: String,
+    @SerializedName(value = "writerName") val writerName: String,
+    @SerializedName(value = "twinkleCreatedAt") val twinkleCreatedAt: String,
+    @SerializedName(value = "twinkleImglists") val twinkleImglists: ArrayList<String>,
+    @SerializedName(value = "content") val content: String,
+    @SerializedName(value = "giftName") val giftName: String,
+    @SerializedName(value = "option") val option: Int,
+    @SerializedName(value = "isAccepted") val isAccepted: String,
+    @SerializedName(value = "receiptImgUrl") val receiptImgUrl: String,
+    @SerializedName(value = "likeNum") val likenum: Int,
+    @SerializedName(value = "isHearted") val isHearted: String,
+    @SerializedName(value = "commentNum") val commentNum: Int,
+    @SerializedName(value = "commentLists") val commentLists: ArrayList<TwinkleComment>,
+    @SerializedName(value = "isPrivated") val isPrivated: String,
 )
 
 data class MyTwinkle(
@@ -46,4 +62,13 @@ data class TwinkleRank(
     @SerializedName(value = "imgUrl") val imgUrl: String = "",
     @SerializedName(value = "nickname") val nickname: String = "",
     @SerializedName(value = "currentClover") val currentClover: Int,
+)
+
+data class TwinkleComment(
+    @SerializedName(value = "idx") val idx: Int,
+    @SerializedName(value = "commentWriterName") val commentWriterName: String = "",
+    @SerializedName(value = "commentWriterImg") val commentWriterImg: String = "",
+    @SerializedName(value = "commentContent") val commentContent: String,
+    @SerializedName(value = "commentCreatedAt") val commentCreatedAt: String,
+    @SerializedName(value = "isCommentWrited") val isCommentWrited: String,
 )

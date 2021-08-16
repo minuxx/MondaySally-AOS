@@ -1,5 +1,6 @@
 package com.moon.android.mondaysally.ui.main.twinkle
 
+import android.content.Intent
 import android.util.Log
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -8,9 +9,9 @@ import androidx.paging.LoadState
 import com.moon.android.mondaysally.R
 import com.moon.android.mondaysally.databinding.FragmentTwinkleBinding
 import com.moon.android.mondaysally.ui.BaseFragment
-import com.moon.android.mondaysally.ui.main.MainActivity
 import com.moon.android.mondaysally.ui.main.twinkle.paging.MyTwinkleAdapter
 import com.moon.android.mondaysally.ui.main.twinkle.paging.TwinkleAdapter
+import com.moon.android.mondaysally.ui.main.twinkle.twinkle_detail.TwinkleDetailActivity
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -95,6 +96,16 @@ class TwinkleFragment() :
                 }
             }
         }
+
+        twinkleAdapter.setOnItemClickListener { item ->
+            twinkleViewModel.twinkleIndex.value = item.idx
+            activity?.let {
+                val intent = Intent(context, TwinkleDetailActivity::class.java)
+                intent.putExtra("idx", item.idx)
+                startActivity(intent)
+            }
+        }
+
         loadData()
     }
 

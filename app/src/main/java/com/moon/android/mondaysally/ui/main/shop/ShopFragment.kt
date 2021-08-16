@@ -28,25 +28,10 @@ class ShopFragment() :
         binding.lifecycleOwner = this;
         binding.viewModel = shopViewModel
 
-        shopViewModel.giftTotalCount.observe(this, { giftTotalCount ->
-
-        })
-
         shopViewModel.isLoading.observe(this, { isLoading ->
 
         })
 
-        val giftShopAdapter = GiftShopAdapter()
-        giftShopAdapter.setOnItemClickListener { item ->
-            shopViewModel.giftIndex.value = item.idx
-            activity?.let {
-                val intent = Intent(context, ShopDetailActivity::class.java)
-                intent.putExtra("idx", item.idx)
-                startActivity(intent)
-            }
-        }
-
-        binding.fragmentShopRvGift.adapter = giftShopAdapter
         context?.let { GridItemDecoration_15_15(it) }?.let {
             binding.fragmentShopRvGift.addItemDecoration(
                 it
@@ -68,6 +53,7 @@ class ShopFragment() :
                     } else {
                         binding.fragmentShopTvNoData.visibility = GONE
                     }
+                    shopViewModel.giftCount.value = giftShopAdapter.itemCount
                 }
                 is LoadState.Error -> {
                     getErrorState(loadState)?.let {
@@ -76,7 +62,14 @@ class ShopFragment() :
                 }
             }
         }
-
+        giftShopAdapter.setOnItemClickListener { item ->
+            shopViewModel.giftIndex.value = item.idx
+            activity?.let {
+                val intent = Intent(context, ShopDetailActivity::class.java)
+                intent.putExtra("idx", item.idx)
+                startActivity(intent)
+            }
+        }
         loadData()
     }
 

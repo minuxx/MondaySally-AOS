@@ -16,7 +16,8 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/splash_root_layout"
@@ -47,7 +48,7 @@
                     android:textSize="14sp"
                     app:layout_constraintStart_toEndOf="@+id/fragment_shop_tv_all_gift"
                     app:layout_constraintTop_toTopOf="@+id/fragment_shop_tv_all_gift"
-                    tools:text="총 0건" />
+                    bind_gift_shop_tv_count="@{viewModel.giftCount}" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/fragment_shop_rv_gift"

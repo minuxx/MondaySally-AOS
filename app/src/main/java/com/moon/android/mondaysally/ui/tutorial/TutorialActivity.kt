@@ -7,6 +7,7 @@ import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.moon.android.mondaysally.R
 import com.moon.android.mondaysally.databinding.ActivityTutorialBinding
 import com.moon.android.mondaysally.ui.BaseActivity
+import com.moon.android.mondaysally.ui.tutorial.fragment.ViewPagerAdapter
 import me.relex.circleindicator.CircleIndicator3
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

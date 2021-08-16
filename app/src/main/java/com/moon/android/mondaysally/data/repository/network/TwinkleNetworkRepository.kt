@@ -14,4 +14,8 @@ class TwinkleNetworkRepository(val twinkleService: TwinkleService) :
     suspend fun getTwinkleList(page: Int): TwinkleResponse {
         return apiRequest { twinkleService.getTwinkleList(page) }
     }
+
+    suspend fun getTwinkleDetail(index: Int): TwinkleResponse {
+        return apiRequest { twinkleService.getTwinkleDetail(index) }
+    }
 }

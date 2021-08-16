@@ -60,13 +60,24 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
         }
     }
 
-    fun setCircleImageByGlide(iv: ImageView, url: String){
+    fun setCircleImageByGlide(iv: ImageView, url: String) {
         Glide.with(this)
             .load(url).placeholder(R.drawable.bg_round_white_gray)
             .error(R.drawable.bg_round_white_gray)
             .centerCrop()
             .circleCrop()
             .thumbnail(0.1f)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(iv)
+    }
+
+    fun setImage(iv: ImageView, url: String) {
+        Glide.with(this)
+            .load(url)
+            .thumbnail(0.2f)
+            .override(700, 700)
+            .error(R.drawable.illust_sally_blank_1_1)
+            .centerCrop()
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(iv)
     }

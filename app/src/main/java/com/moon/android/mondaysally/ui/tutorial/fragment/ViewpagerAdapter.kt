@@ -1,12 +1,9 @@
-package com.moon.android.mondaysally.ui.tutorial
+package com.moon.android.mondaysally.ui.tutorial.fragment
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.moon.android.mondaysally.R
-import com.moon.android.mondaysally.ui.tutorial.fragment.TutorialFragment
-import java.util.*
-
 
 class ViewPagerAdapter(
     fragmentActivity: FragmentActivity,

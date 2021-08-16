@@ -28,8 +28,8 @@ class ShopViewModel(private val giftNetworkRepository: GiftNetworkRepository) : 
     var giftResult: MutableLiveData<GiftResult> = MutableLiveData()
     var postSuccess: MutableLiveData<Boolean> = MutableLiveData()
     var finishActivity: MutableLiveData<Boolean> = MutableLiveData()
-    var giftTotalCount: MutableLiveData<Int> = MutableLiveData()
     var isLoading: MutableLiveData<Boolean> = MutableLiveData()
+    var giftCount: MutableLiveData<Int> = MutableLiveData()
 
     //ApplyDone
     var goHome: MutableLiveData<Boolean> = MutableLiveData()
@@ -88,7 +88,6 @@ class ShopViewModel(private val giftNetworkRepository: GiftNetworkRepository) : 
 
     fun whenBtnApplyClicked() {
         showDialog.value = true
-//        postGift()
     }
 
     fun whenTvGoHomeClicked() {

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.moon.android.mondaysally.ui.main.twinkle.TwinkleViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/fragment_home_title_view"
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/activity_shop_detail_iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:onClick="@{() -> viewModel.whenBtnBackClicked()}"
+                android:padding="15dp"
+                android:src="@drawable/ic_chevron_0_left_gray"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/menu_shop"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                tools:context=".ui.main.MainActivity">
+
+                <FrameLayout
+                    android:id="@+id/activity_twinkle_detail_frame_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/very_light_gray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/activity_twinkle_detail_vp2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <me.relex.circleindicator.CircleIndicator3
+                        android:id="@+id/activity_twinkle_detail_indicator"
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="13dp"
+                        app:ci_drawable="@drawable/white_radius"
+                        app:ci_drawable_unselected="@drawable/radius_gray"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/activity_twinkle_detail_tv_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="18dp"
+                    android:fontFamily="@font/roboto_light"
+                    android:text="@{viewModel.twinkleResult.twinkleCreatedAt}"
+                    android:textColor="@color/twinkle_date_grey"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_twinkle_detail_frame_image"
+                    tools:text="2021.02.12" />
+
+                <TextView
+                    android:id="@+id/activity_twinkle_detail_tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="@{viewModel.twinkleResult.giftName}"
+                    android:textColor="@color/brown_grey"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/activity_twinkle_detail_tv_date"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_twinkle_detail_tv_date"
+                    tools:text="가족에게 쏜다" />
+
+                <TextView
+                    android:id="@+id/activity_twinkle_detail_tv_clover"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="@{Integer.toString(viewModel.twinkleResult.option)}"
+                    android:textColor="@color/brown_grey"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toEndOf="@+id/activity_twinkle_detail_tv_name"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_twinkle_detail_tv_date"
+                    tools:text="60" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:src="@drawable/ic_clover_gray"
+                    app:layout_constraintBottom_toBottomOf="@+id/activity_twinkle_detail_tv_name"
+                    app:layout_constraintStart_toEndOf="@+id/activity_twinkle_detail_tv_clover"
+                    app:layout_constraintTop_toTopOf="@+id/activity_twinkle_detail_tv_name" />
+
+                <ImageView
+                    android:id="@+id/activity_shop_detail_iv_three_dot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:paddingStart="19dp"
+                    android:paddingEnd="9dp"
+                    android:src="@drawable/ic_three_dot"
+                    app:layout_constraintEnd_toStartOf="@+id/activity_shop_detail_iv_heart"
+                    app:layout_constraintTop_toTopOf="@+id/activity_twinkle_detail_tv_date" />
+
+                <ImageView
+                    android:id="@+id/activity_shop_detail_iv_heart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:paddingStart="9dp"
+                    android:paddingEnd="16dp"
+                    android:src="@drawable/ic_like_off_gray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/activity_shop_detail_iv_three_dot" />
+
+                <TextView
+                    android:id="@+id/activity_shop_detail_tv_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:gravity="start"
+                    android:lineSpacingExtra="3sp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:text="@{viewModel.twinkleResult.content}"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_twinkle_detail_tv_name"
+                    tools:text="그동안" />
+
+                <TextView
+                    android:id="@+id/activity_shop_detail_tv_like"
+                    bind_twinkle_tv_like="@{viewModel.twinkleResult.likenum}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textColor="@color/brown_grey"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@+id/activity_twinkle_detail_tv_date"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_shop_detail_tv_content"
+                    tools:text="좋아요 87개" />
+
+                <View
+                    android:id="@+id/activity_shop_detail_line"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0.8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="18.6dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@color/very_light_gray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_shop_detail_tv_like" />
+
+                <TextView
+                    android:id="@+id/activity_shop_detail_tv_comment"
+                    bind_twinkle_tv_comment="@{viewModel.twinkleResult.commentNum}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@+id/activity_twinkle_detail_tv_date"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_shop_detail_line"
+                    tools:text="댓글 3개" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </LinearLayout>
+</layout>

@@ -69,7 +69,7 @@ object DataBindingUtils {
                 .override(700, 700)
                 .error(R.drawable.illust_sally_blank_1_1)
                 .centerCrop()
-                .thumbnail(0.3f)
+                .thumbnail(0.2f)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(this)
         }
@@ -163,6 +163,13 @@ object DataBindingUtils {
     @JvmStatic
     fun bindTwinkleLike(textView: TextView, likenum: Int) {
         val text = "좋아요 ${likenum}개"
+        textView.text = text
+    }
+
+    @BindingAdapter("bind_gift_shop_tv_count")
+    @JvmStatic
+    fun bindGiftShopCount(textView: TextView, count: Int) {
+        val text = "총 ${count}건"
         textView.text = text
     }
 }

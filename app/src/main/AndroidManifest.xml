@@ -41,6 +41,7 @@
         <activity android:name=".ui.welcome.WelcomeActivity" />
         <activity android:name=".ui.main.shop.shop_detail.ShopDetailActivity" />
         <activity android:name=".ui.main.shop.shop_apply_done.ShopApplyDoneActivity" />
+        <activity android:name=".ui.main.twinkle.twinkle_detail.TwinkleDetailActivity" />
     </application>
 
 </manifest>
