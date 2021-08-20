@@ -82,8 +82,10 @@
             android:layout_height="wrap_content"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
+            android:layout_marginTop="3dp"
             android:paddingBottom="16dp"
-            android:src="@drawable/ic_like_on_orange"
+            tools:src="@drawable/ic_like_on_orange"
+            bind_twinkle_iv_heart="@{model.isHearted()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

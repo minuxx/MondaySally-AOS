@@ -4,11 +4,19 @@ import android.content.Intent
 import android.util.Log
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
+import android.view.animation.AnimationSet
+import android.view.animation.ScaleAnimation
+import android.widget.ImageView
+import androidx.core.view.get
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import com.moon.android.mondaysally.R
+import com.moon.android.mondaysally.data.entities.Twinkle
 import com.moon.android.mondaysally.databinding.FragmentTwinkleBinding
 import com.moon.android.mondaysally.ui.BaseFragment
+import com.moon.android.mondaysally.ui.main.MainActivity
 import com.moon.android.mondaysally.ui.main.twinkle.paging.MyTwinkleAdapter
 import com.moon.android.mondaysally.ui.main.twinkle.paging.TwinkleAdapter
 import com.moon.android.mondaysally.ui.main.twinkle.twinkle_detail.TwinkleDetailActivity
@@ -106,7 +114,32 @@ class TwinkleFragment() :
             }
         }
 
+        twinkleAdapter.setOnHeartClickListener { twinkle, heartIv, position ->
+            heartImageChange(heartIv, twinkle)
+            animateHeart(heartIv)
+//            animateHeart(binding.fragmentTwinkleRvMyTwinkle[position].findViewById(R.id.item_twinkle_iv_like) as ImageView)
+        }
+
         loadData()
+    }
+
+
+    private fun heartImageChange(imageView: ImageView, twinkle: Twinkle) {
+        if (twinkle.isHearted == "Y") {
+            imageView.setImageResource(R.drawable.ic_like_off_gray)
+            twinkle.isHearted = "N"
+        } else {
+            (activity as MainActivity).vibrate()
+            imageView.setImageResource(R.drawable.ic_like_on_orange)
+            twinkle.isHearted = "Y"
+        }
+    }
+
+    private  fun animateHeart(view: ImageView) {
+        view.animate().scaleX(1.2f).scaleY(1.2f).setDuration(100).withEndAction {
+            view.scaleX = 1f
+            view.scaleY = 1f
+        }.start()
     }
 
     private fun loadData() {

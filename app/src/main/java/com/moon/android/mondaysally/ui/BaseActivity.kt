@@ -3,7 +3,10 @@ package com.moon.android.mondaysally.ui
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -14,6 +17,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.moon.android.mondaysally.R
 import com.moon.android.mondaysally.utils.GlobalConstant
+
 
 abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
 
@@ -107,6 +111,19 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
 
     fun hideKeyboard(v: View){
         imm?.hideSoftInputFromWindow(v.windowToken, 0)
+    }
+
+
+    fun vibrate(){
+        val vibrator = getSystemService(VIBRATOR_SERVICE) as Vibrator
+        // 1초 진동
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                vibrator.vibrate(VibrationEffect.createOneShot(10, 100))
+            };
+        } else {
+            vibrator.vibrate(1000);
+        }
     }
 
     /**

@@ -38,7 +38,7 @@ data class Twinkle(
     @SerializedName(value = "imgUrl") val imgUrl: String,
     @SerializedName(value = "idx") val idx: Int,
     @SerializedName(value = "twinkleImg") val twinkleImg: String,
-    @SerializedName(value = "isHearted") val isHearted: String,
+    @SerializedName(value = "isHearted") var isHearted: String,
     @SerializedName(value = "date") val date: String,
     @SerializedName(value = "content") val content: String,
     @SerializedName(value = "likenum") val likenum: Int,

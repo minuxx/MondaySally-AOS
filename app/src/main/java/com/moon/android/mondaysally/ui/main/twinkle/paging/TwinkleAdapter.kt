@@ -2,6 +2,7 @@ package com.moon.android.mondaysally.ui.main.twinkle.paging
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -11,7 +12,7 @@ import com.moon.android.mondaysally.data.entities.Twinkle
 import com.moon.android.mondaysally.databinding.ItemTwinkleBinding
 
 class TwinkleAdapter() :
-    PagingDataAdapter<Twinkle, TwinkleAdapter.ViewHolder>(GiftHistoryDiffUtil) {
+    PagingDataAdapter<Twinkle, TwinkleAdapter.ViewHolder>(TwinkleDiffUtil) {
 
     //    var items = mutableListOf<Twinkle>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -39,16 +40,28 @@ class TwinkleAdapter() :
                     click(twinkle)
                 }
             }
+            binding.itemTwinkleIvLike.setOnClickListener {
+                onHeartClickListener?.let { click,  ->
+//                    heartImageChange(binding.itemTwinkleIvLike, twinkle)
+//                    animateHeart(binding.itemTwinkleIvLike)
+                    click(twinkle, binding.itemTwinkleIvLike, layoutPosition)
+                }
+            }
         }
     }
 
     private var onItemClickListener: ((Twinkle) -> Unit)? = null
+    private var onHeartClickListener: ((Twinkle, ImageView, Int) -> Unit)? = null
 
     fun setOnItemClickListener(listener: (Twinkle) -> Unit) {
         onItemClickListener = listener
     }
 
-    companion object GiftHistoryDiffUtil : DiffUtil.ItemCallback<Twinkle>() {
+    fun setOnHeartClickListener(listener: (Twinkle, ImageView, Int) -> Unit) {
+        onHeartClickListener = listener
+    }
+
+    companion object TwinkleDiffUtil : DiffUtil.ItemCallback<Twinkle>() {
         override fun areItemsTheSame(oldItem: Twinkle, newItem: Twinkle): Boolean {
             return oldItem == newItem
         }

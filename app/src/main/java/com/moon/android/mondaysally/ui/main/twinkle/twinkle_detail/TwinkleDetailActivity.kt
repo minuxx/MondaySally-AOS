@@ -5,7 +5,8 @@ import android.content.Context
 import android.graphics.Rect
 import android.view.View
 import android.view.View.GONE
-import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.*
+import android.widget.ImageView
 import androidx.core.animation.doOnEnd
 import androidx.core.widget.NestedScrollView
 import androidx.viewpager2.widget.ViewPager2
@@ -15,6 +16,7 @@ import com.moon.android.mondaysally.ui.BaseActivity
 import com.moon.android.mondaysally.ui.main.twinkle.TwinkleViewModel
 import me.relex.circleindicator.CircleIndicator3
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class TwinkleDetailActivity : BaseActivity<ActivityTwinkleDetailBinding>() {
 
@@ -110,7 +112,6 @@ class TwinkleDetailActivity : BaseActivity<ActivityTwinkleDetailBinding>() {
         twinkleViewModel.getTwinkleDetail(twinkleViewModel.twinkleIndex.value!!)
     }
 
-
     /*
     ScrollView의 상단 절대 y 좌표를 구한다.
     view의 상단 절대 y좌표를 구한다.
@@ -123,7 +124,7 @@ class TwinkleDetailActivity : BaseActivity<ActivityTwinkleDetailBinding>() {
         // 스크롤의 의미가 없다.
         if (this.getChildAt(0).height <= this.height) return
 
-        val y = computeDistanceToView(view)
+//        val y = computeDistanceToView(view)
 
         // (스크롤 해야하는 거리 - 현재 스크롤 된 거리) / (스크롤 몸체의 높이 - 스크롤 뷰의 높이) - 보류
 //        val ratio = kotlin.math.abs(y - this.scrollY) / (this.getChildAt(0).height - this.height).toFloat()
