@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.moon.android.mondaysally.data.entities.TwinkleComment" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14.6dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/item_comment_iv_profile"
+                bind_common_image_circle="@{model.commentWriterImg}"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:layout_marginStart="13dp"
+                android:layout_marginEnd="9dp"
+                android:background="@drawable/bg_circle_comment_profile"
+                android:padding="1dp" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/item_comment_tv_content"
+                    bind_comment_content="@{model.commentContent}"
+                    bind_comment_name="@{model.commentWriterName}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:paddingEnd="18dp"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tool:text="포키  오랜만에 효도했습니다! 포키님두 한번 써보시길..ㅎ 포키  오랜만에 효도했습니다! 포키님두 한번 써보시길..ㅎ포키  오랜만에 효도했습니다! 포키님두 한번 써보시길..ㅎ 포키  오랜만에 효도했습니다! 포키님두 한번 써보시길..ㅎ" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/item_comment_tv_date"
+                        bind_common_text="@{model.commentCreatedAt}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_light"
+                        android:textColor="@color/twinkle_date_grey"
+                        android:textSize="13sp"
+                        tool:text="2021.02.12" />
+
+                    <TextView
+                        android:id="@+id/item_comment_tv_re"
+                        bind_common_text="@{model.commentCreatedAt}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="9dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:textColor="@color/twinkle_date_grey"
+                        android:textSize="13sp"
+                        android:visibility="gone"
+                        tool:text="답글" />
+
+                    <TextView
+                        android:id="@+id/item_comment_tv_update"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:paddingStart="9dp"
+                        android:paddingTop="8dp"
+                        android:paddingEnd="4dp"
+                        android:paddingBottom="13.6dp"
+                        android:textColor="@color/twinkle_date_grey"
+                        android:textSize="13sp"
+                        tool:text="삭제" />
+
+                    <TextView
+                        android:id="@+id/item_comment_tv_d"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:paddingStart="4dp"
+                        android:paddingTop="8dp"
+                        android:paddingEnd="8dp"
+                        android:paddingBottom="13.6dp"
+                        android:textColor="@color/twinkle_date_grey"
+                        android:textSize="13sp"
+                        tool:text="수정" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/activity_shop_detail_line2"
+            android:layout_width="wrap_content"
+            android:layout_height="0.8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/very_light_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activity_shop_detail_tv_comment" />
+
+    </LinearLayout>
+</layout>

@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.LayoutRes
@@ -18,6 +19,7 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
 
     private var lottieDialog: LottieDialog? = null
     private var sallyDialog: SallyDialog? = null
+    private var imm : InputMethodManager? = null
 
     @LayoutRes
     abstract fun getLayoutResId(): Int
@@ -58,6 +60,7 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, getLayoutResId())
         initDataBinding()
         initAfterBinding()
+        imm = getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as InputMethodManager?
     }
 
     override fun finish() {
@@ -100,6 +103,10 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
                 lottieDialog?.dismiss()
             }
         }
+    }
+
+    fun hideKeyboard(v: View){
+        imm?.hideSoftInputFromWindow(v.windowToken, 0)
     }
 
     /**

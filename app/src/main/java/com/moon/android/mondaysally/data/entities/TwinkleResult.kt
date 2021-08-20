@@ -72,3 +72,7 @@ data class TwinkleComment(
     @SerializedName(value = "commentCreatedAt") val commentCreatedAt: String,
     @SerializedName(value = "isCommentWrited") val isCommentWrited: String,
 )
+
+data class CommentPostBody(
+    @SerializedName(value = "content") val content: String,
+)

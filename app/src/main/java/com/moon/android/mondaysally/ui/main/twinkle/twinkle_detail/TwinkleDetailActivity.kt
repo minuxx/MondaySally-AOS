@@ -1,6 +1,7 @@
 package com.moon.android.mondaysally.ui.main.twinkle.twinkle_detail
 
 import android.content.Context
+import android.view.View
 import android.view.View.GONE
 import androidx.viewpager2.widget.ViewPager2
 import com.moon.android.mondaysally.R
@@ -28,7 +29,6 @@ class TwinkleDetailActivity : BaseActivity<ActivityTwinkleDetailBinding>() {
 
         imageViewPager = binding.activityTwinkleDetailVp2
 
-
 //        twinkleViewModel.showDialog.observe(this, { showDialog ->
 //            if (showDialog) {
 //                showSallyDialog(
@@ -43,9 +43,25 @@ class TwinkleDetailActivity : BaseActivity<ActivityTwinkleDetailBinding>() {
 //            }
 //        })
 
+        twinkleViewModel.hideKeyboard.observe(this, { hideKeyboard ->
+            if (hideKeyboard)
+                hideKeyboard(binding.activityShopDetailEtComment)
+        })
+
         twinkleViewModel.finishActivity.observe(this, { finishActivity ->
             if (finishActivity)
                 finish()
+        })
+
+        twinkleViewModel.commentPostSuccess.observe(this, { commentPostSuccess ->
+            if (commentPostSuccess) {
+                //ReLoading ?
+                twinkleViewModel.getTwinkleDetail(twinkleViewModel.twinkleIndex.value!!)
+                twinkleViewModel.editTextCommentString.set("")
+                binding.activityShopDetailEtComment.clearFocus()
+                binding.activityTwinkleScrollView.fullScroll(View.FOCUS_DOWN)
+//                                        .sc.fullScroll(View.FOCUS_DOWN);
+            }
         })
 
         twinkleViewModel.twinkleResult.observe(this, { twinkleResult ->
@@ -80,6 +96,7 @@ class TwinkleDetailActivity : BaseActivity<ActivityTwinkleDetailBinding>() {
     }
 
     override fun initAfterBinding() {
-        twinkleViewModel.getTwinkleDetail(intent.getIntExtra("idx", 0))
+        twinkleViewModel.twinkleIndex.value = intent.getIntExtra("idx", 0)
+        twinkleViewModel.getTwinkleDetail(twinkleViewModel.twinkleIndex.value!!)
     }
 }

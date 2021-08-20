@@ -1,5 +1,6 @@
 package com.moon.android.mondaysally.data.remote.twinkke
 
+import com.moon.android.mondaysally.data.entities.CommentPostBody
 import com.moon.android.mondaysally.data.entities.GiftPostBody
 import com.moon.android.mondaysally.data.remote.shop.GiftResponse
 import retrofit2.Response
@@ -14,5 +15,8 @@ interface TwinkleService {
 
     @GET("/twinkle/{idx}")
     suspend fun getTwinkleDetail(@Path("idx") idx: Int): Response<TwinkleResponse>
+
+    @POST("/comment/{idx}")
+    suspend fun postComment(@Path("idx") idx: Int, @Body commentPostBody: CommentPostBody): Response<TwinkleResponse>
 
 }

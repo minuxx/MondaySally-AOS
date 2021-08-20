@@ -1,5 +1,6 @@
 package com.moon.android.mondaysally.data.repository.network
 
+import com.moon.android.mondaysally.data.entities.CommentPostBody
 import com.moon.android.mondaysally.data.remote.twinkke.TwinkleResponse
 import com.moon.android.mondaysally.data.remote.twinkke.TwinkleService
 import com.moon.android.mondaysally.data.repository.BaseNetworkRepository
@@ -17,5 +18,9 @@ class TwinkleNetworkRepository(val twinkleService: TwinkleService) :
 
     suspend fun getTwinkleDetail(index: Int): TwinkleResponse {
         return apiRequest { twinkleService.getTwinkleDetail(index) }
+    }
+
+    suspend fun postComment(index:Int, commentPostBody: CommentPostBody): TwinkleResponse {
+        return apiRequest { twinkleService.postComment(index, commentPostBody) }
     }
 }

@@ -1,6 +1,10 @@
 package com.moon.android.mondaysally.utils
 
 import android.annotation.SuppressLint
+import android.graphics.Typeface
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.StyleSpan
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.ImageView
@@ -11,9 +15,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.moon.android.mondaysally.R
-import com.moon.android.mondaysally.data.entities.*
+import com.moon.android.mondaysally.data.entities.GiftHistory
+import com.moon.android.mondaysally.data.entities.Member
+import com.moon.android.mondaysally.data.entities.TwinkleComment
 import com.moon.android.mondaysally.ui.main.home.GiftHistoryAdapter
 import com.moon.android.mondaysally.ui.main.home.MemberListAdapter
+import com.moon.android.mondaysally.ui.main.twinkle.twinkle_detail.CommentAdapter
 
 object DataBindingUtils {
 
@@ -51,7 +58,10 @@ object DataBindingUtils {
             Glide.with(this)
                 .load(url)
                 .override(200, 200)
-                .error(R.drawable.illust_sally_blank_1_1)
+                .error(
+                    Glide.with(this)
+                        .load(R.drawable.illust_sally_blank_1_1).circleCrop()
+                )
                 .centerCrop()
                 .circleCrop()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -171,5 +181,31 @@ object DataBindingUtils {
     fun bindGiftShopCount(textView: TextView, count: Int) {
         val text = "총 ${count}건"
         textView.text = text
+    }
+
+    @BindingAdapter("bind_comment")
+    @JvmStatic
+    fun bindCommentList(recyclerView: RecyclerView, items: MutableList<TwinkleComment>) {
+        if (recyclerView.adapter == null) {
+            val adapter = CommentAdapter()
+            recyclerView.adapter = adapter
+        }
+        (recyclerView.adapter as CommentAdapter).items = items
+        recyclerView.adapter?.notifyDataSetChanged()
+    }
+
+    @BindingAdapter("bind_comment_name", "bind_comment_content")
+    @JvmStatic
+    fun bindCommentContent(textView: TextView, name: String?, content: String?) {
+        val spannable = SpannableString("$name  $content")
+        if (name != null) {
+            spannable.setSpan(
+                StyleSpan(Typeface.BOLD),
+                0,
+                name.length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
+        textView.text = spannable
     }
 }

@@ -8,11 +8,12 @@
         <variable
             name="viewModel"
             type="com.moon.android.mondaysally.ui.main.twinkle.TwinkleViewModel" />
+        <import type="android.text.TextUtils" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -49,7 +50,8 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/activity_twinkle_scroll_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1">
@@ -213,7 +215,79 @@
                     app:layout_constraintTop_toBottomOf="@+id/activity_shop_detail_line"
                     tools:text="댓글 3개" />
 
+                <View
+                    android:id="@+id/activity_shop_detail_line2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0.8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="12.6dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@color/very_light_gray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_shop_detail_tv_comment" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/activity_shop_detail_rv_comment"
+                    bind_comment="@{viewModel.commentList}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:scrollbars="none"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_shop_detail_line2"
+                    tools:listitem="@layout/item_comment" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:elevation="12dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/activity_shop_detail_et_comment"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="11dp"
+                android:layout_marginEnd="7dp"
+                android:layout_marginBottom="21dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_round_comment_white_orange"
+                android:fontFamily="@font/roboto_regular"
+                android:hint="@string/twinkle_comment_hint"
+                android:inputType="textMultiLine"
+                android:text="@={viewModel.editTextCommentString}"
+                android:paddingStart="31dp"
+                android:paddingTop="14dp"
+                android:paddingEnd="31dp"
+                android:paddingBottom="14dp"
+                android:textColor="@color/black"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="11dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="21dp"
+                android:background="@drawable/bg_comment_gray_orange"
+                android:gravity="center"
+                android:paddingStart="20dp"
+                android:paddingTop="13dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="13dp"
+                android:text="@string/post"
+                android:enabled="@{!TextUtils.isEmpty(viewModel.editTextCommentString)}"
+                android:onClick="@{() -> viewModel.whenTvPostClicked()}"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
     </LinearLayout>
 </layout>

@@ -3,6 +3,7 @@
 
     <string name="ok">확인</string>
     <string name="more">더보기 ></string>
+    <string name="post">등록</string>
 
     <!--바탐 메뉴-->
     <string name="menu_home">홈</string>
@@ -91,4 +92,5 @@
 
     <!--트윙클-->
     <string name="twinkle_my_twinkle">내 트윙클 현황</string>
+    <string name="twinkle_comment_hint">댓글을 입력해주세요. </string>
 </resources>
