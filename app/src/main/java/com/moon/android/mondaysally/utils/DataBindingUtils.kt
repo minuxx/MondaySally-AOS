@@ -45,8 +45,8 @@ object DataBindingUtils {
             Glide.with(this)
                 .load(url).placeholder(R.drawable.illust_sally_blank_1_1)
                 .error(R.drawable.illust_sally_blank_1_1)
+                .thumbnail(0.2f)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.1f)
                 .into(this)
         }
     }
@@ -65,7 +65,7 @@ object DataBindingUtils {
                 .centerCrop()
                 .circleCrop()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.1f)
+                .thumbnail(0.2f)
                 .into(this)
         }
     }

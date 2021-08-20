@@ -16,6 +16,7 @@ import androidx.paging.LoadState
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.moon.android.mondaysally.R
+import com.moon.android.mondaysally.utils.DataBindingUtils.setImageCommonCircle
 
 abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
     @LayoutRes
@@ -63,7 +64,10 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
     fun setCircleImageByGlide(iv: ImageView, url: String) {
         Glide.with(this)
             .load(url).placeholder(R.drawable.bg_round_white_gray)
-            .error(R.drawable.bg_round_white_gray)
+            .error(
+                Glide.with(this)
+                    .load(R.drawable.illust_sally_blank_1_1).circleCrop()
+            )
             .centerCrop()
             .circleCrop()
             .thumbnail(0.1f)

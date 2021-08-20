@@ -31,6 +31,7 @@ class TwinkleViewModel(private val twinkleNetworkRepository: TwinkleNetworkRepos
     var finishActivity: MutableLiveData<Boolean> = MutableLiveData()
     var commentPostSuccess: MutableLiveData<Boolean> = MutableLiveData()
     var hideKeyboard: MutableLiveData<Boolean> = MutableLiveData()
+    var commentRefresh: MutableLiveData<Boolean> = MutableLiveData()
     val commentList = ListLiveData<TwinkleComment>()
     var editTextCommentString = ObservableField("")
 
@@ -77,6 +78,7 @@ class TwinkleViewModel(private val twinkleNetworkRepository: TwinkleNetworkRepos
             Log.d("네트워크", body.toString())
             Log.d("네트워크", twinkleResponse.toString())
             if (twinkleResponse.code == 200) {
+                commentRefresh.value = true
                 commentPostSuccess.value = true
             } else {
                 fail.value = Fail(twinkleResponse.message, twinkleResponse.code)

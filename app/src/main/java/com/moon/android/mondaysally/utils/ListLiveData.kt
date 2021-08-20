@@ -29,4 +29,6 @@ class ListLiveData<T> : MutableLiveData<MutableList<T>>() {
         value = temp
     }
 
+    fun size() = temp.size
+
 }

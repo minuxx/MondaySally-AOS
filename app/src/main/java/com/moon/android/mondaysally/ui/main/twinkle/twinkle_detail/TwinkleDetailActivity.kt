@@ -1,8 +1,13 @@
 package com.moon.android.mondaysally.ui.main.twinkle.twinkle_detail
 
+import android.animation.ObjectAnimator
 import android.content.Context
+import android.graphics.Rect
 import android.view.View
 import android.view.View.GONE
+import android.view.animation.AccelerateDecelerateInterpolator
+import androidx.core.animation.doOnEnd
+import androidx.core.widget.NestedScrollView
 import androidx.viewpager2.widget.ViewPager2
 import com.moon.android.mondaysally.R
 import com.moon.android.mondaysally.databinding.ActivityTwinkleDetailBinding
@@ -59,20 +64,25 @@ class TwinkleDetailActivity : BaseActivity<ActivityTwinkleDetailBinding>() {
                 twinkleViewModel.getTwinkleDetail(twinkleViewModel.twinkleIndex.value!!)
                 twinkleViewModel.editTextCommentString.set("")
                 binding.activityShopDetailEtComment.clearFocus()
-                binding.activityTwinkleScrollView.fullScroll(View.FOCUS_DOWN)
-//                                        .sc.fullScroll(View.FOCUS_DOWN);
+//                binding.activityTwinkleScrollView.fullScroll(View.FOCUS_DOWN)
+                twinkleViewModel.commentPostSuccess.value = false
             }
         })
 
         twinkleViewModel.twinkleResult.observe(this, { twinkleResult ->
             viewPagerAdapter = ImageViewpagerAdapter(this, twinkleResult.twinkleImglists)
             imageViewPager.adapter = viewPagerAdapter
-
             indicator = binding.activityTwinkleDetailIndicator
             indicator.setViewPager(imageViewPager)
             indicator.createIndicators(twinkleResult.twinkleImglists.size, 0)
             if (twinkleResult.twinkleImglists.size == 1)
                 binding.activityTwinkleDetailIndicator.visibility = GONE
+
+            if (twinkleViewModel.commentRefresh.value == true) {
+//                binding.activityTwinkleScrollView.fullScroll(ScrollView.FOCUS_DOWN)
+//                binding.activityTwinkleScrollView.smoothScrollTo(0,activityTwinkleScrollView.bo)
+                binding.activityTwinkleScrollView.smoothScrollToView(binding.activityShopDetailRvComment)
+            }
         })
 
         twinkleViewModel.fail.observe(this, { fail ->
@@ -98,5 +108,52 @@ class TwinkleDetailActivity : BaseActivity<ActivityTwinkleDetailBinding>() {
     override fun initAfterBinding() {
         twinkleViewModel.twinkleIndex.value = intent.getIntExtra("idx", 0)
         twinkleViewModel.getTwinkleDetail(twinkleViewModel.twinkleIndex.value!!)
+    }
+
+
+    /*
+    ScrollView의 상단 절대 y 좌표를 구한다.
+    view의 상단 절대 y좌표를 구한다.
+    2번의 절대 y좌표는 스크린 기준이기 때문에, 이미 스크롤된 영역은 계산하지 못한다. 따라서 별도로 이미 스크롤된 영역인 scrollY를 더해준다.
+    그리고 그 둘을 빼면 실제로 ScrollView의 최상단과 view의 최상단 사이의 논리적 거리가 구해진다.
+     */
+    fun NestedScrollView.smoothScrollToView(
+        view: View,
+    ) {
+        // 스크롤의 의미가 없다.
+        if (this.getChildAt(0).height <= this.height) return
+
+        val y = computeDistanceToView(view)
+
+        // (스크롤 해야하는 거리 - 현재 스크롤 된 거리) / (스크롤 몸체의 높이 - 스크롤 뷰의 높이) - 보류
+//        val ratio = kotlin.math.abs(y - this.scrollY) / (this.getChildAt(0).height - this.height).toFloat()
+
+        ObjectAnimator.ofInt(this, "scrollY", view.bottom).apply {
+            duration = 1000L
+            interpolator = AccelerateDecelerateInterpolator()
+            doOnEnd {
+//                TODO() 끝났을때의 동작
+            }
+            start()
+        }
+    }
+
+    internal fun NestedScrollView.computeDistanceToView(view: View): Int {
+        return kotlin.math.abs(
+            calculateRectOnScreen(this).top - (this.scrollY + calculateRectOnScreen(
+                view
+            ).top)
+        )
+    }
+
+    private fun calculateRectOnScreen(view: View): Rect {
+        val location = IntArray(2)
+        view.getLocationOnScreen(location)
+        return Rect(
+            location[0],
+            location[1],
+            location[0] + view.measuredWidth,
+            location[1] + view.measuredHeight
+        )
     }
 }
