@@ -146,7 +146,7 @@ object DataBindingUtils {
     @BindingAdapter("bind_my_twinkle_bg")
     @JvmStatic
     fun bindTwinkleBg(imageView: ImageView, isProved: String) {
-        if (isProved.equals("Y"))
+        if (isProved == "Y")
             imageView.visibility = GONE
         else
             imageView.visibility = VISIBLE

@@ -1,5 +1,6 @@
 package com.moon.android.mondaysally.di
 
+import com.moon.android.mondaysally.data.repository.FirebaseImageUploadRepository
 import com.moon.android.mondaysally.data.repository.SharedPrefRepository
 import com.moon.android.mondaysally.data.repository.network.*
 import org.koin.android.ext.koin.androidContext
@@ -12,4 +13,5 @@ val repositoryModule = module {
     single { GiftNetworkRepository(get()) }
     single { TwinkleNetworkRepository(get()) }
     single { SharedPrefRepository(androidContext()) }
+    single { FirebaseImageUploadRepository() }
 }

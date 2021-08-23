@@ -20,6 +20,7 @@ import com.moon.android.mondaysally.ui.main.MainActivity
 import com.moon.android.mondaysally.ui.main.twinkle.paging.MyTwinkleAdapter
 import com.moon.android.mondaysally.ui.main.twinkle.paging.TwinkleAdapter
 import com.moon.android.mondaysally.ui.main.twinkle.twinkle_detail.TwinkleDetailActivity
+import com.moon.android.mondaysally.ui.main.twinkle.twinkle_post.TwinklePostActivity
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -105,11 +106,24 @@ class TwinkleFragment() :
             }
         }
 
-        twinkleAdapter.setOnItemClickListener { item ->
-            twinkleViewModel.twinkleIndex.value = item.idx
+        myTwinkleAdapter.setOnItemClickListener { myTwinkle ->
+            if(myTwinkle.isProved != "Y") {
+                twinkleViewModel.twinkleIndex.value = myTwinkle.idx
+                activity?.let {
+                    val intent = Intent(context, TwinklePostActivity::class.java)
+                    intent.putExtra("idx", myTwinkle.idx)
+                    intent.putExtra("name", myTwinkle.name)
+                    intent.putExtra("usedClover", myTwinkle.usedClover)
+                    startActivity(intent)
+                }
+            }
+        }
+
+        twinkleAdapter.setOnItemClickListener { twinkle ->
+            twinkleViewModel.twinkleIndex.value = twinkle.idx
             activity?.let {
                 val intent = Intent(context, TwinkleDetailActivity::class.java)
-                intent.putExtra("idx", item.idx)
+                intent.putExtra("idx", twinkle.idx)
                 startActivity(intent)
             }
         }

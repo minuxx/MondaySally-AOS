@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "490329607812",
+    "project_id": "modaysally",
+    "storage_bucket": "modaysally.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:490329607812:android:de66bb7c941cb976f0fcd1",
+        "android_client_info": {
+          "package_name": "com.moon.android.mondaysally"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "490329607812-bg3f8j7g44l0r2hg06aov51h2k7pc47l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWjpqsPyDXoFEU5xYK3RzdbWGntFoZmKM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "490329607812-bg3f8j7g44l0r2hg06aov51h2k7pc47l.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "490329607812-2ufiup898pp94kg2hnnk5pk6b5o81uvs.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.project.by.sallyoflaw.mondaysally"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

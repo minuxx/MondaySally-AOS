@@ -93,4 +93,14 @@
     <!--트윙클-->
     <string name="twinkle_my_twinkle">내 트윙클 현황</string>
     <string name="twinkle_comment_hint">댓글을 입력해주세요. </string>
+    <string name="twinkle_post">내 트윙클 추가하기</string>
+    <string name="twinkle_post_btn">게시</string>
+    <string name="twinkle_gift_name">기프트 명</string>
+    <string name="twinkle_clover_photo">클로버 사용 증명사진</string>
+    <string name="twinkle_photo_guide">* 첫번째 사진이 대표사진으로 등록됩니다.</string>
+    <string name="twinkle_receipt">영수증 증명사진</string>
+    <string name="twinkle_receipt_guide">* 영수증 내역이 잘 보이게 첨부해주세요.</string>
+    <string name="twinkle_content">트윙클 내용</string>
+    <string name="twinkle_cotent_hint">트윙클 내용을 입력해주세요.</string>
+
 </resources>

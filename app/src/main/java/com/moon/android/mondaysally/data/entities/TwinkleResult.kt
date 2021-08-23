@@ -1,5 +1,6 @@
 package com.moon.android.mondaysally.data.entities
 
+import android.net.Uri
 import com.google.gson.annotations.SerializedName
 
 data class TwinkleResult(
@@ -75,4 +76,16 @@ data class TwinkleComment(
 
 data class CommentPostBody(
     @SerializedName(value = "content") val content: String,
+)
+
+data class UploadDonePhoto(
+    val uri: Uri,
+    val index: Int,
+)
+
+data class TwinklePostBody  (
+    @SerializedName(value = "giftLogIdx") val giftLogIdx: Int,
+    @SerializedName(value = "content") val content: String,
+    @SerializedName(value = "receiptImgUrl") val receiptImgUrl: String,
+    @SerializedName(value = "twinkleImgList") val twinkleImgList: ArrayList<String>,
 )

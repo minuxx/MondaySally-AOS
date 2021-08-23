@@ -5,8 +5,7 @@ import android.content.Context
 import android.graphics.Rect
 import android.view.View
 import android.view.View.GONE
-import android.view.animation.*
-import android.widget.ImageView
+import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.core.animation.doOnEnd
 import androidx.core.widget.NestedScrollView
 import androidx.viewpager2.widget.ViewPager2
@@ -66,7 +65,6 @@ class TwinkleDetailActivity : BaseActivity<ActivityTwinkleDetailBinding>() {
                 twinkleViewModel.getTwinkleDetail(twinkleViewModel.twinkleIndex.value!!)
                 twinkleViewModel.editTextCommentString.set("")
                 binding.activityShopDetailEtComment.clearFocus()
-//                binding.activityTwinkleScrollView.fullScroll(View.FOCUS_DOWN)
                 twinkleViewModel.commentPostSuccess.value = false
             }
         })
@@ -81,8 +79,6 @@ class TwinkleDetailActivity : BaseActivity<ActivityTwinkleDetailBinding>() {
                 binding.activityTwinkleDetailIndicator.visibility = GONE
 
             if (twinkleViewModel.commentRefresh.value == true) {
-//                binding.activityTwinkleScrollView.fullScroll(ScrollView.FOCUS_DOWN)
-//                binding.activityTwinkleScrollView.smoothScrollTo(0,activityTwinkleScrollView.bo)
                 binding.activityTwinkleScrollView.smoothScrollToView(binding.activityShopDetailRvComment)
             }
         })

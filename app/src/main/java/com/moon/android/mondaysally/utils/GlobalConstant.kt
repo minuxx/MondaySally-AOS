@@ -17,7 +17,6 @@ class GlobalConstant {
         const val FIRST_LAUNCH = "FIRST-LAUNCH"
         const val NO_MORE_TUTORIAL = "NO-MORE-TUTORIAL"
 
-
         //Animation
         const val FREQ = 1.5f
         const val DECAY = 1f
@@ -25,6 +24,17 @@ class GlobalConstant {
             val raw = Math.sin(FREQ * input * 2 * Math.PI)
             (raw * Math.exp((-input * DECAY).toDouble())).toFloat()
         }
+
+        //FirebaseStorage Folder
+        const val TWINKLE_FOLDER = "test/twinkle"
+//        const val TWINKLE_FOLDER = "prod/twinkle"
+        const val RECEIPT_FOLDER = "test/receipt"
+//        const val TWINKLE_FOLDER = "prod/receipt"
+        const val PROFILE_FOLDER = "test/profile"
+//        const val TWINKLE_FOLDER = "prod/receipt"
+
+        const val TWINKLE_IMAGE_MODE = 1
+        const val RECEIPT_IMAGE_MODE = 2
     }
 
 }

@@ -3,18 +3,22 @@ package com.moon.android.mondaysally.ui
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.moon.android.mondaysally.R
 import com.moon.android.mondaysally.utils.GlobalConstant
 
@@ -123,6 +127,19 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
             };
         } else {
             vibrator.vibrate(1000);
+        }
+    }
+
+    fun setLargeImageFromUri(url: Uri?, imageView: ImageView) {
+        url.let {
+            Glide.with(this)
+                .load(url)
+                .override(400, 400)
+                .error(R.drawable.illust_sally_blank_1_1)
+                .centerCrop()
+                .thumbnail(0.2f)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(imageView)
         }
     }
 
