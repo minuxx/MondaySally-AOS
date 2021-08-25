@@ -32,7 +32,6 @@ val networkModule: Module = module {
                 .build()
             Log.d("X_ACCESS_TOKEN", "${sharedPrefRepository.jwtToken}")
             chain.proceed(request)
-
         }
 
     fun provideHttpLoggingInterceptor() =

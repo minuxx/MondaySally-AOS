@@ -1,7 +1,7 @@
 package com.moon.android.mondaysally.ui.main.shop.shop_detail
 
 import android.content.Context
-import android.util.Log
+import android.content.Intent
 import androidx.core.content.res.ResourcesCompat
 import co.lujun.androidtagview.TagView.OnTagClickListener
 import com.moon.android.mondaysally.R
@@ -40,9 +40,12 @@ class ShopDetailActivity : BaseActivity<ActivityShopDetailBinding>() {
             }
         })
 
-        shopViewModel.postSuccess.observe(this, { postSuccess ->
-            if (postSuccess)
-                startNextActivity(ShopApplyDoneActivity::class.java)
+        shopViewModel.twinkleIndex.observe(this, { twinkleIndex ->
+            val intent = Intent(this, ShopApplyDoneActivity::class.java)
+            intent.putExtra("idx", twinkleIndex)
+            intent.putExtra("name", shopViewModel.giftResult.value?.name)
+            intent.putExtra("usedClover", shopViewModel.giftOption.value?.usedClover)
+            startActivity(intent)
         })
 
         shopViewModel.finishActivity.observe(this, { finishActivity ->

@@ -96,14 +96,14 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/activity_welcome_btn_go_home"
+            android:id="@+id/activity_gift_done_btn_go_twinkle"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="80dp"
             android:background="@drawable/bg_round_orange"
             android:fontFamily="@font/roboto_medium"
-            android:onClick="@{() -> viewModel.whenBtnApplyClicked()}"
+            android:onClick="@{() -> viewModel.whenGoTwinkleClicked()}"
             android:text="@string/shop_go_twinkle"
             android:textColor="@color/white"
             android:textSize="17sp"

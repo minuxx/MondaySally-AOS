@@ -35,6 +35,10 @@ class GlobalConstant {
 
         const val TWINKLE_IMAGE_MODE = 1
         const val RECEIPT_IMAGE_MODE = 2
+
+        const val VALIDATE_TWINKLE_PHOTO = 1
+        const val VALIDATE_RECEIPT_PHOTO = 2
+        const val VALIDATE_TWINKLE_CONTENT = 3
     }
 
 }

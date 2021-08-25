@@ -19,20 +19,22 @@ class ShopViewModel(private val giftNetworkRepository: GiftNetworkRepository) : 
 
     //GiftDetail
     var giftIndex: MutableLiveData<Int> = MutableLiveData()
+    var twinkleIndex: MutableLiveData<Int> = MutableLiveData()
     var giftOption: MutableLiveData<GiftOption> = MutableLiveData()
     var optionIndex: MutableLiveData<Int> = MutableLiveData()
     var isOptionSelected: MutableLiveData<Boolean> = MutableLiveData()
     var showDialog: MutableLiveData<Boolean> = MutableLiveData()
+    var postSuccess: MutableLiveData<Boolean> = MutableLiveData()
 
     //GiftList
     var giftResult: MutableLiveData<GiftResult> = MutableLiveData()
-    var postSuccess: MutableLiveData<Boolean> = MutableLiveData()
     var finishActivity: MutableLiveData<Boolean> = MutableLiveData()
     var isLoading: MutableLiveData<Boolean> = MutableLiveData()
     var giftCount: MutableLiveData<Int> = MutableLiveData()
 
     //ApplyDone
     var goHome: MutableLiveData<Boolean> = MutableLiveData()
+    var goTwinkle: MutableLiveData<Boolean> = MutableLiveData()
 
     var fail: MutableLiveData<Fail> = MutableLiveData()
 
@@ -70,7 +72,7 @@ class ShopViewModel(private val giftNetworkRepository: GiftNetworkRepository) : 
             val giftResponse = giftNetworkRepository.postGift(body)
             if (giftResponse.code == 200) {
                 giftResponse.result?.let {
-                    postSuccess.value = true
+                    twinkleIndex.value = giftResponse.result.idx
                 }
             } else {
                 fail.value = Fail(giftResponse.message, giftResponse.code)
@@ -92,5 +94,9 @@ class ShopViewModel(private val giftNetworkRepository: GiftNetworkRepository) : 
 
     fun whenTvGoHomeClicked() {
         goHome.value = true
+    }
+
+    fun whenGoTwinkleClicked() {
+        goTwinkle.value = true
     }
 }

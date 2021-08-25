@@ -63,5 +63,6 @@ class FirebaseImageUploadRepository() {
 
     fun setonUploadDoneListener(listener: (String) -> Unit) {
         onUploadDoneListener = listener
+
     }
 }

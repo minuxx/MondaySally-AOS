@@ -102,5 +102,8 @@
     <string name="twinkle_receipt_guide">* 영수증 내역이 잘 보이게 첨부해주세요.</string>
     <string name="twinkle_content">트윙클 내용</string>
     <string name="twinkle_cotent_hint">트윙클 내용을 입력해주세요.</string>
+    <string name="twinkle_validate_twinkle_photo">클로버 사용 증명사진을\n등록해 주세요.</string>
+    <string name="twinkle_validate_receipt_photo">영수증 증명사진을\n등록해 주세요.</string>
+    <string name="twinkle_validate_twinkle_content">트윙클 내용을 입력해주세요.</string>
 
 </resources>

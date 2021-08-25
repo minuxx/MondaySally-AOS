@@ -9,7 +9,7 @@ import org.koin.dsl.module
 
 
 val utilityModule = module {
-    single { SharedPreferencesManager(androidContext()) }
+//    single { SharedPreferencesManager(androidContext()) }
     single { GlobalConstant() }
     single { GridItemDecoration(get())}
     single { GridItemDecoration_15_15(get())}

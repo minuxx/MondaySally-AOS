@@ -8,18 +8,23 @@ import android.content.pm.ResolveInfo
 import android.graphics.Bitmap
 import android.net.Uri
 import android.provider.MediaStore
-import android.widget.ImageView
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import com.moon.android.mondaysally.BR
 import com.moon.android.mondaysally.R
 import com.moon.android.mondaysally.databinding.ActivityTwinklePostBinding
 import com.moon.android.mondaysally.ui.BaseActivity
+import com.moon.android.mondaysally.ui.SallyDialog
+import com.moon.android.mondaysally.ui.main.MainActivity
 import com.moon.android.mondaysally.ui.main.twinkle.TwinkleViewModel
 import com.moon.android.mondaysally.utils.GlobalConstant.Companion.RECEIPT_IMAGE_MODE
 import com.moon.android.mondaysally.utils.GlobalConstant.Companion.TWINKLE_IMAGE_MODE
+import com.moon.android.mondaysally.utils.GlobalConstant.Companion.VALIDATE_RECEIPT_PHOTO
+import com.moon.android.mondaysally.utils.GlobalConstant.Companion.VALIDATE_TWINKLE_CONTENT
+import com.moon.android.mondaysally.utils.GlobalConstant.Companion.VALIDATE_TWINKLE_PHOTO
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
 import java.text.SimpleDateFormat
@@ -35,17 +40,10 @@ class TwinklePostActivity : BaseActivity<ActivityTwinklePostBinding>() {
 
     private val permission = android.Manifest.permission.CAMERA
 
-    private fun getImageViewFromIndex(index: Int): ImageView {
-        return when (index) {
-            0 -> binding.activityTwinklePostIvPhoto1
-            1 -> binding.activityTwinklePostIvPhoto2
-            else -> binding.activityTwinklePostIvPhoto3
-        }
-    }
-
     private val twinkleImageFromGalleryLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-            cropImage(result.data?.data)
+            if (result.resultCode == RESULT_OK)
+                cropImage(result.data?.data)
         }
 
     private val permissionLauncher =
@@ -65,13 +63,13 @@ class TwinklePostActivity : BaseActivity<ActivityTwinklePostBinding>() {
                     if (imageMode == TWINKLE_IMAGE_MODE) {
                         result.data?.data?.let {
                             if (twinkleViewModel.photoCount < 3) twinkleViewModel.photoCount++
-                            twinkleViewModel._twinkleImgList[twinkleViewModel.selectedPhotoIndex.value!!] = it
-                            setLargeImageFromUri(it, getImageViewFromIndex(twinkleViewModel.selectedPhotoIndex.value!!))
+                            twinkleViewModel._twinkleImgList.get()?.set(twinkleViewModel.selectedPhotoIndex.value!!, it)
+                            twinkleViewModel._twinkleImgList.notifyPropertyChanged(BR._all)
                         }
                     } else {
                         result.data?.data?.let {
-                            twinkleViewModel._receiptImgUrl = it
-                            setLargeImageFromUri(it, binding.activityTwinklePostIvReceipt)
+                            twinkleViewModel._receiptImgUrl.set(it)
+                            twinkleViewModel._receiptImgUrl.notifyPropertyChanged(BR._all)
                         }
                     }
                 }
@@ -118,19 +116,15 @@ class TwinklePostActivity : BaseActivity<ActivityTwinklePostBinding>() {
             }
         })
 
-//        twinkleViewModel.uploadDonePhotoIndex.observe(this, { uploadDonePhotoIndex ->
-//            setLargeImageFromUri(
-//                uploadDonePhotoIndex.uri,
-//                getImageViewFromIndex(uploadDonePhotoIndex.index)
-//            )
-//        })
-//
-//        twinkleViewModel.uploadDoneReceipt.observe(this, { uploadDoneReceipt ->
-//            setLargeImageFromUri(
-//                uploadDoneReceipt,
-//                binding.activityTwinklePostIvReceipt
-//            )
-//        })
+        twinkleViewModel.twinklePostSuccess.observe(this, { twinklePostSuccess ->
+            if (twinklePostSuccess) {
+                val intent = Intent(this, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                intent.putExtra("navigation","twinkle")
+                startActivity(intent)
+                finish()
+            }
+        })
 
         twinkleViewModel.finishActivity.observe(this, { finishActivity ->
             if (finishActivity)
@@ -145,6 +139,25 @@ class TwinklePostActivity : BaseActivity<ActivityTwinklePostBinding>() {
                 binding.activityTwinklePostEtContent.clearFocus()
                 twinkleViewModel.commentPostSuccess.value = false
             }
+        })
+
+        twinkleViewModel.showDialogText.observe(this, { showDialogText ->
+            var text = ""
+            when (showDialogText) {
+                VALIDATE_TWINKLE_PHOTO -> text = getString(R.string.twinkle_validate_twinkle_photo)
+                VALIDATE_RECEIPT_PHOTO -> text = getString(R.string.twinkle_validate_receipt_photo)
+                VALIDATE_TWINKLE_CONTENT -> text =
+                    getString(R.string.twinkle_validate_twinkle_content)
+            }
+            showSallyDialog(
+                this,
+                text,
+                getString(R.string.ok),
+                object : SallyDialog.DialogClickListener {
+                    override fun onOKClicked() {
+
+                    }
+                })
         })
 
         twinkleViewModel.fail.observe(this, { fail ->
@@ -221,8 +234,8 @@ class TwinklePostActivity : BaseActivity<ActivityTwinklePostBinding>() {
         intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
         intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString())
 
-        val cropIamgeIntent = Intent(intent)
-        cropIamgeIntent.component = ComponentName(
+        val cropImageIntent = Intent(intent)
+        cropImageIntent.component = ComponentName(
             getCropImageActivity.activityInfo.packageName,
             getCropImageActivity.activityInfo.name
         )
@@ -232,7 +245,7 @@ class TwinklePostActivity : BaseActivity<ActivityTwinklePostBinding>() {
             Intent.FLAG_GRANT_WRITE_URI_PERMISSION or Intent.FLAG_GRANT_READ_URI_PERMISSION
         )
 
-        twinkleCropImageLauncher.launch(cropIamgeIntent)
+        twinkleCropImageLauncher.launch(cropImageIntent)
     }
 
 }

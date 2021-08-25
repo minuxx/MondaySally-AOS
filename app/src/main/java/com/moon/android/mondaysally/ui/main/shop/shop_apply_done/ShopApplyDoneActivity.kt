@@ -27,8 +27,21 @@ class ShopApplyDoneActivity : BaseActivity<ActivityShopApplyDoneBinding>() {
             if (goHome) {
                 val intent = Intent(this, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
-                intent.putExtra("goHome",true)
+                intent.putExtra("navigation", "home")
                 startActivity(intent)
+                finish()
+            }
+        })
+
+        shopViewModel.goTwinkle.observe(this, { goHome ->
+            if (goHome) {
+                val mainActivityIntent = Intent(this, MainActivity::class.java)
+                mainActivityIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                mainActivityIntent.putExtra("navigation", "twinklePost")
+                mainActivityIntent.putExtra("idx", intent.getIntExtra("idx",0))
+                mainActivityIntent.putExtra("name", intent.getStringExtra("name"))
+                mainActivityIntent.putExtra("usedClover", intent.getIntExtra("usedClover",0))
+                startActivity(mainActivityIntent)
                 finish()
             }
         })

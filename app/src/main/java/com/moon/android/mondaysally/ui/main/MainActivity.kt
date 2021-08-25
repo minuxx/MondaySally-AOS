@@ -1,10 +1,6 @@
 package com.moon.android.mondaysally.ui.main
 
-import android.app.Activity
-import android.app.Instrumentation
 import android.content.Intent
-import android.util.Log
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -12,6 +8,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.moon.android.mondaysally.R
 import com.moon.android.mondaysally.databinding.ActivityMainBinding
 import com.moon.android.mondaysally.ui.BaseActivity
+import com.moon.android.mondaysally.ui.main.twinkle.twinkle_post.TwinklePostActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -40,6 +37,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
 //        Log.d("인텐트", intent?.getBooleanExtra("goHome", false).toString())
-        navHostFragment.navController.navigate(R.id.homeFragment)
+        when (intent?.getStringExtra("navigation")) {
+            "home" -> navHostFragment.navController.navigate(R.id.homeFragment)
+            "twinkle" -> navHostFragment.navController.navigate(R.id.twinkleFragment)
+            "twinklePost" -> {
+                navHostFragment.navController.navigate(R.id.twinkleFragment)
+                val twinklePostIntent = Intent(this, TwinklePostActivity::class.java)
+                twinklePostIntent.putExtra("idx", intent.getIntExtra("idx",0))
+                twinklePostIntent.putExtra("name", intent.getStringExtra("name"))
+                twinklePostIntent.putExtra("usedClover", intent.getIntExtra("usedClover",0))
+                startActivity(twinklePostIntent)
+            }
+        }
     }
 }

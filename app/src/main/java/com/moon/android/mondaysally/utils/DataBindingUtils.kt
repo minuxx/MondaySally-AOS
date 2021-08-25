@@ -2,6 +2,7 @@ package com.moon.android.mondaysally.utils
 
 import android.annotation.SuppressLint
 import android.graphics.Typeface
+import android.net.Uri
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.StyleSpan
@@ -207,5 +208,20 @@ object DataBindingUtils {
             )
         }
         textView.text = spannable
+    }
+
+    @BindingAdapter("bind_twinkle_post_photo")
+    @JvmStatic
+    fun ImageView.setTwinklePostPhoto(uri: Uri?) {
+        uri.let {
+            Glide.with(this)
+                .load(uri)
+                .override(700, 700)
+                .error(R.drawable.button_photo_add)
+                .centerCrop()
+                .thumbnail(0.2f)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(this)
+        }
     }
 }

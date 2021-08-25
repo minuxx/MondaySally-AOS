@@ -182,37 +182,88 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/activity_twinkle_post_tv_photo_guide">
 
-                    <ImageView
-                        android:id="@+id/activity_twinkle_post_iv_photo_1"
+                    <FrameLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="14dp"
-                        android:layout_weight="1"
-                        android:adjustViewBounds="true"
-                        android:background="@drawable/bg_round_trans"
-                        android:onClick="@{() -> viewModel.whenIvPhotoClicked(0)}"
-                        android:src="@drawable/button_photo_add" />
+                        android:layout_weight="1">
 
-                    <ImageView
-                        android:id="@+id/activity_twinkle_post_iv_photo_2"
+                        <ImageView
+                            android:id="@+id/activity_twinkle_post_iv_photo_1"
+                            bind_twinkle_post_photo="@{viewModel._twinkleImgList[0]}"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:adjustViewBounds="true"
+                            android:background="@drawable/bg_round_trans"
+                            android:onClick="@{() -> viewModel.whenIvPhotoClicked(0)}"
+                            tools:src="@drawable/button_photo_add" />
+
+                        <ImageView
+                            android:id="@+id/activity_twinkle_post_iv_photo_2_delete"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end|top"
+                            android:onClick="@{() -> viewModel.whenIvPhotoDeleteClicked(0)}"
+                            android:visibility="@{viewModel.deletePhotoButtonVisiblillty(viewModel._twinkleImgList[0])}"
+                            android:padding="5dp"
+                            android:src="@drawable/button_photo_delete" />
+
+                    </FrameLayout>
+
+                    <FrameLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="14dp"
-                        android:layout_weight="1"
-                        android:adjustViewBounds="true"
-                        android:background="@drawable/bg_round_trans"
-                        android:onClick="@{() -> viewModel.whenIvPhotoClicked(1)}"
-                        android:src="@drawable/button_photo_add" />
+                        android:layout_weight="1">
 
-                    <ImageView
-                        android:id="@+id/activity_twinkle_post_iv_photo_3"
+                        <ImageView
+                            android:id="@+id/activity_twinkle_post_iv_photo_2"
+                            bind_twinkle_post_photo="@{viewModel._twinkleImgList[1]}"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:adjustViewBounds="true"
+                            android:background="@drawable/bg_round_trans"
+                            android:onClick="@{() -> viewModel.whenIvPhotoClicked(1)}"
+                            tools:src="@drawable/button_photo_add" />
+
+                        <ImageView
+                            android:id="@+id/activity_twinkle_post_iv_photo_1_delete"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end|top"
+                            android:onClick="@{() -> viewModel.whenIvPhotoDeleteClicked(1)}"
+                            android:visibility="@{viewModel.deletePhotoButtonVisiblillty(viewModel._twinkleImgList[1])}"
+                            android:padding="5dp"
+                            android:src="@drawable/button_photo_delete" />
+
+                    </FrameLayout>
+
+                    <FrameLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:adjustViewBounds="true"
-                        android:background="@drawable/bg_round_trans"
-                        android:onClick="@{() -> viewModel.whenIvPhotoClicked(2)}"
-                        android:src="@drawable/button_photo_add" />
+                        android:layout_marginEnd="14dp"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/activity_twinkle_post_iv_photo_3"
+                            bind_twinkle_post_photo="@{viewModel._twinkleImgList[2]}"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:adjustViewBounds="true"
+                            android:background="@drawable/bg_round_trans"
+                            android:onClick="@{() -> viewModel.whenIvPhotoClicked(2)}"
+                            tools:src="@drawable/button_photo_add" />
+
+                        <ImageView
+                            android:id="@+id/activity_twinkle_post_iv_photo_3_delete"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end|top"
+                            android:onClick="@{() -> viewModel.whenIvPhotoDeleteClicked(2)}"
+                            android:visibility="@{viewModel.deletePhotoButtonVisiblillty(viewModel._twinkleImgList[2])}"
+                            android:padding="5dp"
+                            android:src="@drawable/button_photo_delete" />
+                    </FrameLayout>
                 </LinearLayout>
 
                 <TextView
@@ -251,18 +302,35 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/activity_twinkle_post_tv_receipt_guide">
 
-                    <ImageView
-                        android:id="@+id/activity_twinkle_post_iv_receipt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
                         android:layout_marginEnd="14dp"
-                        android:layout_weight="1"
-                        android:adjustViewBounds="true"
-                        android:onClick="@{() -> viewModel.whenIvReceiptClicked()}"
-                        android:src="@drawable/button_photo_add" />
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/activity_twinkle_post_iv_receipt"
+                            bind_twinkle_post_photo="@{viewModel._receiptImgUrl}"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:adjustViewBounds="true"
+                            android:background="@drawable/bg_round_trans"
+                            android:onClick="@{() -> viewModel.whenIvReceiptClicked()}"
+                            tools:src="@drawable/button_photo_add" />
+
+                        <ImageView
+                            android:id="@+id/activity_twinkle_post_iv_receipt_delete"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end|top"
+                            android:onClick="@{() -> viewModel.whenIvReceiptDeleteClicked()}"
+                            android:padding="5dp"
+                            android:src="@drawable/button_photo_delete"
+                            android:visibility="@{viewModel.deletePhotoButtonVisiblillty(viewModel._receiptImgUrl)}" />
+                    </FrameLayout>
 
                     <ImageView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="14dp"
                         android:layout_weight="1"
@@ -271,7 +339,7 @@
                         android:visibility="invisible" />
 
                     <ImageView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:adjustViewBounds="true"

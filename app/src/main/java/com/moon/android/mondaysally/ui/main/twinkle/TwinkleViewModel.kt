@@ -2,6 +2,8 @@ package com.moon.android.mondaysally.ui.main.twinkle
 
 import android.net.Uri
 import android.util.Log
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,6 +13,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.google.firebase.storage.ktx.component1
 import com.google.firebase.storage.ktx.component2
+import com.moon.android.mondaysally.BR
 import com.moon.android.mondaysally.data.entities.*
 import com.moon.android.mondaysally.data.remote.Fail
 import com.moon.android.mondaysally.data.repository.FirebaseImageUploadRepository
@@ -19,18 +22,21 @@ import com.moon.android.mondaysally.ui.main.twinkle.paging.MyTwinklePagingSource
 import com.moon.android.mondaysally.ui.main.twinkle.paging.TwinklePagingSource
 import com.moon.android.mondaysally.utils.ApiException
 import com.moon.android.mondaysally.utils.GlobalConstant.Companion.TWINKLE_FOLDER
+import com.moon.android.mondaysally.utils.GlobalConstant.Companion.VALIDATE_RECEIPT_PHOTO
+import com.moon.android.mondaysally.utils.GlobalConstant.Companion.VALIDATE_TWINKLE_CONTENT
+import com.moon.android.mondaysally.utils.GlobalConstant.Companion.VALIDATE_TWINKLE_PHOTO
 import com.moon.android.mondaysally.utils.ListLiveData
 import kotlinx.coroutines.launch
 
 class TwinkleViewModel(
-    private val twinkleNetworkRepository: TwinkleNetworkRepository,
-    private val firebaseImageUploadRepository: FirebaseImageUploadRepository
+    private val twinkleNetworkRepository: TwinkleNetworkRepository
 ) :
     ViewModel() {
 
     var isLoading: MutableLiveData<Boolean> = MutableLiveData()
     var finishActivity: MutableLiveData<Boolean> = MutableLiveData()
     var twinkleIndex: MutableLiveData<Int> = MutableLiveData()
+    var showDialogText: MutableLiveData<Int> = MutableLiveData()
 
     //TwinkleDetail
     var twinkleResult: MutableLiveData<TwinkleResult> = MutableLiveData()
@@ -43,11 +49,11 @@ class TwinkleViewModel(
     //TwinklePost
     var getTwinklePhoto: MutableLiveData<Boolean> = MutableLiveData()
     var getReceiptPhoto: MutableLiveData<Boolean> = MutableLiveData()
+    var twinklePostSuccess: MutableLiveData<Boolean> = MutableLiveData()
     var selectedPhotoIndex: MutableLiveData<Int> = MutableLiveData()
-    var uploadDonePhotoIndex: MutableLiveData<UploadDonePhoto> = MutableLiveData()
     var uploadDoneReceipt: MutableLiveData<Uri> = MutableLiveData()
-    var _twinkleImgList = arrayOfNulls<Uri>(3)
-    var _receiptImgUrl: Uri? = null
+    var _twinkleImgList = ObservableField(arrayOfNulls<Uri>(3))
+    var _receiptImgUrl = ObservableField<Uri?>()
 
     //TwinklePostBody
     var editTextContentString = ObservableField("")
@@ -130,15 +136,15 @@ class TwinkleViewModel(
                 fail.value = Fail("", 404)
                 return@launch
             }
-//            val twinkleResponse = twinkleNetworkRepository.postTwinkle(body)
-//            isLoading.value = false
-//            Log.d("네트워크", twinkleResponse.toString())
-//            if (twinkleResponse.code == 200) {
-//                commentRefresh.value = true
-//                commentPostSuccess.value = true
-//            } else {
-//                fail.value = Fail(twinkleResponse.message, twinkleResponse.code)
-//            }
+            Log.d("네트워크", body.toString())
+            val twinkleResponse = twinkleNetworkRepository.postTwinkle(body)
+            isLoading.value = false
+            Log.d("네트워크", twinkleResponse.toString())
+            if (twinkleResponse.code == 200) {
+                twinklePostSuccess.value = true
+            } else {
+                fail.value = Fail(twinkleResponse.message, twinkleResponse.code)
+            }
         } catch (e: ApiException) {
             isLoading.value = false
             fail.value = Fail(e.message!!, 404)
@@ -151,17 +157,25 @@ class TwinkleViewModel(
     private fun uploadToFirebase() {
         isLoading.value = true
         for (i in 0 until 3) {
-            _twinkleImgList[i]?.let { twinkleImageUploadToFirebaseStorage(it, i) }
+            _twinkleImgList.get()?.get(i).let {
+                it?.let { uri ->
+                    twinkleImageUploadToFirebaseStorage(
+                        uri, i
+                    )
+                }
+            }
         }
     }
 
     private fun twinkleImageUploadToFirebaseStorage(uri: Uri, index: Int) {
+        val firebaseImageUploadRepository = FirebaseImageUploadRepository()
         firebaseImageUploadRepository.setonUploadDoneListener { downloadUrl ->
             if (downloadUrl != "Fail") {
                 twinkleImgList[index] = downloadUrl
                 uploadDoneCount++
                 if (photoCount == uploadDoneCount) {
-                    _receiptImgUrl?.let { receiptImageUploadToFirebaseStorage(it) }
+                    uploadDoneCount = 0
+                    _receiptImgUrl.get()?.let { receiptImageUploadToFirebaseStorage(it) }
                 }
             } else {
                 fail.value = Fail("이미지 업로드에 실패하였습니다.", 404)
@@ -177,6 +191,7 @@ class TwinkleViewModel(
     }
 
     private fun receiptImageUploadToFirebaseStorage(uri: Uri) {
+        val firebaseImageUploadRepository = FirebaseImageUploadRepository()
         firebaseImageUploadRepository.setonUploadDoneListener { downloadUrl ->
             if (downloadUrl != "Fail") {
                 receiptImgUrl = downloadUrl
@@ -205,15 +220,22 @@ class TwinkleViewModel(
 
     fun whenIvPhotoClicked(i: Int) {
         selectedPhotoIndex.value = i
-//        if (photoCount < 3) {
-//            //앞부터채우기
-//            selectedPhotoIndex.value = photoCount
-//        }
         getTwinklePhoto.value = true
+    }
+
+    fun whenIvPhotoDeleteClicked(i: Int) {
+        _twinkleImgList.get()?.set(i, null)
+        _twinkleImgList.notifyPropertyChanged(BR._all)
+        photoCount--
     }
 
     fun whenIvReceiptClicked() {
         getReceiptPhoto.value = true
+    }
+
+    fun whenIvReceiptDeleteClicked() {
+        _receiptImgUrl.set(null)
+        _receiptImgUrl.notifyPropertyChanged(BR._all)
     }
 
     fun whenTvTwinklePostClicked() {
@@ -221,17 +243,28 @@ class TwinkleViewModel(
             uploadToFirebase()
     }
 
+    fun deletePhotoButtonVisiblillty(uri: Uri?): Int {
+        return if (uri == null)
+            GONE
+        else
+            VISIBLE
+    }
+
     private fun validateCheck(): Boolean {
-        if (photoCount < 1) {
-            Log.d("네트워크", "트윙클이미지 입력필요")
-            return false
-        } else if (_receiptImgUrl == null) {
-            Log.d("네트워크", "영수증이미지 입력필요")
-            return false
-        } else if (editTextContentString.get()?.isEmpty() == true) {
-            Log.d("네트워크", "텍스트 입력필요")
-            return false
+        return when {
+            photoCount < 1 -> {
+                showDialogText.value = VALIDATE_TWINKLE_PHOTO
+                false
+            }
+            _receiptImgUrl.get() == null -> {
+                showDialogText.value = VALIDATE_RECEIPT_PHOTO
+                false
+            }
+            editTextContentString.get()?.isEmpty() == true -> {
+                showDialogText.value = VALIDATE_TWINKLE_CONTENT
+                false
+            }
+            else -> true
         }
-        return true
     }
 }
