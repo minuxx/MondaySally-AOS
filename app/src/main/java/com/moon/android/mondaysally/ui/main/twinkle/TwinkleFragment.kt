@@ -1,15 +1,12 @@
 package com.moon.android.mondaysally.ui.main.twinkle
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.util.Log
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.view.animation.AlphaAnimation
-import android.view.animation.Animation
-import android.view.animation.AnimationSet
-import android.view.animation.ScaleAnimation
 import android.widget.ImageView
-import androidx.core.view.get
+import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import com.moon.android.mondaysally.R
@@ -55,6 +52,7 @@ class TwinkleFragment() :
         }
     }
 
+    @SuppressLint("SetTextI18n")
     override fun initAfterBinding() {
         twinkleAdapter = TwinkleAdapter()
         myTwinkleAdapter = MyTwinkleAdapter()
@@ -128,25 +126,32 @@ class TwinkleFragment() :
             }
         }
 
-        twinkleAdapter.setOnHeartClickListener { twinkle, heartIv, position ->
-            heartImageChange(heartIv, twinkle)
+        twinkleAdapter.setOnHeartClickListener { twinkle, heartIv, likeTv, likeNum ->
+            heartImageChange(heartIv, likeTv, twinkle, likeNum)
             animateHeart(heartIv)
-//            animateHeart(binding.fragmentTwinkleRvMyTwinkle[position].findViewById(R.id.item_twinkle_iv_like) as ImageView)
+            twinkleViewModel.postLike(twinkle.idx)
         }
-
         loadData()
     }
 
 
-    private fun heartImageChange(imageView: ImageView, twinkle: Twinkle) {
+    private fun heartImageChange(
+        imageView: ImageView,
+        textView: TextView,
+        twinkle: Twinkle,
+        likeNum: Int
+    ) {
         if (twinkle.isHearted == "Y") {
             imageView.setImageResource(R.drawable.ic_like_off_gray)
             twinkle.isHearted = "N"
+            twinkle.likenum--
         } else {
             (activity as MainActivity).vibrate()
             imageView.setImageResource(R.drawable.ic_like_on_orange)
             twinkle.isHearted = "Y"
+            twinkle.likenum++
         }
+        textView.text = "좋아요 ${twinkle.likenum}개"
     }
 
     private  fun animateHeart(view: ImageView) {

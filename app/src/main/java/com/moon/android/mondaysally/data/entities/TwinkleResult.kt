@@ -42,7 +42,7 @@ data class Twinkle(
     @SerializedName(value = "isHearted") var isHearted: String,
     @SerializedName(value = "date") val date: String,
     @SerializedName(value = "content") val content: String,
-    @SerializedName(value = "likenum") val likenum: Int,
+    @SerializedName(value = "likenum") var likenum: Int,
     @SerializedName(value = "commentnum") val commentnum: Int,
 
 //    "idx": 2, // 트윙클 아이디

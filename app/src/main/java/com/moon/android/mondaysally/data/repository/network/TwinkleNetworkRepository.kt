@@ -21,11 +21,15 @@ class TwinkleNetworkRepository(val twinkleService: TwinkleService) :
         return apiRequest { twinkleService.getTwinkleDetail(index) }
     }
 
-    suspend fun postComment(index:Int, commentPostBody: CommentPostBody): TwinkleResponse {
+    suspend fun postComment(index: Int, commentPostBody: CommentPostBody): TwinkleResponse {
         return apiRequest { twinkleService.postComment(index, commentPostBody) }
     }
 
     suspend fun postTwinkle(twinklePostBody: TwinklePostBody): TwinkleResponse {
         return apiRequest { twinkleService.postTwinkle(twinklePostBody) }
+    }
+
+    suspend fun postLike(index: Int): TwinkleResponse {
+        return apiRequest { twinkleService.postLike(index) }
     }
 }

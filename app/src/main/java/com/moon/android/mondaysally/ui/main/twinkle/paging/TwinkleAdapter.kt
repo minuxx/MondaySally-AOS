@@ -3,6 +3,7 @@ package com.moon.android.mondaysally.ui.main.twinkle.paging
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -42,22 +43,20 @@ class TwinkleAdapter() :
             }
             binding.itemTwinkleIvLike.setOnClickListener {
                 onHeartClickListener?.let { click,  ->
-//                    heartImageChange(binding.itemTwinkleIvLike, twinkle)
-//                    animateHeart(binding.itemTwinkleIvLike)
-                    click(twinkle, binding.itemTwinkleIvLike, layoutPosition)
+                    click(twinkle, binding.itemTwinkleIvLike, binding.itemTwinkleTvLike, twinkle.likenum)
                 }
             }
         }
     }
 
     private var onItemClickListener: ((Twinkle) -> Unit)? = null
-    private var onHeartClickListener: ((Twinkle, ImageView, Int) -> Unit)? = null
+    private var onHeartClickListener: ((Twinkle, ImageView, TextView, Int) -> Unit)? = null
 
     fun setOnItemClickListener(listener: (Twinkle) -> Unit) {
         onItemClickListener = listener
     }
 
-    fun setOnHeartClickListener(listener: (Twinkle, ImageView, Int) -> Unit) {
+    fun setOnHeartClickListener(listener: (Twinkle, ImageView, TextView, Int) -> Unit) {
         onHeartClickListener = listener
     }
 

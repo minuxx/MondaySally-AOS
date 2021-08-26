@@ -154,6 +154,23 @@ class TwinkleViewModel(
         }
     }
 
+    fun postLike(idx: Int) = viewModelScope.launch {
+        try {
+            val twinkleResponse = twinkleNetworkRepository.postLike(idx)
+            Log.d("네트워크", twinkleResponse.toString())
+            if (twinkleResponse.code == 200) {
+                commentRefresh.value = true
+                commentPostSuccess.value = true
+            } else {
+                fail.value = Fail(twinkleResponse.message, twinkleResponse.code)
+            }
+        } catch (e: ApiException) {
+            fail.value = Fail(e.message!!, 404)
+        } catch (e: Exception) {
+            fail.value = Fail(e.message!!, 404)
+        }
+    }
+
     private fun uploadToFirebase() {
         isLoading.value = true
         for (i in 0 until 3) {

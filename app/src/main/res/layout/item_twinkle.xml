@@ -104,7 +104,7 @@
             bind_twinkle_tv_like="@{model.likenum}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="12dp"
             android:fontFamily="@font/roboto_regular"
             android:textColor="@color/twinkle_gift_grey"
             android:textSize="14sp"

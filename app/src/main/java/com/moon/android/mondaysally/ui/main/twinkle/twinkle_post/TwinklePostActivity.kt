@@ -8,6 +8,7 @@ import android.content.pm.ResolveInfo
 import android.graphics.Bitmap
 import android.net.Uri
 import android.provider.MediaStore
+import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -188,11 +189,14 @@ class TwinklePostActivity : BaseActivity<ActivityTwinklePostBinding>() {
         permissionLauncher.launch(permission)
     }
 
-    @SuppressLint("SimpleDateFormat")
+    @SuppressLint("SimpleDateFormat", "QueryPermissionsNeeded")
     private fun cropImage(photoDirectory: Uri?) {
         var photoUri: Uri? = photoDirectory
 
-        val intent = Intent("com.android.camera.action.CROP")
+        val intent = Intent("com.android.camera.action.CROP").apply {
+            type = "image/*"
+            data = photoUri
+        }
         intent.setDataAndType(photoUri, "image/*")
 
         val list: MutableList<ResolveInfo> = packageManager.queryIntentActivities(intent, 0)
@@ -247,5 +251,4 @@ class TwinklePostActivity : BaseActivity<ActivityTwinklePostBinding>() {
 
         twinkleCropImageLauncher.launch(cropImageIntent)
     }
-
 }

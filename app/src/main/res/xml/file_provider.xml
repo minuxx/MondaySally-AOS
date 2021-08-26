@@ -6,7 +6,9 @@
     <files-path
         name="files"
         path="." /> <!--Context.getFilesDir() 내부 저장소-->
-
+    <external-path
+        name="images"
+        path="." />
     <external-path
         name="external"
         path="."/>  <!--  Environment.getExternalStorageDirectory() 외부 저장소-->

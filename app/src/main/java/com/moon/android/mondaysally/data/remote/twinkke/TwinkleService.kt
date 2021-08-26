@@ -22,4 +22,7 @@ interface TwinkleService {
 
     @POST("/twinkle")
     suspend fun postTwinkle(@Body twinklePostBody: TwinklePostBody): Response<TwinkleResponse>
+
+    @POST("/like/{idx}")
+    suspend fun postLike(@Path("idx") idx: Int): Response<TwinkleResponse>
 }
