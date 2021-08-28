@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.moon.android.mondaysally.data.entities.CloverHistory" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24.6dp"
+            android:layout_marginBottom="24.6dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/item_twinkle_ranking_tv_rank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="30dp"
+                android:fontFamily="@font/roboto_light"
+                android:text="@{model.time}"
+                android:textColor="@color/brown_grey_2"
+                android:textSize="12sp"
+                tools:text="21.05.31" />
+
+            <TextView
+                android:id="@+id/item_twinkle_ranking_tv_nickname"
+                bind_accum_clover_history_work="@{model.worktime}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/item_twinkle_ranking_iv_profile"
+                app:layout_constraintTop_toTopOf="@id/item_twinkle_ranking_iv_profile"
+                tools:text="닉네임" />
+
+            <TextView
+                android:id="@+id/item_twinkle_ranking_tv_point"
+                bind_accum_clover_history_clover="@{model.clover}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@color/pinkish_red"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/item_twinkle_ranking_tv_date"
+                tools:text="0 clover" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/activity_shop_detail_line2"
+            android:layout_width="wrap_content"
+            android:layout_height="0.8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/very_light_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activity_shop_detail_tv_comment" />
+
+    </LinearLayout>
+</layout>

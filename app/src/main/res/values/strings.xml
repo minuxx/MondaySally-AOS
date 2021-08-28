@@ -12,6 +12,7 @@
     <string name="go_home">홈으로</string>
     <string name="gift_history">기프트 히스토리</string>
     <string name="twinkle_ranking">트윙클 랭킹</string>
+    <string name="clover_history">클로버 히스토리</string>
 
     <!--에러처리-->
     <string name="default_fail">네트워크연결이 원활하지 않습니다</string>
@@ -116,5 +117,9 @@
 
     <string name="twinkle_ranking_now">현재</string>
     <string name="twinkle_ranking_guide">*랭킹은 현재 클로버를 기준으로 선정됩니다.</string>
+    <string name="can_buy_gift">현재클로버로 구매 가능한 기프트</string>
+    <string name="clover_history_accum_guide">님의 누적 클로버</string>
+    <string name="clover_history_now_guide">님의 현재 클로버</string>
+    <string name="clover_history_used_guide">님의 사용 클로버</string>
 
 </resources>

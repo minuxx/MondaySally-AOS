@@ -7,6 +7,7 @@ import com.moon.android.mondaysally.R
 import com.moon.android.mondaysally.databinding.FragmentHomeBinding
 import com.moon.android.mondaysally.ui.BaseFragment
 import com.moon.android.mondaysally.ui.main.clover.CloverRankingActivity
+import com.moon.android.mondaysally.ui.main.clover.clover_history.CloverHistoryActivity
 import com.moon.android.mondaysally.ui.main.gift.gift_history.GiftHistoryActivity
 import com.moon.android.mondaysally.utils.GridItemDecoration
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -67,6 +68,13 @@ class HomeFragment() :
             if (goGiftHistory) {
                 startActivity(Intent(context, CloverRankingActivity::class.java))
                 homeViewModel.goTwinkleRanking.value = false
+            }
+        })
+
+        homeViewModel.goCloverHistory.observe(this, { goCloverHistory ->
+            if (goCloverHistory) {
+                startActivity(Intent(context, CloverHistoryActivity::class.java))
+                homeViewModel.goCloverHistory.value = false
             }
         })
 

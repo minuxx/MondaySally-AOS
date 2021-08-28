@@ -10,4 +10,7 @@ class CloverNetworkRepository(val cloverService: CloverService) : BaseNetworkRep
         return apiRequest { cloverService.getTwinkleRanking(1) }
     }
 
+    suspend fun getCloverHistory(type: String): CloverResponse {
+        return apiRequest { cloverService.getCloverHistory(1, type) }
+    }
 }

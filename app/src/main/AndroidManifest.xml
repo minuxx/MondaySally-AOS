@@ -56,6 +56,7 @@
         <activity android:name=".ui.main.twinkle.twinkle_post.TwinklePostActivity" />
         <activity android:name=".ui.main.gift.gift_history.GiftHistoryActivity"/>
         <activity android:name=".ui.main.clover.CloverRankingActivity"/>
+        <activity android:name=".ui.main.clover.clover_history.CloverHistoryActivity"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"

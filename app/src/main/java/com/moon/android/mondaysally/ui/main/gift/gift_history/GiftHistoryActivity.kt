@@ -70,7 +70,6 @@ class GiftHistoryActivity : BaseActivity<ActivityGiftHistoryBinding>() {
         }
 
         giftHistoryAdapter.setOnItemClickListener { giftHistory ->
-
             if (giftHistory.isProved == "Y") {
                 val intent = Intent(context, TwinkleDetailActivity::class.java)
                 intent.putExtra("idx", giftHistory.twinkleIdx)

@@ -9,17 +9,22 @@ import com.moon.android.mondaysally.data.entities.GiftHistory
 import com.moon.android.mondaysally.data.entities.HomeResult
 import com.moon.android.mondaysally.data.entities.Member
 import com.moon.android.mondaysally.data.remote.Fail
+import com.moon.android.mondaysally.data.repository.SharedPrefRepository
 import com.moon.android.mondaysally.data.repository.network.HomeNetworkRepository
 import com.moon.android.mondaysally.utils.ApiException
 import com.moon.android.mondaysally.utils.ListLiveData
 import kotlinx.coroutines.launch
 
 
-class HomeViewModel(private val homeNetworkRepository: HomeNetworkRepository) : ViewModel() {
+class HomeViewModel(
+    private val homeNetworkRepository: HomeNetworkRepository,
+    private val sharedPrefRepository: SharedPrefRepository,
+) : ViewModel() {
 
     var isLoading: MutableLiveData<Boolean> = MutableLiveData()
     var goGiftHistory: MutableLiveData<Boolean> = MutableLiveData()
     var goTwinkleRanking: MutableLiveData<Boolean> = MutableLiveData()
+    var goCloverHistory: MutableLiveData<Boolean> = MutableLiveData()
 
     var homeResultResult: MutableLiveData<HomeResult> = MutableLiveData()
     val giftHistoryList = ListLiveData<GiftHistory>()
@@ -39,6 +44,7 @@ class HomeViewModel(private val homeNetworkRepository: HomeNetworkRepository) : 
                     giftHistoryList.addAll(homeResponse.result.giftHistory)
                     memberList.addAll(homeResponse.result.workingMemberlist)
                     homeResultResult.value = homeResponse.result
+                    sharedPrefRepository.saveNickName(homeResponse.result.nickname)
                     Log.d("네트워크", homeResponse.result.toString())
                 }
             } else {
@@ -51,12 +57,15 @@ class HomeViewModel(private val homeNetworkRepository: HomeNetworkRepository) : 
         }
     }
 
-    fun whenMoreGiftHistoryClicked(){
+    fun whenMoreGiftHistoryClicked() {
         goGiftHistory.value = true
     }
 
-    fun whenMoreRankingClicked(){
+    fun whenMoreRankingClicked() {
         goTwinkleRanking.value = true
     }
 
+    fun whenCloverClicked() {
+        goCloverHistory.value = true
+    }
 }

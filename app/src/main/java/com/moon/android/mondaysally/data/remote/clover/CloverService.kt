@@ -8,4 +8,10 @@ import retrofit2.http.Query
 interface CloverService {
     @GET("/rank")
     suspend fun getTwinkleRanking(@Query("page") page: Int): Response<CloverResponse>
+
+    @GET("/clover")
+    suspend fun getCloverHistory(
+        @Query("page") page: Int,
+        @Query("type") type: String
+    ): Response<CloverResponse>
 }

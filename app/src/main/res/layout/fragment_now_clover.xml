@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.moon.android.mondaysally.ui.main.clover.CloverViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/fragment_now_clover_tv_date"
+            bind_twinkle_ranking_tv_date="@{viewModel.test}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="38dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/roboto_light"
+            android:textColor="@color/brown_grey_2"
+            android:textSize="13sp"
+            tools:text="21. 05. 31 기준" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center_horizontal"
+                android:text="@{viewModel.nickname}"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                tools:text="미" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/roboto_regular"
+                android:gravity="center_horizontal"
+                android:text="@string/clover_history_now_guide"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="6dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/fragment_now_clover_tv_clover"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@{Integer.toString(viewModel.cloverHistoryResult.currentClover)}"
+                android:textColor="@color/sand_yellow"
+                android:textSize="31sp"
+                android:textStyle="bold"
+                tools:text="1,094" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="4dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_clover_yellow" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="7dp"
+            android:layout_marginTop="30dp"
+            android:background="@color/heavy_line_grey" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/can_buy_gift"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:fontFamily="@font/roboto_light"
+                android:onClick="@{() -> viewModel.whenTvMoreGiftClicked()}"
+                android:paddingTop="19dp"
+                android:paddingBottom="15dp"
+                android:text="@string/more"
+                android:textColor="@color/greyish_brown"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="4dp"
+                android:onClick="@{() -> viewModel.whenTvMoreGiftClicked()}"
+                android:paddingTop="19dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="15dp"
+                android:src="@drawable/ic_chevron_right_gray" />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fragment_now_clover_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:scrollbars="none"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_shop_tv_all_gift"
+            tools:listitem="@layout/item_gift_in_clover_history" />
+
+
+    </LinearLayout>
+
+</layout>

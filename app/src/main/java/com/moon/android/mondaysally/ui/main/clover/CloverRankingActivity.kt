@@ -37,8 +37,7 @@ class CloverRankingActivity : BaseActivity<ActivityCloverRankingBinding>() {
         cloverViewModel.rankingList.observe(this, { rankingList ->
             if (rankingList.isNotEmpty()) {
                 binding.activityCloverRankingTvFirstRankNickname.text = rankingList[0].nickname
-                binding.activityCloverRankingTvFirstRankClover.text =
-                    rankingList[0].currentClover.toString()
+                binding.activityCloverRankingTvFirstRankClover.text = rankingList[0].currentClover.toString()
                 setCircleImageByGlide(
                     binding.activityCloverRankingIvFirstRankProfile,
                     rankingList[0].imgUrl

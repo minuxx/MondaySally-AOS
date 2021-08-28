@@ -311,14 +311,15 @@ object DataBindingUtils {
         textView.text = text
     }
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
     @BindingAdapter("bind_twinkle_ranking_tv_date")
     @JvmStatic
-    fun bindTwinkleRankingTvDate(textView: TextView, string: String) {
+    fun bindTwinkleRankingTvDate(textView: TextView, string: String?) {
         val current = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd")
         val formatted = current.format(formatter)
-        textView.text = formatted
+        textView.text = formatted + " 기준"
     }
 
     @BindingAdapter("bind_twinkle_ranking_list")
@@ -330,5 +331,26 @@ object DataBindingUtils {
         }
         (recyclerView.adapter as CloverRankingAdapter).items = items
         recyclerView.adapter?.notifyDataSetChanged()
+    }
+
+    @BindingAdapter("bind_accum_clover_history_clover")
+    @JvmStatic
+    fun bindAccumCloverHistoryClover(textView: TextView, clover: Int) {
+        val text = "+ ${clover} clover"
+        textView.text = text
+    }
+
+    @BindingAdapter("bind_used_clover_history_clover")
+    @JvmStatic
+    fun bindUsedCloverHistoryClover(textView: TextView, clover: Int) {
+        val text = "- ${clover} clover"
+        textView.text = text
+    }
+
+    @BindingAdapter("bind_accum_clover_history_work")
+    @JvmStatic
+    fun bindUsedCloverHistoryWork(textView: TextView, workTime: Int) {
+        val text = "${workTime}시간 근무"
+        textView.text = text
     }
 }

@@ -11,6 +11,7 @@ import com.moon.android.mondaysally.ui.BaseFragment
 import com.moon.android.mondaysally.ui.main.gift.paging.GiftShopAdapter
 import com.moon.android.mondaysally.ui.main.gift.shop_detail.ShopDetailActivity
 import com.moon.android.mondaysally.utils.GridItemDecoration_15_15
+import com.moon.android.mondaysally.utils.GridItemDecoration_16_22
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -65,11 +66,17 @@ class ShopFragment() :
             }
         }
 
-        context?.let { GridItemDecoration_15_15(it) }?.let {
+        GridItemDecoration_15_15(binding.fragmentShopRvGift.context).let {
             binding.fragmentShopRvGift.addItemDecoration(
                 it
             )
         }
+
+//        context?.let { GridItemDecoration_15_15(it) }?.let {
+//            binding.fragmentShopRvGift.addItemDecoration(
+//                it
+//            )
+//        }
 
         loadData()
     }

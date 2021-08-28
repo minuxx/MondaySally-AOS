@@ -117,6 +117,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="15.6dp"
+                    android:onClick="@{() -> viewModel.whenCloverClicked()}"
                     android:background="@drawable/bg_round_pinkish_red"
                     app:layout_constraintTop_toBottomOf="@+id/fragment_home_line_1">
 
@@ -158,6 +159,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="9dp"
+                    android:onClick="@{() -> viewModel.whenCloverClicked()}"
                     android:background="@drawable/bg_round_pinkish_sand_yellow"
                     app:layout_constraintTop_toBottomOf="@+id/fragment_home_linear_total_clover">
 
@@ -198,6 +200,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="9dp"
+                    android:onClick="@{() -> viewModel.whenCloverClicked()}"
                     android:background="@drawable/bg_round_pinkish_perrywinkle"
                     app:layout_constraintTop_toBottomOf="@+id/fragment_home_linear_now_clover">
 
@@ -257,7 +260,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/roboto_light"
                     android:onClick="@{() -> viewModel.whenMoreGiftHistoryClicked()}"
                     android:paddingTop="10dp"
@@ -339,7 +342,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp"
                     android:fontFamily="@font/roboto_light"

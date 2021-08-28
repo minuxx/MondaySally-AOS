@@ -11,6 +11,7 @@ class GlobalConstant {
 
         const val TAG = "MOBILE_TEMPLATE_APP"
         const val X_ACCESS_TOKEN = "X-ACCESS-TOKEN"
+        const val NICKNAME = "NICKNAME"
         const val USER = "USER"
 
         //SharedPref Key
