@@ -41,6 +41,7 @@ class TwinkleViewModel(
     //TwinkleDetail
     var twinkleResult: MutableLiveData<TwinkleResult> = MutableLiveData()
     var commentPostSuccess: MutableLiveData<Boolean> = MutableLiveData()
+    var likePostSuccess: MutableLiveData<Boolean> = MutableLiveData()
     var hideKeyboard: MutableLiveData<Boolean> = MutableLiveData()
     var commentRefresh: MutableLiveData<Boolean> = MutableLiveData()
     val commentList = ListLiveData<TwinkleComment>()
@@ -159,8 +160,8 @@ class TwinkleViewModel(
             val twinkleResponse = twinkleNetworkRepository.postLike(idx)
             Log.d("네트워크", twinkleResponse.toString())
             if (twinkleResponse.code == 200) {
-                commentRefresh.value = true
-                commentPostSuccess.value = true
+                //결과와 상관없이 로컬에서 변경처리
+//                likePostSuccess.value = true
             } else {
                 fail.value = Fail(twinkleResponse.message, twinkleResponse.code)
             }
@@ -233,6 +234,13 @@ class TwinkleViewModel(
     fun whenTvPostClicked() {
         postComment()
         hideKeyboard.value = true
+    }
+
+    fun whenIvLikeClicked() {
+        twinkleIndex.value?.let {
+            postLike(it)
+            likePostSuccess.value = true
+        }
     }
 
     fun whenIvPhotoClicked(i: Int) {

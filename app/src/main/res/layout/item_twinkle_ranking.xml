@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.moon.android.mondaysally.data.entities.TwinkleRanking" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/item_twinkle_ranking_tv_rank"
+                bind_twinkle_ranking_tv_rank="@{model.ranking}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="18.6dp"
+                android:fontFamily="@font/roboto_light"
+                android:textColor="@color/brown_grey_2"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="2등" />
+
+            <ImageView
+                android:id="@+id/item_twinkle_ranking_iv_profile"
+                bind_common_image_circle="@{model.imgUrl}"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="12dp"
+                android:background="@drawable/bg_circle_white_gray"
+                android:padding="0.5dp"
+                android:src="@drawable/illust_sally_profile_blank"
+                app:layout_constraintStart_toEndOf="@+id/item_twinkle_ranking_tv_rank"
+                app:layout_constraintTop_toTopOf="@id/item_twinkle_ranking_tv_rank" />
+
+            <TextView
+                android:id="@+id/item_twinkle_ranking_tv_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@{model.nickname}"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintStart_toEndOf="@+id/item_twinkle_ranking_iv_profile"
+                app:layout_constraintTop_toTopOf="@id/item_twinkle_ranking_iv_profile"
+                tools:text="닉네임" />
+
+            <TextView
+                android:id="@+id/item_twinkle_ranking_tv_date"
+                bind_twinkle_ranking_tv_date=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:fontFamily="@font/roboto_light"
+                android:textColor="@color/bottom_font_gray"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@id/item_twinkle_ranking_tv_nickname"
+                app:layout_constraintTop_toBottomOf="@id/item_twinkle_ranking_tv_nickname"
+                tools:text="2020.12.12" />
+
+            <TextView
+                android:id="@+id/item_twinkle_ranking_tv_now"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/twinkle_ranking_now"
+                android:textColor="@color/sand_yellow"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/item_twinkle_ranking_iv_profile" />
+
+            <TextView
+                android:id="@+id/item_twinkle_ranking_tv_point"
+                bind_twinkle_ranking_tv_clover="@{model.currentClover}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@color/sand_yellow"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/item_twinkle_ranking_tv_date"
+                tools:text="0 clover" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/activity_shop_detail_line2"
+            android:layout_width="wrap_content"
+            android:layout_height="0.8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="18.6dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/very_light_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activity_shop_detail_tv_comment" />
+
+    </LinearLayout>
+</layout>

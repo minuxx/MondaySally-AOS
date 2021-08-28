@@ -17,11 +17,14 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(private val homeNetworkRepository: HomeNetworkRepository) : ViewModel() {
 
-    var homeResultResult: MutableLiveData<HomeResult> = MutableLiveData()
     var isLoading: MutableLiveData<Boolean> = MutableLiveData()
+    var goGiftHistory: MutableLiveData<Boolean> = MutableLiveData()
+    var goTwinkleRanking: MutableLiveData<Boolean> = MutableLiveData()
 
+    var homeResultResult: MutableLiveData<HomeResult> = MutableLiveData()
     val giftHistoryList = ListLiveData<GiftHistory>()
     val memberList = ListLiveData<Member>()
+
     var fail: MutableLiveData<Fail> = MutableLiveData()
 
     fun getHomeData() = viewModelScope.launch {
@@ -47,4 +50,13 @@ class HomeViewModel(private val homeNetworkRepository: HomeNetworkRepository) : 
             fail.value = Fail(e.message!!, 404)
         }
     }
+
+    fun whenMoreGiftHistoryClicked(){
+        goGiftHistory.value = true
+    }
+
+    fun whenMoreRankingClicked(){
+        goTwinkleRanking.value = true
+    }
+
 }

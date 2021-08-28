@@ -5,7 +5,6 @@ import androidx.annotation.LayoutRes
 import com.moon.android.mondaysally.R
 import com.moon.android.mondaysally.databinding.ActivitySplashBinding
 import com.moon.android.mondaysally.ui.BaseActivity
-import com.moon.android.mondaysally.ui.login.LoginActivity
 import com.moon.android.mondaysally.ui.main.MainActivity
 import com.moon.android.mondaysally.ui.team_code.TeamCodeActivity
 import com.moon.android.mondaysally.ui.tutorial.TutorialActivity

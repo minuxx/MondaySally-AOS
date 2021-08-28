@@ -1,10 +1,13 @@
 package com.moon.android.mondaysally.ui.main.home
 
-import android.util.Log
-import android.view.View.*
+import android.content.Intent
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import com.moon.android.mondaysally.R
 import com.moon.android.mondaysally.databinding.FragmentHomeBinding
 import com.moon.android.mondaysally.ui.BaseFragment
+import com.moon.android.mondaysally.ui.main.clover.CloverRankingActivity
+import com.moon.android.mondaysally.ui.main.gift.gift_history.GiftHistoryActivity
 import com.moon.android.mondaysally.utils.GridItemDecoration
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -53,6 +56,21 @@ class HomeFragment() :
             }
         })
 
+        homeViewModel.goGiftHistory.observe(this, { goGiftHistory ->
+            if (goGiftHistory) {
+                startActivity(Intent(context, GiftHistoryActivity::class.java))
+                homeViewModel.goGiftHistory.value = false
+            }
+        })
+
+        homeViewModel.goTwinkleRanking.observe(this, { goGiftHistory ->
+            if (goGiftHistory) {
+                startActivity(Intent(context, CloverRankingActivity::class.java))
+                homeViewModel.goTwinkleRanking.value = false
+            }
+        })
+
+
         homeViewModel.isLoading.observe(this, { isLoading ->
             if (isLoading)
 //                binding.fragmentHomeSwipeRefresh.isRefreshing = false;
@@ -61,7 +79,7 @@ class HomeFragment() :
         })
 
         homeViewModel.fail.observe(this, { fail ->
-            when(fail.code){
+            when (fail.code) {
                 341, 388, 389 -> {
                     showToast(fail.message)
                 }
@@ -73,7 +91,9 @@ class HomeFragment() :
                 }
             }
         })
+    }
 
+    override fun initAfterBinding() {
         binding.fragmentHomeRvGiftHistory.adapter = GiftHistoryAdapter()
         binding.fragmentHomeRvNowOn.adapter = MemberListAdapter()
         context?.let { GridItemDecoration(it) }?.let {
@@ -85,16 +105,10 @@ class HomeFragment() :
         binding.fragmentHomeSwipeRefresh.setColorSchemeResources(
             R.color.pinkish_orange
         )
+
         binding.fragmentHomeSwipeRefresh.setOnRefreshListener {
-            //리로딩
             homeViewModel.getHomeData()
-            //완료되면 아래코드
         }
-
-    }
-
-    override fun initAfterBinding() {
-
 
         homeViewModel.getHomeData()
     }

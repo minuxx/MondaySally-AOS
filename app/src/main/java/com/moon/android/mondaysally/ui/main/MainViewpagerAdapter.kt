@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.moon.android.mondaysally.ui.main.home.HomeFragment
-import com.moon.android.mondaysally.ui.main.shop.ShopFragment
+import com.moon.android.mondaysally.ui.main.gift.ShopFragment
 import com.moon.android.mondaysally.ui.main.twinkle.TwinkleFragment
 
 class MainViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :

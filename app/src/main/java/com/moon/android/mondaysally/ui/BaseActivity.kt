@@ -17,6 +17,8 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.paging.CombinedLoadStates
+import androidx.paging.LoadState
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.moon.android.mondaysally.R
@@ -96,13 +98,14 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         }
         lottieDialog = LottieDialog(context)
         lottieDialog?.show()
-//        lottieDialog.let {
-//            if (lottieDialog!!.isShowing) {
-////            뒤로가기로 끌 수 없게하기
-//            lottieDialog!!.setCancelable(false);
-//                lottieDialog!!.show()
-//            }
-//        }
+
+        lottieDialog.let {
+            if (lottieDialog!!.isShowing) {
+//            뒤로가기로 끌 수 없게하기
+                lottieDialog!!.setCancelable(false);
+                lottieDialog!!.show()
+            }
+        }
     }
 
     open fun hideLottieDialog() {
@@ -140,6 +143,26 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
                 .thumbnail(0.2f)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imageView)
+        }
+    }
+
+    fun setCircleImageByGlide(iv: ImageView, url: String) {
+        Glide.with(this)
+            .load(url).placeholder(R.drawable.bg_round_white_gray)
+            .error(R.drawable.illust_sally_profile_blank)
+            .centerCrop()
+            .circleCrop()
+            .thumbnail(0.1f)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(iv)
+    }
+
+    fun getErrorState(loadState: CombinedLoadStates): LoadState.Error? {
+        return when {
+            loadState.prepend is LoadState.Error -> loadState.prepend as LoadState.Error
+            loadState.append is LoadState.Error -> loadState.append as LoadState.Error
+            loadState.refresh is LoadState.Error -> loadState.refresh as LoadState.Error
+            else -> null
         }
     }
 

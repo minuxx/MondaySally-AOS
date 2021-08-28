@@ -3,9 +3,10 @@ package com.moon.android.mondaysally.di
 
 import android.util.Log
 import com.moon.android.mondaysally.data.remote.auth.AuthService
+import com.moon.android.mondaysally.data.remote.clover.CloverService
 import com.moon.android.mondaysally.data.remote.common.CommonService
 import com.moon.android.mondaysally.data.remote.home.HomeService
-import com.moon.android.mondaysally.data.remote.shop.GiftService
+import com.moon.android.mondaysally.data.remote.gift.GiftService
 import com.moon.android.mondaysally.data.remote.twinkke.TwinkleService
 import com.moon.android.mondaysally.data.repository.SharedPrefRepository
 import com.moon.android.mondaysally.utils.GlobalConstant.Companion.X_ACCESS_TOKEN
@@ -69,6 +70,9 @@ val networkModule: Module = module {
     fun provideTwinkleService(retrofit: Retrofit): TwinkleService =
         retrofit.create(TwinkleService::class.java)
 
+    fun provideCloverService(retrofit: Retrofit): CloverService =
+        retrofit.create(CloverService::class.java)
+
     single { provideHeaderInterceptor(get()) }
     single { provideHttpLoggingInterceptor() }
     single { provideOkHttpClient(get(), get()) }
@@ -77,5 +81,6 @@ val networkModule: Module = module {
     single { provideCommonService(get()) }
     single { provideHomeService(get()) }
     single { provideGiftService(get()) }
+    single { provideCloverService(get()) }
     single { provideTwinkleService(get()) }
 }

@@ -156,6 +156,7 @@
                     android:paddingStart="9dp"
                     android:paddingEnd="16dp"
                     android:src="@drawable/ic_like_off_gray"
+                    android:onClick="@{() -> viewModel.whenIvLikeClicked()}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/activity_shop_detail_iv_three_dot" />
 

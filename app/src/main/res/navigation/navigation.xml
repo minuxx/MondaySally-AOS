@@ -9,7 +9,7 @@
         android:label="homeFragment" />
     <fragment
         android:id="@+id/shopFragment"
-        android:name="com.moon.android.mondaysally.ui.main.shop.ShopFragment"
+        android:name="com.moon.android.mondaysally.ui.main.gift.ShopFragment"
         android:label="shopFragment"
         tools:layout="@layout/fragment_shop" />
     <fragment

@@ -64,10 +64,7 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
     fun setCircleImageByGlide(iv: ImageView, url: String) {
         Glide.with(this)
             .load(url).placeholder(R.drawable.bg_round_white_gray)
-            .error(
-                Glide.with(this)
-                    .load(R.drawable.illust_sally_blank_1_1).circleCrop()
-            )
+            .error(R.drawable.illust_sally_profile_blank)
             .centerCrop()
             .circleCrop()
             .thumbnail(0.1f)

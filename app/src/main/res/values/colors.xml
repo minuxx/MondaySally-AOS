@@ -18,6 +18,7 @@
     <color name="no_gray_font">#bdbdbd</color>
     <color name="text_dim_gray">#acacac</color>
     <color name="option_border_gray">#acacac</color>
+    <color name="brown_grey_3">#8a8a8a</color>
 
     <color name="pinkish_red">#ff7c59</color>
     <color name="sand_yellow">#ffd465</color>
@@ -29,4 +30,6 @@
     <color name="heavy_line_grey">#f6f6f6</color>
 
     <color name="ttt">#33FF7669</color>
+    <color name="blur_white">#a6ffffff</color>
+
 </resources>

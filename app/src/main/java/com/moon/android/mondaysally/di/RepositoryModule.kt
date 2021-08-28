@@ -12,6 +12,7 @@ val repositoryModule = module {
     single { CommonNetworkRepository(get()) }
     single { GiftNetworkRepository(get()) }
     single { TwinkleNetworkRepository(get()) }
+    single { CloverNetworkRepository(get()) }
     single { SharedPrefRepository(androidContext()) }
     single { FirebaseImageUploadRepository() }
 }

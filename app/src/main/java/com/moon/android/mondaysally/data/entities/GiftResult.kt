@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class GiftResult(
     @SerializedName(value = "gifts") val gifts: ArrayList<Gift>,
+    @SerializedName(value = "giftLogs") val giftLogs: ArrayList<GiftHistory>,
     @SerializedName(value = "totalCount") val totalCount: Int,
     @SerializedName(value = "thumnail") val thumnail: String,
     @SerializedName(value = "name") val name: String,
@@ -18,6 +19,9 @@ data class GiftHistory(
     @SerializedName(value = "isAccepted") val isAccepted: String = "",
     @SerializedName(value = "isProved") val isProved: String = "",
     @SerializedName(value = "name") val name: String = "",
+    @SerializedName(value = "giftLogIdx") val giftLogIdx: Int,
+    @SerializedName(value = "twinkleIdx") val twinkleIdx: Int,
+    @SerializedName(value = "usedClover") val usedClover: Int,
 )
 
 data class Gift(

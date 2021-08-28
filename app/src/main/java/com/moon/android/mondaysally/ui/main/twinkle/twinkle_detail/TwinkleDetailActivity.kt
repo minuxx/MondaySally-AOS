@@ -1,11 +1,14 @@
 package com.moon.android.mondaysally.ui.main.twinkle.twinkle_detail
 
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Rect
 import android.view.View
 import android.view.View.GONE
 import android.view.animation.AccelerateDecelerateInterpolator
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.animation.doOnEnd
 import androidx.core.widget.NestedScrollView
 import androidx.viewpager2.widget.ViewPager2
@@ -35,20 +38,6 @@ class TwinkleDetailActivity : BaseActivity<ActivityTwinkleDetailBinding>() {
 
         imageViewPager = binding.activityTwinkleDetailVp2
 
-//        twinkleViewModel.showDialog.observe(this, { showDialog ->
-//            if (showDialog) {
-//                showSallyDialog(
-//                    this,
-//                    getString(R.string.shop_apply_check),
-//                    getString(R.string.ok),
-//                    object : SallyDialog.DialogClickListener {
-//                        override fun onOKClicked() {
-//                            shopViewModel.postGift()
-//                        }
-//                    })
-//            }
-//        })
-
         twinkleViewModel.hideKeyboard.observe(this, { hideKeyboard ->
             if (hideKeyboard)
                 hideKeyboard(binding.activityShopDetailEtComment)
@@ -57,6 +46,16 @@ class TwinkleDetailActivity : BaseActivity<ActivityTwinkleDetailBinding>() {
         twinkleViewModel.finishActivity.observe(this, { finishActivity ->
             if (finishActivity)
                 finish()
+        })
+
+        twinkleViewModel.likePostSuccess.observe(this, { likePostSuccess ->
+            if (likePostSuccess) {
+                heartImageChange(
+                    binding.activityShopDetailIvHeart,
+                    binding.activityShopDetailTvLike
+                )
+                animateHeart(binding.activityShopDetailIvHeart)
+            }
         })
 
         twinkleViewModel.commentPostSuccess.observe(this, { commentPostSuccess ->
@@ -81,6 +80,7 @@ class TwinkleDetailActivity : BaseActivity<ActivityTwinkleDetailBinding>() {
             if (twinkleViewModel.commentRefresh.value == true) {
                 binding.activityTwinkleScrollView.smoothScrollToView(binding.activityShopDetailRvComment)
             }
+            bindTwinkleHeart(binding.activityShopDetailIvHeart, twinkleResult.isHearted)
         })
 
         twinkleViewModel.fail.observe(this, { fail ->
@@ -121,7 +121,6 @@ class TwinkleDetailActivity : BaseActivity<ActivityTwinkleDetailBinding>() {
         if (this.getChildAt(0).height <= this.height) return
 
 //        val y = computeDistanceToView(view)
-
         // (스크롤 해야하는 거리 - 현재 스크롤 된 거리) / (스크롤 몸체의 높이 - 스크롤 뷰의 높이) - 보류
 //        val ratio = kotlin.math.abs(y - this.scrollY) / (this.getChildAt(0).height - this.height).toFloat()
 
@@ -135,14 +134,6 @@ class TwinkleDetailActivity : BaseActivity<ActivityTwinkleDetailBinding>() {
         }
     }
 
-    internal fun NestedScrollView.computeDistanceToView(view: View): Int {
-        return kotlin.math.abs(
-            calculateRectOnScreen(this).top - (this.scrollY + calculateRectOnScreen(
-                view
-            ).top)
-        )
-    }
-
     private fun calculateRectOnScreen(view: View): Rect {
         val location = IntArray(2)
         view.getLocationOnScreen(location)
@@ -152,5 +143,41 @@ class TwinkleDetailActivity : BaseActivity<ActivityTwinkleDetailBinding>() {
             location[0] + view.measuredWidth,
             location[1] + view.measuredHeight
         )
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun heartImageChange(
+        imageView: ImageView,
+        textView: TextView
+    ) {
+        if (twinkleViewModel.twinkleResult.value?.isHearted == "Y") {
+            imageView.setImageResource(R.drawable.ic_like_off_gray)
+            twinkleViewModel.twinkleResult.value?.isHearted = "N"
+            twinkleViewModel.twinkleResult.value?.likenum =
+                twinkleViewModel.twinkleResult.value?.likenum?.minus(1)!!
+            textView.text = "좋아요 ${twinkleViewModel.twinkleResult.value?.likenum}개"
+        } else {
+            vibrate()
+            imageView.setImageResource(R.drawable.ic_like_on_orange)
+            twinkleViewModel.twinkleResult.value?.isHearted = "Y"
+            twinkleViewModel.twinkleResult.value?.likenum =
+                twinkleViewModel.twinkleResult.value?.likenum?.plus(1)!!
+            textView.text = "좋아요 ${twinkleViewModel.twinkleResult.value?.likenum}개"
+        }
+
+    }
+
+    private fun animateHeart(view: ImageView) {
+        view.animate().scaleX(1.2f).scaleY(1.2f).setDuration(100).withEndAction {
+            view.scaleX = 1f
+            view.scaleY = 1f
+        }.start()
+    }
+
+    fun bindTwinkleHeart(imageView: ImageView, isHearted: String) {
+        if (isHearted == "Y")
+            imageView.setImageResource(R.drawable.ic_like_on_orange)
+        else
+            imageView.setImageResource(R.drawable.ic_like_off_gray)
     }
 }

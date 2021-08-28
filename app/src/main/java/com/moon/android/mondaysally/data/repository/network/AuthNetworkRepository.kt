@@ -1,7 +1,6 @@
 package com.moon.android.mondaysally.data.repository.network
 
 import com.moon.android.mondaysally.data.entities.Code
-import com.moon.android.mondaysally.data.entities.User
 import com.moon.android.mondaysally.data.remote.auth.AuthResponse
 import com.moon.android.mondaysally.data.remote.auth.AuthService
 import com.moon.android.mondaysally.data.repository.BaseNetworkRepository

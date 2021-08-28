@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.moon.android.mondaysally.ui.main.shop.ShopViewModel" />
+            type="com.moon.android.mondaysally.ui.main.gift.GiftViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

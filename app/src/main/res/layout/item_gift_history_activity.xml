@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.moon.android.mondaysally.data.entities.GiftHistory" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/item_gift_history"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/item_gift_history_iv"
+                bind_common_image_square="@{model.imgUrl}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_round_trans"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                bind_view_blur="@{model.isProved()}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/blur_white"
+                android:src="@drawable/bg_round_blur"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/item_gift_history_tv_status"
+                bind_gift_history_status="@{model.isAccepted}"
+                bind_gift_history_status2="@{model.isProved}"
+                android:layout_width="37dp"
+                android:layout_height="37dp"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/bg_circle_orange"
+                android:fontFamily="@font/roboto_bold"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="9sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SmallSp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            bind_gift_history_twinkle_status="@{model.isAccepted}"
+            bind_gift_history_twinkle_status2="@{model.isProved}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:fontFamily="@font/roboto_light"
+            android:textColor="#8c8c8c"
+            android:textSize="12sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="@{model.name}"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:textStyle="normal" />
+
+    </LinearLayout>
+</layout>

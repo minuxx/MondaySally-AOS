@@ -2,14 +2,17 @@
     <string name="app_name">MondaySally</string>
 
     <string name="ok">확인</string>
-    <string name="more">더보기 ></string>
+    <string name="more">더보기</string>
     <string name="post">등록</string>
 
-    <!--바탐 메뉴-->
+    <!--메뉴-->
     <string name="menu_home">홈</string>
     <string name="menu_shop">기프트샵</string>
     <string name="menu_twinkle">트윙클</string>
     <string name="go_home">홈으로</string>
+    <string name="gift_history">기프트 히스토리</string>
+    <string name="twinkle_ranking">트윙클 랭킹</string>
+
     <!--에러처리-->
     <string name="default_fail">네트워크연결이 원활하지 않습니다</string>
 
@@ -76,8 +79,12 @@
 
     <!--기프트히스토리-->
     <string name="gift_history_confirm">승인\n완료</string>
-    <string name="gift_history_hold">승인\n보류</string>
+    <string name="gift_history_hold">승인\n대기</string>
     <string name="gift_history_rejected">승인\n거부</string>
+    <string name="gift_history_guide">기프트 신청내역</string>
+    <string name="gift_history_twinkle_confirm">트윙클 완료</string>
+    <string name="gift_history_twinkle_hold">트윙클 대기</string>
+    <string name="gift_history_twinkle_rejected">트윙클 거부</string>
 
     <!--기프트샵-->
     <string name="shop_all_gift">전체 기프트</string>
@@ -89,6 +96,7 @@
     <string name="shop_go_twinkle">트윙클 쓰러가기</string>
     <string name="shop_apply_check">신청하시겠습니까?</string>
     <string name="shop_no_data">등록된 기프트가 없어요</string>
+    <string name="gift_history_no_data">신청한 기프트가 없어요</string>
 
     <!--트윙클-->
     <string name="twinkle_my_twinkle">내 트윙클 현황</string>
@@ -105,5 +113,8 @@
     <string name="twinkle_validate_twinkle_photo">클로버 사용 증명사진을\n등록해 주세요.</string>
     <string name="twinkle_validate_receipt_photo">영수증 증명사진을\n등록해 주세요.</string>
     <string name="twinkle_validate_twinkle_content">트윙클 내용을 입력해주세요.</string>
+
+    <string name="twinkle_ranking_now">현재</string>
+    <string name="twinkle_ranking_guide">*랭킹은 현재 클로버를 기준으로 선정됩니다.</string>
 
 </resources>

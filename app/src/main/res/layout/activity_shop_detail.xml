@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.moon.android.mondaysally.ui.main.shop.ShopViewModel" />
+            type="com.moon.android.mondaysally.ui.main.gift.GiftViewModel" />
     </data>
 
     <LinearLayout
@@ -112,7 +112,7 @@
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
-                <com.moon.android.mondaysally.ui.main.shop.CustomTagContainerLayout
+                <com.moon.android.mondaysally.ui.main.gift.CustomTagContainerLayout
                     android:id="@+id/activity_shop_detail_tag_option"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

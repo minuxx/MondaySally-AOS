@@ -258,13 +258,30 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="20dp"
-                    android:layout_marginEnd="16dp"
                     android:fontFamily="@font/roboto_light"
+                    android:onClick="@{() -> viewModel.whenMoreGiftHistoryClicked()}"
+                    android:paddingTop="10dp"
                     android:text="@string/more"
+                    android:paddingBottom="10dp"
                     android:textColor="@color/greyish_brown"
                     android:textSize="13sp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/fragment_home_iv_more_gift_history"
                     app:layout_constraintTop_toBottomOf="@+id/fragment_home_line_2" />
+
+                <ImageView
+                    android:id="@+id/fragment_home_iv_more_gift_history"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:onClick="@{() -> viewModel.whenMoreGiftHistoryClicked()}"
+                    android:paddingStart="4dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="17dp"
+                    android:paddingBottom="10dp"
+                    android:src="@drawable/ic_chevron_right_gray"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_home_tv_more_gift_history"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/fragment_home_tv_more_gift_history" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/fragment_home_rv_gift_history"
@@ -323,13 +340,30 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="20dp"
-                    android:layout_marginEnd="16dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
                     android:fontFamily="@font/roboto_light"
                     android:text="@string/more"
                     android:textColor="@color/greyish_brown"
+                    android:onClick="@{() -> viewModel.whenMoreRankingClicked()}"
                     android:textSize="13sp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/fragment_home_iv_more_twinkle_ranking"
                     app:layout_constraintTop_toBottomOf="@+id/fragment_home_line_3" />
+
+                <ImageView
+                    android:id="@+id/fragment_home_iv_more_twinkle_ranking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:onClick="@{() -> viewModel.whenMoreRankingClicked()}"
+                    android:paddingStart="4dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="17dp"
+                    android:paddingBottom="10dp"
+                    android:src="@drawable/ic_chevron_right_gray"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_home_tv_more_raking"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/fragment_home_tv_more_raking" />
 
                 <LinearLayout
                     android:id="@+id/fragment_home_linear_ranking"

@@ -3,13 +3,15 @@ package com.moon.android.mondaysally.utils
 import android.annotation.SuppressLint
 import android.graphics.Typeface
 import android.net.Uri
+import android.os.Build
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.StyleSpan
-import android.view.View.GONE
-import android.view.View.VISIBLE
+import android.view.View
+import android.view.View.*
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,9 +21,13 @@ import com.moon.android.mondaysally.R
 import com.moon.android.mondaysally.data.entities.GiftHistory
 import com.moon.android.mondaysally.data.entities.Member
 import com.moon.android.mondaysally.data.entities.TwinkleComment
+import com.moon.android.mondaysally.data.entities.TwinkleRanking
+import com.moon.android.mondaysally.ui.main.clover.CloverRankingAdapter
 import com.moon.android.mondaysally.ui.main.home.GiftHistoryAdapter
 import com.moon.android.mondaysally.ui.main.home.MemberListAdapter
 import com.moon.android.mondaysally.ui.main.twinkle.twinkle_detail.CommentAdapter
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 object DataBindingUtils {
 
@@ -109,7 +115,42 @@ object DataBindingUtils {
     @BindingAdapter("bind_gift_history_status", "bind_gift_history_status2")
     @JvmStatic
     fun bindText(textView: TextView, isAccepted: String?, isProved: String?) {
-        isAccepted.let { textView.text = textView.context.getString(R.string.gift_history_hold) }
+        isProved.let {
+            if (it == "Y") {
+                //블러처리(트윙클 작성 완료)
+                if (isAccepted == null) {
+                    //승인대기
+                    textView.text = textView.context.getString(R.string.gift_history_hold)
+                } else if (isAccepted == "Y") {
+                    //승인완료
+                    textView.text = textView.context.getString(R.string.gift_history_confirm)
+                } else {
+                    //승인거부
+                    textView.text = textView.context.getString(R.string.gift_history_rejected)
+                }
+            } else {
+                //승인대기 (트윙클 작성 필요)
+                textView.text = textView.context.getString(R.string.gift_history_hold)
+            }
+        }
+    }
+
+    @BindingAdapter("bind_gift_history_blur")
+    @JvmStatic
+    fun bindGiftHistoryBlur(imageView: ImageView, isProved: String) {
+        if (isProved == "Y")
+            imageView.visibility = VISIBLE
+        else
+            imageView.visibility = INVISIBLE
+    }
+
+    @BindingAdapter("bind_view_blur")
+    @JvmStatic
+    fun bindViewBlur(view: View, isProved: String) {
+        if (isProved == "Y")
+            view.visibility = VISIBLE
+        else
+            view.visibility = INVISIBLE
     }
 
     @BindingAdapter("bind_gift_history_image")
@@ -160,7 +201,6 @@ object DataBindingUtils {
             imageView.setImageResource(R.drawable.ic_like_on_orange)
         else
             imageView.setImageResource(R.drawable.ic_like_off_gray)
-
     }
 
     @BindingAdapter("bind_twinkle_tv_comment")
@@ -181,6 +221,13 @@ object DataBindingUtils {
     @JvmStatic
     fun bindGiftShopCount(textView: TextView, count: Int) {
         val text = "총 ${count}건"
+        textView.text = text
+    }
+
+    @BindingAdapter("bind_gift_history_tv_count")
+    @JvmStatic
+    fun bindGiftHistoryCount(textView: TextView, count: Int) {
+        val text = "총 ${count}건의 기프트"
         textView.text = text
     }
 
@@ -223,5 +270,65 @@ object DataBindingUtils {
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(this)
         }
+    }
+
+    @BindingAdapter("bind_gift_history_twinkle_status", "bind_gift_history_twinkle_status2")
+    @JvmStatic
+    fun bindGiftHistoryTwinkleStatus(textView: TextView, isAccepted: String?, isProved: String?) {
+        isProved.let {
+            if (it == "Y") {
+                //블러처리(트윙클 작성 완료)
+                if (isAccepted == null) {
+                    //승인대기
+                    textView.text = textView.context.getString(R.string.gift_history_twinkle_hold)
+                } else if (isAccepted == "Y") {
+                    //승인완료
+                    textView.text =
+                        textView.context.getString(R.string.gift_history_twinkle_confirm)
+                } else {
+                    //승인거부
+                    textView.text =
+                        textView.context.getString(R.string.gift_history_twinkle_rejected)
+                }
+            } else {
+                //승인대기 (트윙클 작성 필요)
+                textView.text = textView.context.getString(R.string.gift_history_twinkle_hold)
+            }
+        }
+    }
+
+    @BindingAdapter("bind_twinkle_ranking_tv_rank")
+    @JvmStatic
+    fun bindTwinkleRankingTvRank(textView: TextView, ranking: Int) {
+        val text = "${ranking}등"
+        textView.text = text
+    }
+
+    @BindingAdapter("bind_twinkle_ranking_tv_clover")
+    @JvmStatic
+    fun bindTwinkleRankingTvClover(textView: TextView, currentClover: Int) {
+        val text = "${currentClover} clover"
+        textView.text = text
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    @BindingAdapter("bind_twinkle_ranking_tv_date")
+    @JvmStatic
+    fun bindTwinkleRankingTvDate(textView: TextView, string: String) {
+        val current = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd")
+        val formatted = current.format(formatter)
+        textView.text = formatted
+    }
+
+    @BindingAdapter("bind_twinkle_ranking_list")
+    @JvmStatic
+    fun bindTwinkleRankingList(recyclerView: RecyclerView, items: MutableList<TwinkleRanking>) {
+        if (recyclerView.adapter == null) {
+            val adapter = CloverRankingAdapter()
+            recyclerView.adapter = adapter
+        }
+        (recyclerView.adapter as CloverRankingAdapter).items = items
+        recyclerView.adapter?.notifyDataSetChanged()
     }
 }
