@@ -11,6 +11,7 @@ import com.moon.android.mondaysally.ui.BaseActivity
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.text.DecimalFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -37,7 +38,7 @@ class CloverRankingActivity : BaseActivity<ActivityCloverRankingBinding>() {
         cloverViewModel.rankingList.observe(this, { rankingList ->
             if (rankingList.isNotEmpty()) {
                 binding.activityCloverRankingTvFirstRankNickname.text = rankingList[0].nickname
-                binding.activityCloverRankingTvFirstRankClover.text = rankingList[0].currentClover.toString()
+                binding.activityCloverRankingTvFirstRankClover.text = DecimalFormat("#,###").format(rankingList[0].currentClover)
                 setCircleImageByGlide(
                     binding.activityCloverRankingIvFirstRankProfile,
                     rankingList[0].imgUrl

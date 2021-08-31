@@ -62,7 +62,7 @@
 
                 <ImageView
                     android:id="@+id/activity_shop_detail_iv_gift"
-                    bind_common_image="@{viewModel.giftResult.thumnail}"
+                    bind_original_image="@{viewModel.giftResult.thumnail}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"

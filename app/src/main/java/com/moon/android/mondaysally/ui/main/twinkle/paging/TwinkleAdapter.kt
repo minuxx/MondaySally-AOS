@@ -38,7 +38,7 @@ class TwinkleAdapter() :
             binding.executePendingBindings() //데이터가 수정되면 즉각 바인딩
             binding.itemTwinkle.setOnClickListener {
                 onItemClickListener?.let { click ->
-                    click(twinkle)
+                    click(twinkle, absoluteAdapterPosition)
                 }
             }
             binding.itemTwinkleIvLike.setOnClickListener {
@@ -49,10 +49,10 @@ class TwinkleAdapter() :
         }
     }
 
-    private var onItemClickListener: ((Twinkle) -> Unit)? = null
+    private var onItemClickListener: ((Twinkle, Int) -> Unit)? = null
     private var onHeartClickListener: ((Twinkle, ImageView, TextView, Int) -> Unit)? = null
 
-    fun setOnItemClickListener(listener: (Twinkle) -> Unit) {
+    fun setOnItemClickListener(listener: (Twinkle, Int) -> Unit) {
         onItemClickListener = listener
     }
 

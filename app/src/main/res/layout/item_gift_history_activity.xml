@@ -23,11 +23,11 @@
 
             <ImageView
                 android:id="@+id/item_gift_history_iv"
-                bind_common_image_square="@{model.imgUrl}"
+                bind_original_image="@{model.imgUrl}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_round_trans"
-                app:layout_constraintDimensionRatio="1:1"
+                android:adjustViewBounds="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

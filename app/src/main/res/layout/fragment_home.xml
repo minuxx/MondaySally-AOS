@@ -95,7 +95,7 @@
 
                 <ImageView
                     android:id="@+id/fragment_home_iv_profile"
-                    bind_gift_history_image="@{viewModel.homeResultResult.logoImgUrl}"
+                    bind_profile_image_circle="@{viewModel.homeResultResult.logoImgUrl}"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginEnd="16dp"
@@ -138,7 +138,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:fontFamily="@font/roboto_medium"
-                        android:text="@{Integer.toString(viewModel.homeResultResult.accumulatedClover)}"
+                        android:text="@{@string/price_format(viewModel.homeResultResult.accumulatedClover)}"
                         android:textColor="@color/white"
                         android:textSize="17sp" />
 
@@ -180,7 +180,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:fontFamily="@font/roboto_medium"
-                        android:text="@{Integer.toString(viewModel.homeResultResult.currentClover)}"
+                        android:text="@{@string/price_format(viewModel.homeResultResult.currentClover)}"
                         android:textColor="@color/white"
                         android:textSize="17sp" />
 
@@ -221,7 +221,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:fontFamily="@font/roboto_medium"
-                        android:text="@{Integer.toString(viewModel.homeResultResult.usedClover)}"
+                        android:text="@{@string/price_format(viewModel.homeResultResult.usedClover)}"
                         android:textColor="@color/white"
                         android:textSize="17sp" />
 

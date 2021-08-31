@@ -17,11 +17,11 @@
 
         <ImageView
             android:id="@+id/item_gift_history_iv"
-            bind_gift_history_image="@{model.imgUrl}"
+            bind_original_image="@{model.imgUrl}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/bg_round_trans"
-            android:src="@mipmap/ic_launcher_foreground"
+            android:adjustViewBounds="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

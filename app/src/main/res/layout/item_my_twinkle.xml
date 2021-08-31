@@ -20,7 +20,7 @@
 
         <ImageView
             android:id="@+id/item_my_twinkle_iv"
-            bind_common_image_circle="@{model.imgUrl}"
+            bind_profile_image_circle="@{model.imgUrl}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"

@@ -24,15 +24,28 @@ class HomeFragment() :
 
         homeViewModel.homeResultResult.observe(this, { homeResult ->
             homeResult.twinkleRank.forEachIndexed { index, twinkleRank ->
-                if (index == 0) {
-                    setCircleImageByGlide(binding.fragmentHomeIvTwinkleFirst, twinkleRank.imgUrl)
-                    binding.fragmentHomeTvTwinkleFirst.text = twinkleRank.nickname
-                } else if (index == 1) {
-                    setCircleImageByGlide(binding.fragmentHomeIvTwinkleSecond, twinkleRank.imgUrl)
-                    binding.fragmentHomeTvTwinkleSecond.text = twinkleRank.nickname
-                } else {
-                    setCircleImageByGlide(binding.fragmentHomeIvTwinkleThird, twinkleRank.imgUrl)
-                    binding.fragmentHomeTvTwinkleThird.text = twinkleRank.nickname
+                when (index) {
+                    0 -> {
+                        setCircleImageByGlide(
+                            binding.fragmentHomeIvTwinkleFirst,
+                            twinkleRank.imgUrl
+                        )
+                        binding.fragmentHomeTvTwinkleFirst.text = twinkleRank.nickname
+                    }
+                    1 -> {
+                        setCircleImageByGlide(
+                            binding.fragmentHomeIvTwinkleSecond,
+                            twinkleRank.imgUrl
+                        )
+                        binding.fragmentHomeTvTwinkleSecond.text = twinkleRank.nickname
+                    }
+                    else -> {
+                        setCircleImageByGlide(
+                            binding.fragmentHomeIvTwinkleThird,
+                            twinkleRank.imgUrl
+                        )
+                        binding.fragmentHomeTvTwinkleThird.text = twinkleRank.nickname
+                    }
                 }
             }
         })

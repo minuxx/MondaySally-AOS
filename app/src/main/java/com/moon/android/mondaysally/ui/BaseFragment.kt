@@ -16,7 +16,6 @@ import androidx.paging.LoadState
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.moon.android.mondaysally.R
-import com.moon.android.mondaysally.utils.DataBindingUtils.setImageCommonCircle
 
 abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
     @LayoutRes

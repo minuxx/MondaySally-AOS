@@ -35,7 +35,7 @@
 
             <ImageView
                 android:id="@+id/item_twinkle_ranking_iv_profile"
-                bind_common_image_circle="@{model.imgUrl}"
+                bind_profile_image_circle="@{model.imgUrl}"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginStart="12dp"

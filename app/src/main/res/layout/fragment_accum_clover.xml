@@ -71,7 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_bold"
-                android:text="@{Integer.toString(viewModel.cloverHistoryResult.accumulatedClover)}"
+                android:text="@{@string/price_format(viewModel.cloverHistoryResult.accumulatedClover)}"
                 android:textColor="@color/pinkish_orange"
                 android:textSize="31sp"
                 android:textStyle="bold"

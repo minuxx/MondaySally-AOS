@@ -26,26 +26,13 @@ import com.moon.android.mondaysally.ui.main.clover.CloverRankingAdapter
 import com.moon.android.mondaysally.ui.main.home.GiftHistoryAdapter
 import com.moon.android.mondaysally.ui.main.home.MemberListAdapter
 import com.moon.android.mondaysally.ui.main.twinkle.twinkle_detail.CommentAdapter
+import java.text.DecimalFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 object DataBindingUtils {
 
-    @BindingAdapter("bind_common_image")
-    @JvmStatic
-    fun ImageView.setImageCommon(url: String?) {
-        url.let {
-            Glide.with(this)
-                .load(url)
-                .error(R.drawable.illust_sally_blank_1_1)
-                .centerCrop()
-                .thumbnail(0.3f)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(this)
-        }
-    }
-
-    @BindingAdapter("bind_common_image_square")
+    @BindingAdapter("bind_original_image")
     @JvmStatic
     fun ImageView.setImageCommonSquare(url: String?) {
         url.let {
@@ -53,22 +40,20 @@ object DataBindingUtils {
                 .load(url).placeholder(R.drawable.illust_sally_blank_1_1)
                 .error(R.drawable.illust_sally_blank_1_1)
                 .thumbnail(0.2f)
+                .centerCrop()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(this)
         }
     }
 
-    @BindingAdapter("bind_common_image_circle")
+    @BindingAdapter("bind_profile_image_circle")
     @JvmStatic
-    fun ImageView.setImageCommonCircle(url: String?) {
+    fun ImageView.bindProfileImageCircle(url: String?) {
         url.let {
             Glide.with(this)
                 .load(url)
                 .override(200, 200)
-                .error(
-                    Glide.with(this)
-                        .load(R.drawable.illust_sally_blank_1_1).circleCrop()
-                )
+                .error(R.drawable.illust_sally_profile_blank)
                 .centerCrop()
                 .circleCrop()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -151,20 +136,6 @@ object DataBindingUtils {
             view.visibility = VISIBLE
         else
             view.visibility = INVISIBLE
-    }
-
-    @BindingAdapter("bind_gift_history_image")
-    @JvmStatic
-    fun ImageView.setUrlImage(url: String?) {
-        url.let {
-            Glide.with(this)
-                .load(url).placeholder(R.drawable.illust_sally_blank_1_1)
-                .error(R.drawable.illust_sally_blank_1_1)
-                .centerCrop()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .thumbnail(0.1f)
-                .into(this)
-        }
     }
 
     @BindingAdapter("bind_member")
@@ -307,7 +278,7 @@ object DataBindingUtils {
     @BindingAdapter("bind_twinkle_ranking_tv_clover")
     @JvmStatic
     fun bindTwinkleRankingTvClover(textView: TextView, currentClover: Int) {
-        val text = "${currentClover} clover"
+        val text = "${DecimalFormat("#,###").format(currentClover)} clover"
         textView.text = text
     }
 
@@ -336,14 +307,14 @@ object DataBindingUtils {
     @BindingAdapter("bind_accum_clover_history_clover")
     @JvmStatic
     fun bindAccumCloverHistoryClover(textView: TextView, clover: Int) {
-        val text = "+ ${clover} clover"
+        val text = "+ ${DecimalFormat("#,###").format(clover)} clover"
         textView.text = text
     }
 
     @BindingAdapter("bind_used_clover_history_clover")
     @JvmStatic
     fun bindUsedCloverHistoryClover(textView: TextView, clover: Int) {
-        val text = "- ${clover} clover"
+        val text = "- ${DecimalFormat("#,###").format(clover)} clover"
         textView.text = text
     }
 

@@ -7,6 +7,9 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import com.moon.android.mondaysally.R
@@ -30,6 +33,25 @@ class TwinkleFragment() :
     private lateinit var myTwinkleAdapter: MyTwinkleAdapter
 
     override fun getLayoutResId() = R.layout.fragment_twinkle
+
+    private val twinkleDatailActivityLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == AppCompatActivity.RESULT_OK) {
+                val position = result.data?.getIntExtra("position", -1)
+                val isHearted = result.data?.getStringExtra("isHearted")
+                val likenum = result.data?.getIntExtra("likenum", -1)
+                if (position != null && position > -1) {
+                    twinkleAdapter.snapshot()[position]?.let {
+                        if (isHearted != null) {
+                            it.isHearted = isHearted
+                        }
+                        if (likenum != null) {
+                            it.likenum = likenum
+                        }
+                    }
+                }
+            }
+        }
 
     override fun initDataBinding() {
         binding.lifecycleOwner = this;
@@ -117,12 +139,13 @@ class TwinkleFragment() :
             }
         }
 
-        twinkleAdapter.setOnItemClickListener { twinkle ->
+        twinkleAdapter.setOnItemClickListener { twinkle, position ->
             twinkleViewModel.twinkleIndex.value = twinkle.idx
             activity?.let {
                 val intent = Intent(context, TwinkleDetailActivity::class.java)
                 intent.putExtra("idx", twinkle.idx)
-                startActivity(intent)
+                intent.putExtra("position", position)
+                twinkleDatailActivityLauncher.launch(intent)
             }
         }
 

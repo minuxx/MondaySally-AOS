@@ -3,6 +3,7 @@ package com.moon.android.mondaysally.ui.main.twinkle.twinkle_detail
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.graphics.Rect
 import android.view.View
 import android.view.View.GONE
@@ -44,8 +45,16 @@ class TwinkleDetailActivity : BaseActivity<ActivityTwinkleDetailBinding>() {
         })
 
         twinkleViewModel.finishActivity.observe(this, { finishActivity ->
-            if (finishActivity)
+            if (finishActivity) {
+                val intent = Intent(context, TwinkleDetailActivity::class.java).apply {
+                    putExtra(
+                        "position",
+                        intent.getIntExtra("position", 0)
+                    )
+                }
+                setResult(RESULT_OK, intent)
                 finish()
+            }
         })
 
         twinkleViewModel.likePostSuccess.observe(this, { likePostSuccess ->
@@ -179,5 +188,29 @@ class TwinkleDetailActivity : BaseActivity<ActivityTwinkleDetailBinding>() {
             imageView.setImageResource(R.drawable.ic_like_on_orange)
         else
             imageView.setImageResource(R.drawable.ic_like_off_gray)
+    }
+
+    override fun onBackPressed() {
+        setIntentResult()
+        finish()
+    }
+
+    private fun setIntentResult() {
+        val intent =
+            Intent(context, TwinkleDetailActivity::class.java).apply {
+                putExtra(
+                    "position",
+                    intent.getIntExtra("position", 0)
+                )
+                putExtra(
+                    "isHearted",
+                    twinkleViewModel.twinkleResult.value?.isHearted
+                )
+                putExtra(
+                    "likenum",
+                    twinkleViewModel.twinkleResult.value?.likenum
+                )
+            }
+        setResult(RESULT_OK, intent)
     }
 }
