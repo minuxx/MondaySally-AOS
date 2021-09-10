@@ -4,6 +4,8 @@
     <string name="ok">확인</string>
     <string name="more">더보기</string>
     <string name="post">등록</string>
+    <string name="delete">삭제</string>
+    <string name="modify">수정</string>
 
     <!--숫자포맷-->
     <string name="price_format">%,2d</string>
@@ -124,5 +126,6 @@
     <string name="clover_history_accum_guide">님의 누적 클로버</string>
     <string name="clover_history_now_guide">님의 현재 클로버</string>
     <string name="clover_history_used_guide">님의 사용 클로버</string>
+
 
 </resources>

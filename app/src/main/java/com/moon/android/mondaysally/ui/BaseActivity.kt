@@ -70,7 +70,7 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, getLayoutResId())
         initDataBinding()
         initAfterBinding()
-        imm = getSystemService(android.content.Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+        imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager?
     }
 
     override fun finish() {

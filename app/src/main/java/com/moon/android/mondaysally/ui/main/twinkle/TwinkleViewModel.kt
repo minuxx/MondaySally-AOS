@@ -44,6 +44,7 @@ class TwinkleViewModel(
     var likePostSuccess: MutableLiveData<Boolean> = MutableLiveData()
     var hideKeyboard: MutableLiveData<Boolean> = MutableLiveData()
     var commentRefresh: MutableLiveData<Boolean> = MutableLiveData()
+    var bottomSheetOpen: MutableLiveData<Boolean> = MutableLiveData()
     val commentList = ListLiveData<TwinkleComment>()
     var editTextCommentString = ObservableField("")
 
@@ -266,6 +267,10 @@ class TwinkleViewModel(
     fun whenTvTwinklePostClicked() {
         if (validateCheck())
             uploadToFirebase()
+    }
+
+    fun whenIv3dotClicked() {
+        bottomSheetOpen.value = true
     }
 
     fun deletePhotoButtonVisiblillty(uri: Uri?): Int {

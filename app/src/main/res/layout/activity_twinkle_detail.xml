@@ -145,6 +145,8 @@
                     android:paddingStart="19dp"
                     android:paddingEnd="9dp"
                     android:src="@drawable/ic_three_dot"
+                    bind_twinkle_detail_3dot="@{viewModel.twinkleResult.isWriter()}"
+                    android:onClick="@{() -> viewModel.whenIv3dotClicked()}"
                     app:layout_constraintEnd_toStartOf="@+id/activity_shop_detail_iv_heart"
                     app:layout_constraintTop_toTopOf="@+id/activity_twinkle_detail_tv_date" />
 

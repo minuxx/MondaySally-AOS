@@ -16,6 +16,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.moon.android.mondaysally.R
 import com.moon.android.mondaysally.databinding.ActivityTwinkleDetailBinding
 import com.moon.android.mondaysally.ui.BaseActivity
+import com.moon.android.mondaysally.ui.main.twinkle.BottomSheetDialogFragment
 import com.moon.android.mondaysally.ui.main.twinkle.TwinkleViewModel
 import me.relex.circleindicator.CircleIndicator3
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -54,6 +55,14 @@ class TwinkleDetailActivity : BaseActivity<ActivityTwinkleDetailBinding>() {
                 }
                 setResult(RESULT_OK, intent)
                 finish()
+            }
+        })
+
+        twinkleViewModel.bottomSheetOpen.observe(this, { bottomSheetOpen ->
+            if (bottomSheetOpen) {
+                val bottomDialogFragment = BottomSheetDialogFragment()
+                bottomDialogFragment.show(supportFragmentManager, bottomDialogFragment.tag)
+                twinkleViewModel.bottomSheetOpen.value = false
             }
         })
 

@@ -324,4 +324,13 @@ object DataBindingUtils {
         val text = "${workTime}시간 근무"
         textView.text = text
     }
+
+    @BindingAdapter("bind_twinkle_detail_3dot")
+    @JvmStatic
+    fun bindTwinkleDetail3dot(imageView: ImageView, isWriter: String?) {
+        if (isWriter == "Y")
+            imageView.visibility = VISIBLE
+        else
+            imageView.visibility = INVISIBLE
+    }
 }

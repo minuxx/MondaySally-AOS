@@ -34,7 +34,7 @@ class TwinkleFragment() :
 
     override fun getLayoutResId() = R.layout.fragment_twinkle
 
-    private val twinkleDatailActivityLauncher =
+    private val twinkleDetailActivityLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == AppCompatActivity.RESULT_OK) {
                 val position = result.data?.getIntExtra("position", -1)
@@ -145,7 +145,7 @@ class TwinkleFragment() :
                 val intent = Intent(context, TwinkleDetailActivity::class.java)
                 intent.putExtra("idx", twinkle.idx)
                 intent.putExtra("position", position)
-                twinkleDatailActivityLauncher.launch(intent)
+                twinkleDetailActivityLauncher.launch(intent)
             }
         }
 
@@ -154,6 +154,7 @@ class TwinkleFragment() :
             animateHeart(heartIv)
             twinkleViewModel.postLike(twinkle.idx)
         }
+
         loadData()
     }
 
