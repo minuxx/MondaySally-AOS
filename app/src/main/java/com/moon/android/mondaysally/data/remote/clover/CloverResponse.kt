@@ -1,9 +1,7 @@
 package com.moon.android.mondaysally.data.remote.auth
 
 import com.google.gson.annotations.SerializedName
-import com.moon.android.mondaysally.data.entities.Auth
 import com.moon.android.mondaysally.data.entities.CloverResult
-import com.moon.android.mondaysally.data.entities.TwinkleRanking
 
 data class CloverResponse(
     @SerializedName(value = "isSuccess") val isSuccess : Boolean,

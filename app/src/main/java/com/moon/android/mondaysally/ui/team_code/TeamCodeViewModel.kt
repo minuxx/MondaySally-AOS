@@ -27,8 +27,8 @@ class TeamCodeViewModel(
         try {
             val authResponse = authNetworkRepository.checkTeamCode(Code(code))
             if (authResponse.code == 200) {
-                authResponse.auth?.let {
-                    authResponse.auth.jwtToken?.let { it2 -> sharedPrefRepository.saveJwtToken(it2) }
+                authResponse.result?.let {
+                    authResponse.result.jwtToken?.let { it2 -> sharedPrefRepository.saveJwtToken(it2) }
                     goNextActivity.value = true
                 }
             } else {

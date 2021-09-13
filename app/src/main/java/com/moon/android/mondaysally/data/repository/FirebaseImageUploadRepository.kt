@@ -11,7 +11,7 @@ import okhttp3.HttpUrl.Companion.toHttpUrl
 class FirebaseImageUploadRepository() {
 
     val storage = Firebase.storage
-    var storageRef = storage.reference
+    private var storageRef = storage.reference
 
     @SuppressLint("SimpleDateFormat")
     fun uploadImage(uri: Uri, folder: String): UploadTask {

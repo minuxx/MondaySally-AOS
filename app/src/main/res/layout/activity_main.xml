@@ -42,16 +42,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:padding="10dp"
+                android:padding="6.3dp"
                 android:src="@drawable/ic_header_right_qr_gray" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:paddingEnd="10dp"
-                android:onClick="@{() -> viewModel.whenTvGoHomeClicked()}"
-                android:padding="6dp"
+                android:onClick="@{() -> viewModel.whenTvMyPage()}"
+                android:padding="6.3dp"
+                android:paddingEnd="16.5dp"
                 android:src="@drawable/ic_header_right_mypage_gray" />
         </LinearLayout>
 

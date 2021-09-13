@@ -50,7 +50,7 @@ class SplashViewModel(
         try {
             val authResponse = commonNetworkRepository.getVersion()
             if (authResponse.code == 200) {
-                authResponse.auth?.let {
+                authResponse.authResult?.let {
                     serverAccessible.value = true
                 }
             } else {

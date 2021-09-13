@@ -8,7 +8,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.moon.android.mondaysally.R
 import com.moon.android.mondaysally.databinding.ActivityMainBinding
 import com.moon.android.mondaysally.ui.BaseActivity
+import com.moon.android.mondaysally.ui.main.auth.MyPageActivity
 import com.moon.android.mondaysally.ui.main.twinkle.twinkle_post.TwinklePostActivity
+import com.moon.android.mondaysally.ui.tutorial.TutorialActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -25,6 +27,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             if (navigationFlag == 1)
                 navHostFragment.navController.navigate(R.id.homeFragment)
         })
+
+        mainViewModel.goMyPage.observe(this, { goMyPage ->
+            if (goMyPage)
+                startNextActivity(MyPageActivity::class.java)
+        })
     }
 
     override fun initAfterBinding() {
@@ -36,7 +43,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
-//        Log.d("인텐트", intent?.getBooleanExtra("goHome", false).toString())
         when (intent?.getStringExtra("navigation")) {
             "home" -> navHostFragment.navController.navigate(R.id.homeFragment)
             "twinkle" -> navHostFragment.navController.navigate(R.id.twinkleFragment)

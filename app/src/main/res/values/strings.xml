@@ -6,6 +6,7 @@
     <string name="post">등록</string>
     <string name="delete">삭제</string>
     <string name="modify">수정</string>
+    <string name="done">완료</string>
 
     <!--숫자포맷-->
     <string name="price_format">%,2d</string>
@@ -18,6 +19,8 @@
     <string name="gift_history">기프트 히스토리</string>
     <string name="twinkle_ranking">트윙클 랭킹</string>
     <string name="clover_history">클로버 히스토리</string>
+    <string name="mypage">마이페이지</string>
+    <string name="profile_edit">프로필수정</string>
 
     <!--에러처리-->
     <string name="default_fail">네트워크연결이 원활하지 않습니다</string>
@@ -126,6 +129,27 @@
     <string name="clover_history_accum_guide">님의 누적 클로버</string>
     <string name="clover_history_now_guide">님의 현재 클로버</string>
     <string name="clover_history_used_guide">님의 사용 클로버</string>
+
+    <!--마이메뉴-->
+    <string name="mypage_my_clover">내 클로버</string>
+    <string name="mypage_gift_history">기프트 내역</string>
+    <string name="mypage_inquiry">1:1 문의</string>
+    <string name="mypage_on_boarding">온보딩</string>
+    <string name="mypage_open_source">오픈 소스</string>
+    <string name="mypage_terms">이용약관</string>
+    <string name="mypage_version">버전 정보</string>
+    <string name="mypage_resignation">퇴사 신청</string>
+    <string name="mypage_logout">로그아웃</string>
+    <string name="mypage_profile_edit">프로필 수정</string>
+
+    <string name="mypage_nickname">닉네임</string>
+    <string name="mypage_nickname_hint">닉네임을 입력해주세요.</string>
+    <string name="mypage_phone">연락처</string>
+    <string name="mypage_phone_hint">연락처를 입력해주세요.</string>
+    <string name="mypage_bank">은행 및 계좌번호</string>
+    <string name="mypage_bank_hint">(은행) 계좌번호를 입력해주세요.</string>
+    <string name="mypage_email">이메일</string>
+    <string name="mypage_email_hint">이메일을 입력해주세요.</string>
 
 
 </resources>

@@ -47,6 +47,7 @@ class NowCloverFragment() :
                 }
             }
         }
+
         cloverViewModel.nickname.value = cloverViewModel.sharedPrefRepository.nickname
         cloverViewModel._getCloverHistory("current")
         loadData()

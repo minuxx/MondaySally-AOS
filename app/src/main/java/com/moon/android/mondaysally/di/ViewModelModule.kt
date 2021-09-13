@@ -1,9 +1,10 @@
 package com.moon.android.mondaysally.di
 
 import com.moon.android.mondaysally.ui.main.MainViewModel
+import com.moon.android.mondaysally.ui.main.auth.AuthViewModel
 import com.moon.android.mondaysally.ui.main.clover.CloverViewModel
-import com.moon.android.mondaysally.ui.main.home.HomeViewModel
 import com.moon.android.mondaysally.ui.main.gift.GiftViewModel
+import com.moon.android.mondaysally.ui.main.home.HomeViewModel
 import com.moon.android.mondaysally.ui.main.twinkle.TwinkleViewModel
 import com.moon.android.mondaysally.ui.onboarding.OnBoardingViewModel
 import com.moon.android.mondaysally.ui.splash.SplashViewModel
@@ -27,5 +28,6 @@ val viewModelModule = module {
     viewModel { GiftViewModel(get()) }
     viewModel { TwinkleViewModel(get()) }
     viewModel { HomeViewModel(get(), get()) }
-    viewModel { CloverViewModel(get(),get()) }
+    viewModel { CloverViewModel(get(), get()) }
+    viewModel { AuthViewModel(get(), get()) }
 }

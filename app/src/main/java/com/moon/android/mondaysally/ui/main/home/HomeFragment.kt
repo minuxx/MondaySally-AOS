@@ -9,6 +9,9 @@ import com.moon.android.mondaysally.ui.BaseFragment
 import com.moon.android.mondaysally.ui.main.clover.CloverRankingActivity
 import com.moon.android.mondaysally.ui.main.clover.clover_history.CloverHistoryActivity
 import com.moon.android.mondaysally.ui.main.gift.gift_history.GiftHistoryActivity
+import com.moon.android.mondaysally.ui.main.twinkle.twinkle_detail.ImageViewpagerAdapter
+import com.moon.android.mondaysally.ui.main.twinkle.twinkle_detail.TwinkleDetailActivity
+import com.moon.android.mondaysally.ui.main.twinkle.twinkle_post.TwinklePostActivity
 import com.moon.android.mondaysally.utils.GridItemDecoration
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -16,6 +19,8 @@ class HomeFragment() :
     BaseFragment<FragmentHomeBinding>() {
 
     private val homeViewModel: HomeViewModel by viewModel()
+    lateinit var giftHistoryAdapter :GiftHistoryAdapter
+
     override fun getLayoutResId() = R.layout.fragment_home
 
     override fun initDataBinding() {
@@ -115,7 +120,23 @@ class HomeFragment() :
     }
 
     override fun initAfterBinding() {
-        binding.fragmentHomeRvGiftHistory.adapter = GiftHistoryAdapter()
+        giftHistoryAdapter = GiftHistoryAdapter()
+        giftHistoryAdapter.setOnItemClickListener { giftHistory ->
+            if (giftHistory.isProved == "Y") {
+                val intent = Intent(context, TwinkleDetailActivity::class.java)
+                intent.putExtra("idx", giftHistory.twinkleIdx)
+                startActivity(intent)
+            } else {
+                val intent = Intent(context, TwinklePostActivity::class.java)
+                intent.putExtra("idx", giftHistory.giftLogIdx)
+                intent.putExtra("name", giftHistory.name)
+                intent.putExtra("usedClover", giftHistory.usedClover)
+                startActivity(intent)
+            }
+        }
+
+        binding.fragmentHomeRvGiftHistory.adapter = giftHistoryAdapter
+        binding.fragmentHomeRvGiftHistory.adapter
         binding.fragmentHomeRvNowOn.adapter = MemberListAdapter()
         context?.let { GridItemDecoration(it) }?.let {
             binding.fragmentHomeRvNowOn.addItemDecoration(

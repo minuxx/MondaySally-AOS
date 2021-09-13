@@ -5,9 +5,11 @@ import androidx.lifecycle.ViewModel
 
 
 class MainViewModel() : ViewModel() {
-    var navigationFlag: MutableLiveData<Int> = MutableLiveData()
 
-    fun whenTvGoHomeClicked() {
-        navigationFlag.value = 1
+    var navigationFlag: MutableLiveData<Int> = MutableLiveData()
+    var goMyPage: MutableLiveData<Boolean> = MutableLiveData()
+
+    fun whenTvMyPage() {
+        goMyPage.value = true
     }
 }

@@ -53,7 +53,7 @@ object DataBindingUtils {
             Glide.with(this)
                 .load(url)
                 .override(200, 200)
-                .error(R.drawable.illust_sally_profile_blank)
+                .error(R.drawable.illust_sally_blank_circle)
                 .centerCrop()
                 .circleCrop()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -332,5 +332,12 @@ object DataBindingUtils {
             imageView.visibility = VISIBLE
         else
             imageView.visibility = INVISIBLE
+    }
+
+    @BindingAdapter("bind_my_page_working_year")
+    @JvmStatic
+    fun bindMyPageWorkingYear(textView: TextView, workingYear: Int) {
+        val text = "${workingYear}년"
+        textView.text = text
     }
 }
