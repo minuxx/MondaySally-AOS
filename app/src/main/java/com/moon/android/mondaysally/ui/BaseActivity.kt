@@ -146,6 +146,19 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         }
     }
 
+    fun setCircleImageFromUri(url: Uri?, imageView: ImageView) {
+        url.let {
+            Glide.with(this)
+                .load(url)
+                .override(400, 400)
+                .circleCrop()
+                .error(R.drawable.illust_sally_blank_1_1)
+                .thumbnail(0.2f)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(imageView)
+        }
+    }
+
     fun setCircleImageByGlide(iv: ImageView, url: String) {
         Glide.with(this)
             .load(url).placeholder(R.drawable.bg_round_white_gray)

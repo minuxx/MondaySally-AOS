@@ -39,7 +39,7 @@ class TwinklePostActivity : BaseActivity<ActivityTwinklePostBinding>() {
     override fun getLayoutResId() = R.layout.activity_twinkle_post
     private var imageMode: Int = 0
 
-    private val permission = android.Manifest.permission.CAMERA
+    private val permission = android.Manifest.permission.READ_EXTERNAL_STORAGE
 
     private val twinkleImageFromGalleryLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->

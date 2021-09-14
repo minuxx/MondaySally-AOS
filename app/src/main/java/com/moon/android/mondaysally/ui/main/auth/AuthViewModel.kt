@@ -1,16 +1,21 @@
 package com.moon.android.mondaysally.ui.main.auth
 
+import android.net.Uri
 import android.util.Log
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.storage.ktx.component1
+import com.google.firebase.storage.ktx.component2
 import com.moon.android.mondaysally.data.entities.AuthResult
 import com.moon.android.mondaysally.data.entities.ProfileBody
 import com.moon.android.mondaysally.data.remote.Fail
+import com.moon.android.mondaysally.data.repository.FirebaseImageUploadRepository
 import com.moon.android.mondaysally.data.repository.SharedPrefRepository
 import com.moon.android.mondaysally.data.repository.network.AuthNetworkRepository
+import com.moon.android.mondaysally.utils.GlobalConstant
 import kotlinx.coroutines.launch
 import java.util.regex.Pattern
 
@@ -20,14 +25,18 @@ class AuthViewModel(
     private val sharedPrefRepository: SharedPrefRepository,
 ) : ViewModel() {
 
+    var isLoading: MutableLiveData<Boolean> = MutableLiveData()
     var authResult: MutableLiveData<AuthResult> = MutableLiveData()
     var finish: MutableLiveData<Boolean> = MutableLiveData()
     var fail: MutableLiveData<Fail> = MutableLiveData()
     var goProfileEdit: MutableLiveData<Boolean> = MutableLiveData()
     var profileEditSuccess: MutableLiveData<Boolean> = MutableLiveData()
+    var bottomSheetOpen: MutableLiveData<Boolean> = MutableLiveData()
     var validateMessage: MutableLiveData<String> = MutableLiveData()
 
+
     var profileUrl: String? = null
+    var profileUri: Uri? = null
     var editTextNicknameString = ObservableField("")
     var editTextPhoneString = ObservableField("")
     var editTextBankString = ObservableField("")
@@ -60,6 +69,7 @@ class AuthViewModel(
                         editTextEmailString.get()!!
                     )
                 )
+            isLoading.value = false
             if (authResponse.code == 200) {
                 profileEditSuccess.value = true
             } else {
@@ -83,11 +93,17 @@ class AuthViewModel(
         goProfileEdit.value = true
     }
 
+    fun whenIvProfileClicked() {
+        bottomSheetOpen.value = true
+    }
+
     fun whenEditDoneClicked() {
         //validation check
         if (validateCheck()) {
             //dialog check
-            postProfile()
+
+            //이미지 업로드
+            uploadToFirebase()
         }
     }
 
@@ -130,5 +146,33 @@ class AuthViewModel(
 
     fun dialogCheck(): Boolean {
         return true
+    }
+
+    private fun uploadToFirebase() {
+        imageUploadToFirebaseStorage(profileUri)
+    }
+
+    private fun imageUploadToFirebaseStorage(uri: Uri?) {
+        if (uri == null) {
+            postProfile()
+        } else {
+            isLoading.value = true
+            val firebaseImageUploadRepository = FirebaseImageUploadRepository()
+            firebaseImageUploadRepository.setonUploadDoneListener { downloadUrl ->
+                if (downloadUrl != "Fail") {
+                    profileUrl = downloadUrl
+                    postProfile()
+                } else {
+                    fail.value = Fail("이미지 업로드에 실패하였습니다.", 404)
+                }
+            }
+            //업로드
+            firebaseImageUploadRepository.uploadImage(uri, GlobalConstant.TWINKLE_FOLDER)
+                .addOnProgressListener { (bytesTransferred, totalByteCount) ->
+                    val progress = (100.0 * bytesTransferred) / totalByteCount
+                    Log.d("네트워크", "Upload is $progress% done")
+                }.addOnPausedListener {
+                }
+        }
     }
 }

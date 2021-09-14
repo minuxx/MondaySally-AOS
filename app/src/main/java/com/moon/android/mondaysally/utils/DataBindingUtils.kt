@@ -62,6 +62,22 @@ object DataBindingUtils {
         }
     }
 
+    @BindingAdapter("bind_profile_edit_image_circle")
+    @JvmStatic
+    fun ImageView.bindProfileEditImage(url: String?) {
+        url.let {
+            Glide.with(this)
+                .load(url)
+                .override(500, 500)
+                .error(R.drawable.ic_photo_mid)
+                .centerCrop()
+                .circleCrop()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .thumbnail(0.2f)
+                .into(this)
+        }
+    }
+
     @BindingAdapter("bind_large_image")
     @JvmStatic
     fun ImageView.setLargeImageCommon(url: String?) {

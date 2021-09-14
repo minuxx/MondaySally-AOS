@@ -15,17 +15,35 @@ class BottomSheetDialogFragment() :BottomSheetDialogFragment(){
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_twinkle_bottom_sheet, container, false)
-        val view = binding.root
-        return view
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_twinkle_bottom_sheet,
+            container,
+            false
+        )
+        return binding.root
+    }
+
+    private var onDeleteClickListener: (() -> Unit)? = null
+    private var onEditClickListener: (() -> Unit)? = null
+
+    fun setOnDeleteClickListener(listener: () -> Unit) {
+        onDeleteClickListener = listener
+    }
+    fun setOnEditClickListener(listener: () -> Unit) {
+        onEditClickListener = listener
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.fragmentTwinkleBottomSheetTvDelete.setOnClickListener{
-
+            onDeleteClickListener?.let { click ->
+                click()
+            }
         }
         binding.fragmentTwinkleBottomSheetTvModify.setOnClickListener{
-
+            onEditClickListener?.let { click ->
+                click()
+            }
         }
         super.onViewCreated(view, savedInstanceState)
     }
