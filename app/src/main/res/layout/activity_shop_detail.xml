@@ -10,132 +10,137 @@
             type="com.moon.android.mondaysally.ui.main.gift.GiftViewModel" />
     </data>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/fragment_home_title_view"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="57dp"
-            android:background="@color/white"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/activity_shop_detail_iv_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:onClick="@{() -> viewModel.whenBtnBackClicked()}"
-                android:padding="15dp"
-                android:src="@drawable/ic_chevron_0_left_gray"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_medium"
-                android:text="@string/menu_shop"
-                android:textColor="@color/black"
-                android:textSize="17sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fragment_home_title_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                tools:context=".ui.main.MainActivity">
+                android:layout_height="57dp"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/activity_shop_detail_iv_gift"
-                    bind_original_image="@{viewModel.giftResult.thumnail}"
+                    android:id="@+id/activity_shop_detail_iv_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:onClick="@{() -> viewModel.whenBtnBackClicked()}"
+                    android:padding="15dp"
+                    android:src="@drawable/ic_chevron_0_left_gray"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="@string/menu_shop"
+                    android:textColor="@color/black"
+                    android:textSize="17sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:adjustViewBounds="true"
-                    android:cropToPadding="false"
-                    android:scaleType="fitCenter" />
+                    android:orientation="vertical"
+                    tools:context=".ui.main.MainActivity">
 
-                <TextView
-                    android:id="@+id/activity_shop_detail_tv_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="18dp"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="@{viewModel.giftResult.name}"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    <ImageView
+                        android:id="@+id/activity_shop_detail_iv_gift"
+                        bind_original_image="@{viewModel.giftResult.thumnail}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:cropToPadding="false"
+                        android:scaleType="fitCenter" />
 
-                <TextView
-                    android:id="@+id/activity_shop_detail_tv_content"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="15dp"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="@{viewModel.giftResult.info}"
-                    android:textColor="@color/greyish_brown"
-                    android:textSize="14sp" />
+                    <TextView
+                        android:id="@+id/activity_shop_detail_tv_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="18dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="@{viewModel.giftResult.name}"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
 
-                <TextView
-                    android:id="@+id/activity_shop_detail_tv_comment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="11dp"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="@{viewModel.giftResult.rule}"
-                    android:textColor="@color/text_dim_gray"
-                    android:textSize="14sp" />
+                    <TextView
+                        android:id="@+id/activity_shop_detail_tv_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/roboto_light"
+                        android:text="@{viewModel.giftResult.info}"
+                        android:textColor="@color/greyish_brown"
+                        android:textSize="14sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="23dp"
-                    android:fontFamily="@font/roboto_regular"
-                    android:text="@string/shop_option_select"
-                    android:textColor="@color/black"
-                    android:textSize="15sp" />
+                    <TextView
+                        android:id="@+id/activity_shop_detail_tv_comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="11dp"
+                        android:fontFamily="@font/roboto_light"
+                        android:text="@{viewModel.giftResult.rule}"
+                        android:textColor="@color/text_dim_gray"
+                        android:textSize="14sp" />
 
-                <com.moon.android.mondaysally.ui.main.gift.CustomTagContainerLayout
-                    android:id="@+id/activity_shop_detail_tag_option"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="0dp"
-                    android:layout_marginHorizontal="16dp"
-                    android:padding="10dp"
-                    app:container_enable_drag="false"
-                    app:horizontal_interval="10dp"
-                    app:tag_clickable="true"
-                    app:tag_theme="none"
-                    app:vertical_interval="8dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginTop="23dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="@string/shop_option_select"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
 
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="80dp" />
-            </LinearLayout>
-        </ScrollView>
+                    <com.moon.android.mondaysally.ui.main.gift.CustomTagContainerLayout
+                        android:id="@+id/activity_shop_detail_tag_option"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:padding="10dp"
+                        app:container_enable_drag="false"
+                        app:horizontal_interval="10dp"
+                        app:tag_clickable="true"
+                        app:tag_theme="none"
+                        app:vertical_interval="8dp" />
 
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="80dp" />
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
         <Button
             android:id="@+id/activity_welcome_btn_go_home"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginHorizontal="16dp"
+            android:layout_gravity="bottom"
             android:layout_marginBottom="18dp"
             android:fontFamily="@font/roboto_medium"
             android:background="@drawable/bg_btn_gray_orange"
@@ -144,5 +149,5 @@
             android:text="@string/shop_apply"
             android:textColor="@color/white"
             android:textSize="17sp" />
-    </LinearLayout>
+    </FrameLayout>
 </layout>

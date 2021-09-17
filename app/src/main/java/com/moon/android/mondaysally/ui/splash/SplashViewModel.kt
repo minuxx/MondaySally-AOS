@@ -23,7 +23,7 @@ class SplashViewModel(
     var fail: MutableLiveData<Fail> = MutableLiveData()
 
     fun autoLoginCheck() {
-        val jwtToken = sharedPrefRepository.jwtToken
+        val jwtToken = sharedPrefRepository.getJwtToken()
         if (jwtToken != null) {
             tokenCheck()
         } else {

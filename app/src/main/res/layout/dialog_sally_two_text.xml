@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="174dp"
+    android:layout_marginHorizontal="65dp"
+    android:background="@color/translate"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="42"
+        android:scaleType="fitCenter"
+        android:src="@drawable/illust_mondaysally_symbol_popup" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="127"
+        android:background="@drawable/bg_round_dialog"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/dialog_sally_title_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:fontFamily="@font/roboto_regular"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                tools:ignore="NestedWeights"
+                tools:text="댓글을 삭제하시겠습니까?" />
+
+            <TextView
+                android:id="@+id/dialog_sally_content_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
+                android:fontFamily="@font/roboto_light"
+                android:gravity="center"
+                android:textColor="@color/brown_grey"
+                android:textSize="13sp"
+                tools:ignore="NestedWeights"
+                tools:text="삭제된 댓글은 복구가 불가능합니다." />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/dialog_sally_btn"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_round_dialog_bottom_orange"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            tools:text="확인" />
+
+    </LinearLayout>
+
+</LinearLayout>

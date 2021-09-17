@@ -37,3 +37,7 @@ data class ProfileBody(
     @SerializedName(value = "email") val email: String = "",
 )
 
+data class FcmBody(
+    @SerializedName(value = "token") val token: String = "",
+    @SerializedName(value = "isAos") val imgUrl: String = "Y",
+)

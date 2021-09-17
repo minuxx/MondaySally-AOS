@@ -24,17 +24,20 @@ class AuthViewModel(
     private val authNetworkRepository: AuthNetworkRepository,
     private val sharedPrefRepository: SharedPrefRepository,
 ) : ViewModel() {
-
     var isLoading: MutableLiveData<Boolean> = MutableLiveData()
-    var authResult: MutableLiveData<AuthResult> = MutableLiveData()
+
     var finish: MutableLiveData<Boolean> = MutableLiveData()
     var fail: MutableLiveData<Fail> = MutableLiveData()
+
     var goProfileEdit: MutableLiveData<Boolean> = MutableLiveData()
+    var authResult: MutableLiveData<AuthResult> = MutableLiveData()
+    var menuClick: MutableLiveData<Int> = MutableLiveData()
+
+    //ProfileEdit
+    var editDoneClick: MutableLiveData<Boolean> = MutableLiveData()
     var profileEditSuccess: MutableLiveData<Boolean> = MutableLiveData()
     var bottomSheetOpen: MutableLiveData<Boolean> = MutableLiveData()
     var validateMessage: MutableLiveData<String> = MutableLiveData()
-
-
     var profileUrl: String? = null
     var profileUri: Uri? = null
     var editTextNicknameString = ObservableField("")
@@ -60,7 +63,7 @@ class AuthViewModel(
     private fun postProfile() = viewModelScope.launch {
         try {
             val authResponse =
-                authNetworkRepository.postProfile(
+                authNetworkRepository.patchProfile(
                     ProfileBody(
                         editTextNicknameString.get()!!,
                         profileUrl!!,
@@ -84,7 +87,6 @@ class AuthViewModel(
         }
     }
 
-
     fun whenBackClicked() {
         finish.value = true
     }
@@ -97,17 +99,15 @@ class AuthViewModel(
         bottomSheetOpen.value = true
     }
 
-    fun whenEditDoneClicked() {
-        //validation check
-        if (validateCheck()) {
-            //dialog check
-
-            //이미지 업로드
-            uploadToFirebase()
-        }
+    fun whenMenuClicked(flag: Int) {
+        menuClick.value = flag
     }
 
-    private fun validateCheck(): Boolean {
+    fun whenEditDoneClicked() {
+        editDoneClick.value = true
+    }
+
+    fun validateCheck(): Boolean {
         return if (editTextNicknameString.get()?.isEmpty() == true) {
             validateMessage.value = "닉네임을 입력해주세요"
             false
@@ -144,11 +144,7 @@ class AuthViewModel(
         return matcher.matches()
     }
 
-    fun dialogCheck(): Boolean {
-        return true
-    }
-
-    private fun uploadToFirebase() {
+    fun uploadToFirebase() {
         imageUploadToFirebaseStorage(profileUri)
     }
 

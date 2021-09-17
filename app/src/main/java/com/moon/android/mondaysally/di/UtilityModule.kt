@@ -1,5 +1,6 @@
 package com.moon.android.mondaysally.di
 
+import com.moon.android.mondaysally.MyFirebaseMessagingService
 import com.moon.android.mondaysally.utils.GlobalConstant
 import com.moon.android.mondaysally.utils.GridItemDecoration
 import com.moon.android.mondaysally.utils.GridItemDecoration_15_15

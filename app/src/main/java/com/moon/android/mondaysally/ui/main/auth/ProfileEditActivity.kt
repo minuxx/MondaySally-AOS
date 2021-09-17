@@ -16,8 +16,8 @@ import androidx.core.content.FileProvider
 import com.moon.android.mondaysally.R
 import com.moon.android.mondaysally.databinding.ActivityProfileEditBinding
 import com.moon.android.mondaysally.ui.BaseActivity
+import com.moon.android.mondaysally.ui.SallyDialog
 import com.moon.android.mondaysally.ui.main.twinkle.BottomSheetDialogFragment
-import com.moon.android.mondaysally.utils.GlobalConstant
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
 import java.text.SimpleDateFormat
@@ -78,6 +78,23 @@ class ProfileEditActivity : BaseActivity<ActivityProfileEditBinding>() {
         authViewModel.finish.observe(this, { finish ->
             if (finish) {
                 finish()
+            }
+        })
+
+        authViewModel.editDoneClick.observe(this, { editDoneClick ->
+            if (editDoneClick) {
+                if (authViewModel.validateCheck()) {
+                    //dialog check
+                    showSallyDialog(
+                        this,
+                        getString(R.string.profile_edit_check),
+                        getString(R.string.ok),
+                        object : SallyDialog.DialogClickListener {
+                            override fun onOKClicked() {
+                                authViewModel.uploadToFirebase()
+                            }
+                        })
+                }
             }
         })
 

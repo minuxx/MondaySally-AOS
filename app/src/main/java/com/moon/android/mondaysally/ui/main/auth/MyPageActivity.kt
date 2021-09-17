@@ -5,6 +5,10 @@ import androidx.annotation.LayoutRes
 import com.moon.android.mondaysally.R
 import com.moon.android.mondaysally.databinding.ActivityMyPageBinding
 import com.moon.android.mondaysally.ui.BaseActivity
+import com.moon.android.mondaysally.ui.main.clover.clover_history.CloverHistoryActivity
+import com.moon.android.mondaysally.ui.main.gift.gift_history.GiftHistoryActivity
+import com.moon.android.mondaysally.ui.terms.TermsActivity
+import com.moon.android.mondaysally.ui.tutorial.TutorialActivity
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -34,6 +38,20 @@ class MyPageActivity : BaseActivity<ActivityMyPageBinding>() {
                 profileEditActivity.putExtra("bank", authViewModel.authResult.value?.bankAccount)
                 profileEditActivity.putExtra("email", authViewModel.authResult.value?.email)
                 startActivity(profileEditActivity)
+            }
+        })
+
+        authViewModel.menuClick.observe(this, { flag ->
+            when(flag){
+                1->startNextActivity(CloverHistoryActivity::class.java) //클로버내역
+                2->startNextActivity(GiftHistoryActivity::class.java) //기프트내역
+//                3->startNextActivity(GiftHistoryActivity::class.java)
+                4->startNextActivity(TutorialActivity::class.java) //온보딩
+//                5->startNextActivity(TermsActivity::class.java) //오픈소스
+                6->startNextActivity(TermsActivity::class.java) //이용약관
+//                7->startNextActivity(TermsActivity::class.java) //버전정보
+//                8->startNextActivity(TermsActivity::class.java) //퇴사신청
+//                9->startNextActivity(TermsActivity::class.java) //로그아웃
             }
         })
 

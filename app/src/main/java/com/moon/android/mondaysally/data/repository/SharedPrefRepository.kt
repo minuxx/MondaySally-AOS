@@ -3,6 +3,7 @@ package com.moon.android.mondaysally.data.repository
 import android.content.Context
 import android.content.SharedPreferences
 import com.moon.android.mondaysally.utils.GlobalConstant
+import com.moon.android.mondaysally.utils.GlobalConstant.Companion.X_ACCESS_TOKEN
 
 class SharedPrefRepository(private val context: Context) {
 //    var sharedPreferencesManager: SharedPreferencesManager = SharedPreferencesManager(context)
@@ -11,8 +12,9 @@ class SharedPrefRepository(private val context: Context) {
         return context.getSharedPreferences(GlobalConstant.TAG, Context.MODE_PRIVATE)
     }
 
-    val jwtToken: String? = getSharedPreferences()
-        .getString(GlobalConstant.X_ACCESS_TOKEN, null)
+    fun getJwtToken() : String? {
+        return getSharedPreferences().getString(X_ACCESS_TOKEN, null)
+    }
 
     val nickname: String? = getSharedPreferences()
         .getString(GlobalConstant.NICKNAME, null)
@@ -30,7 +32,7 @@ class SharedPrefRepository(private val context: Context) {
     fun saveJwtToken(jwtToken: String) {
         val spf = getSharedPreferences()
         val editor = spf.edit()
-        editor.putString(GlobalConstant.X_ACCESS_TOKEN, jwtToken)
+        editor.putString(X_ACCESS_TOKEN, jwtToken)
         editor.apply()
     }
 

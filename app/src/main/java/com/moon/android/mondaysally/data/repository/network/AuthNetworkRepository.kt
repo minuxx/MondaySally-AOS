@@ -1,6 +1,7 @@
 package com.moon.android.mondaysally.data.repository.network
 
 import com.moon.android.mondaysally.data.entities.Code
+import com.moon.android.mondaysally.data.entities.FcmBody
 import com.moon.android.mondaysally.data.entities.ProfileBody
 import com.moon.android.mondaysally.data.remote.auth.AuthResponse
 import com.moon.android.mondaysally.data.remote.auth.AuthService
@@ -20,7 +21,11 @@ class AuthNetworkRepository(private val authService: AuthService) : BaseNetworkR
         return apiRequest { authService.getMyPage() }
     }
 
-    suspend fun postProfile(profileBody: ProfileBody): AuthResponse {
-        return apiRequest { authService.postProfile(profileBody) }
+    suspend fun patchProfile(profileBody: ProfileBody): AuthResponse {
+        return apiRequest { authService.patchProfile(profileBody) }
+    }
+
+    suspend fun postFcmToken(fcmBody: FcmBody): AuthResponse {
+        return apiRequest { authService.postFcmToken(fcmBody) }
     }
 }

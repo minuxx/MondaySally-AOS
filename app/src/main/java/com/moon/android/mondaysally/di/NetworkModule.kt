@@ -29,9 +29,9 @@ val networkModule: Module = module {
     fun provideHeaderInterceptor(sharedPrefRepository: SharedPrefRepository) =
         Interceptor { chain ->
             val request = chain.request().newBuilder()
-                .addHeader(X_ACCESS_TOKEN, "${sharedPrefRepository.jwtToken}")
+                .addHeader(X_ACCESS_TOKEN, "${sharedPrefRepository.getJwtToken()}")
                 .build()
-            Log.d("X_ACCESS_TOKEN", "${sharedPrefRepository.jwtToken}")
+            Log.d("X_ACCESS_TOKEN", "${sharedPrefRepository.getJwtToken()}")
             chain.proceed(request)
         }
 

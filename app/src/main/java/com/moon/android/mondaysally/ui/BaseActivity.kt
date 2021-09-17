@@ -29,6 +29,7 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
 
     private var lottieDialog: LottieDialog? = null
     private var sallyDialog: SallyDialog? = null
+    private var sallyDialogTwoText: SallyDialogTwoText? = null
     private var imm : InputMethodManager? = null
 
     @LayoutRes
@@ -90,6 +91,21 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         sallyDialog = SallyDialog(context, content, btnText)
         sallyDialog?.setOnChangeListener(listener)
         sallyDialog?.show()
+    }
+
+    fun showSallyDialogTwoText(
+        context: Context,
+        title: String,
+        content: String,
+        btnText: String,
+        listener: SallyDialogTwoText.DialogClickListener
+    ) {
+        if (isFinishing) {
+            return
+        }
+        sallyDialogTwoText = SallyDialogTwoText(context, title, content, btnText)
+        sallyDialogTwoText?.setOnChangeListener(listener)
+        sallyDialogTwoText?.show()
     }
 
     open fun showLottieDialog(context: Context) {

@@ -204,6 +204,7 @@
                 android:paddingBottom="21dp"
                 android:text="@string/mypage_my_clover"
                 android:textColor="@color/black"
+                android:onClick="@{()->viewModel.whenMenuClicked(1)}"
                 android:textSize="15sp" />
 
             <View
@@ -220,6 +221,7 @@
                 android:paddingStart="16dp"
                 android:paddingTop="21dp"
                 android:paddingBottom="21dp"
+                android:onClick="@{()->viewModel.whenMenuClicked(2)}"
                 android:text="@string/mypage_gift_history"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
@@ -240,6 +242,7 @@
                 android:paddingBottom="21dp"
                 android:text="@string/mypage_inquiry"
                 android:textColor="@color/black"
+                android:onClick="@{()->viewModel.whenMenuClicked(3)}"
                 android:textSize="15sp" />
 
             <View
@@ -258,6 +261,7 @@
                 android:paddingBottom="21dp"
                 android:text="@string/mypage_on_boarding"
                 android:textColor="@color/black"
+                android:onClick="@{()->viewModel.whenMenuClicked(4)}"
                 android:textSize="15sp" />
 
             <View
@@ -276,6 +280,7 @@
                 android:paddingBottom="21dp"
                 android:text="@string/mypage_open_source"
                 android:textColor="@color/black"
+                android:onClick="@{()->viewModel.whenMenuClicked(5)}"
                 android:textSize="15sp" />
 
             <View
@@ -294,6 +299,7 @@
                 android:paddingBottom="21dp"
                 android:text="@string/mypage_terms"
                 android:textColor="@color/black"
+                android:onClick="@{()->viewModel.whenMenuClicked(6)}"
                 android:textSize="15sp" />
 
             <View
@@ -312,6 +318,7 @@
                 android:paddingBottom="21dp"
                 android:text="@string/mypage_version"
                 android:textColor="@color/black"
+                android:onClick="@{()->viewModel.whenMenuClicked(7)}"
                 android:textSize="15sp" />
 
             <View
@@ -330,6 +337,7 @@
                 android:paddingBottom="21dp"
                 android:text="@string/mypage_resignation"
                 android:textColor="@color/black"
+                android:onClick="@{()->viewModel.whenMenuClicked(8)}"
                 android:textSize="15sp" />
 
             <View
@@ -347,6 +355,7 @@
                 android:paddingTop="21dp"
                 android:paddingBottom="21dp"
                 android:text="@string/mypage_logout"
+                android:onClick="@{()->viewModel.whenMenuClicked(9)}"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 

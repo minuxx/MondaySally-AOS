@@ -1,6 +1,7 @@
 package com.moon.android.mondaysally.data.remote.auth
 
 import com.moon.android.mondaysally.data.entities.Code
+import com.moon.android.mondaysally.data.entities.FcmBody
 import com.moon.android.mondaysally.data.entities.ProfileBody
 import retrofit2.Response
 import retrofit2.http.Body
@@ -19,5 +20,8 @@ interface AuthService {
     suspend fun getMyPage(): Response<AuthResponse>
 
     @PATCH("/profile")
-    suspend fun postProfile(@Body profileBody: ProfileBody): Response<AuthResponse>
+    suspend fun patchProfile(@Body profileBody: ProfileBody): Response<AuthResponse>
+
+    @POST("/firebase")
+    suspend fun postFcmToken(@Body fcmBody: FcmBody): Response<AuthResponse>
 }

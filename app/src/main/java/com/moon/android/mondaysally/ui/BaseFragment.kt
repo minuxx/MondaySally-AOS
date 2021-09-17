@@ -38,7 +38,6 @@ abstract class BaseFragment<T : ViewDataBinding> : Fragment() {
         super.onStart()
         initDataBinding()
         initAfterBinding()
-
     }
 
     /**
