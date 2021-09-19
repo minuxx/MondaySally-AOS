@@ -11,13 +11,16 @@ class GlobalConstant {
         const val NOTIFICATION_ID = 1
 
         const val TAG = "MOBILE_TEMPLATE_APP"
+
+        //SharedPref Key
         const val X_ACCESS_TOKEN = "X-ACCESS-TOKEN"
         const val NICKNAME = "NICKNAME"
         const val USER = "USER"
-
-        //SharedPref Key
         const val FIRST_LAUNCH = "FIRST-LAUNCH"
         const val NO_MORE_TUTORIAL = "NO-MORE-TUTORIAL"
+        const val NOTIFICATION_TWINKLE_IDX = "NOTIFICATION_TWINKLE_IDX"
+        const val NOTIFICATION_PERMISSION = "NOTIFICATION_PERMISSION"
+        const val NOTIFICATION_CATEGORY = "NOTIFICATION_CATEGORY"
 
         //Animation
         const val FREQ = 1.5f

@@ -3,6 +3,7 @@ package com.moon.android.mondaysally.ui.splash
 import android.util.Log
 import androidx.annotation.LayoutRes
 import com.moon.android.mondaysally.R
+import com.moon.android.mondaysally.data.repository.SharedPrefRepository
 import com.moon.android.mondaysally.databinding.ActivitySplashBinding
 import com.moon.android.mondaysally.ui.BaseActivity
 import com.moon.android.mondaysally.ui.main.MainActivity
@@ -40,6 +41,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
         splashViewModel.autoLogin.observe(this, { isAutologin ->
             if (isAutologin) {
+//                setNotificationIntentFlag()
                 startActivityWithClear(MainActivity::class.java)
             } else {
                 startNextActivity(TeamCodeActivity::class.java)
@@ -73,6 +75,24 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     override fun initAfterBinding() {
         splashViewModel.serverVersionCheck()
 //        splashViewModel.firstLaunchCheck()
+    }
 
+    private fun setNotificationIntentFlag() {
+        val sharedPrefRepository = SharedPrefRepository(this)
+
+        if (intent.getStringExtra("category") != null) {
+            val twinkleIndex = intent.getIntExtra("twinkleIdx", 0)
+            val permission = intent.getStringExtra("permission")
+            val category = intent.getStringExtra("category")
+
+            if (twinkleIndex > 0)
+                sharedPrefRepository.saveNotificationTwinkleIdx(twinkleIndex)
+            permission.let {
+                sharedPrefRepository.saveNotificationPermission(it)
+            }
+            category.let {
+                sharedPrefRepository.saveNotificationCategory(it)
+            }
+        }
     }
 }

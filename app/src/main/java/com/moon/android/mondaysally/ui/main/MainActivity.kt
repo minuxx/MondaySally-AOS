@@ -3,9 +3,7 @@ package com.moon.android.mondaysally.ui.main
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.app.PendingIntent
 import android.content.Intent
-import androidx.core.app.NotificationCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
@@ -15,12 +13,13 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.ktx.messaging
 import com.moon.android.mondaysally.R
+import com.moon.android.mondaysally.data.repository.SharedPrefRepository
 import com.moon.android.mondaysally.databinding.ActivityMainBinding
 import com.moon.android.mondaysally.ui.BaseActivity
 import com.moon.android.mondaysally.ui.main.auth.MyPageActivity
+import com.moon.android.mondaysally.ui.main.gift.gift_history.GiftHistoryActivity
+import com.moon.android.mondaysally.ui.main.twinkle.twinkle_detail.TwinkleDetailActivity
 import com.moon.android.mondaysally.ui.main.twinkle.twinkle_post.TwinklePostActivity
-import com.moon.android.mondaysally.ui.splash.SplashActivity
-import com.moon.android.mondaysally.utils.GlobalConstant.Companion.NOTIFICATION_ID
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -55,6 +54,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         Firebase.messaging.isAutoInitEnabled = true
         tokenCheck()
         setNotificationChannel()
+        notificationFlagCheck()
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -96,6 +96,37 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             notificationChannel.description = "description"
             notificationChannel.setShowBadge(true)
             notificationManager.createNotificationChannel(notificationChannel)
+        }
+    }
+
+    private fun notificationFlagCheck() {
+        val sharedPrefRepository = SharedPrefRepository(this)
+        if (sharedPrefRepository.notificationCategory != null) {
+            when (sharedPrefRepository.notificationCategory) {
+                //좋아요
+                "좋아요" -> {
+                    navHostFragment.navController.navigate(R.id.twinkleFragment)
+                    val intent = Intent(this, TwinkleDetailActivity::class.java)
+                    intent.putExtra("idx", sharedPrefRepository.notificationTwinkleIdx)
+                    startActivity(intent)
+                }
+                //댓글
+                "댓글" -> {
+                    navHostFragment.navController.navigate(R.id.twinkleFragment)
+                    val intent = Intent(this, TwinkleDetailActivity::class.java)
+                    intent.putExtra("idx", sharedPrefRepository.notificationTwinkleIdx)
+                    startActivity(intent)
+                }
+                //승인/거절
+                "기프트" -> {
+                    startActivity(Intent(this, GiftHistoryActivity::class.java))
+                }
+                //출퇴근
+                "출근", "퇴근" -> {
+
+                }
+            }
+            sharedPrefRepository.clearNotificationFlag()
         }
     }
 }

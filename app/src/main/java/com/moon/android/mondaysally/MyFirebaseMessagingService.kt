@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.moon.android.mondaysally.data.repository.SharedPrefRepository
 import com.moon.android.mondaysally.ui.splash.SplashActivity
 import com.moon.android.mondaysally.utils.GlobalConstant
 
@@ -40,15 +41,23 @@ class MyFirebaseMessagingService :
         }
     }
 
-    fun payloadProcess(data: Map<String, String>) {
-        val category = data["category"]
-
-        notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-
+    private fun payloadProcess(data: Map<String, String>) {
+        val sharedPrefRepository = SharedPrefRepository(this)
         val intent = Intent(this, SplashActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
-        intent.putExtra("twinkleIdx", data["twinkleIdx"])
-        intent.putExtra("permission", data["permission"])
+        if (data["twinkleIdx"] != null) {
+//            intent.putExtra("twinkleIdx", Integer.valueOf(data["twinkleIdx"]!!))
+            sharedPrefRepository.saveNotificationTwinkleIdx(Integer.valueOf(data["twinkleIdx"]!!))
+        }
+        if (data["permission"] != null) {
+//            intent.putExtra("permission", data["permission"]!!)
+            sharedPrefRepository.saveNotificationPermission(data["permission"])
+
+        }
+        if (data["category"] != null) {
+//            intent.putExtra("category", data["category"]!!)
+            sharedPrefRepository.saveNotificationCategory(data["category"])
+        }
 
         val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, 0)
 
@@ -61,25 +70,7 @@ class MyFirebaseMessagingService :
             .setDefaults(NotificationCompat.DEFAULT_ALL)
             .setAutoCancel(true)
 
-        when (category) {
-            //좋아요
-            "좋아요" -> {
-
-            }
-            //댓글
-            "좋아요" -> {
-
-            }
-            //승인/거절
-            "기프트" -> {
-
-            }
-            //출퇴근
-            "출근", "퇴근" -> {
-
-            }
-        }
-
+        notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.notify(GlobalConstant.NOTIFICATION_ID, builder.build())
     }
 }

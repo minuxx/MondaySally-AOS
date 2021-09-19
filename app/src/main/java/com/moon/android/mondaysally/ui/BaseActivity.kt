@@ -22,6 +22,7 @@ import androidx.paging.LoadState
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.moon.android.mondaysally.R
+import com.moon.android.mondaysally.ui.main.twinkle.twinkle_post.TwinklePostActivity
 import com.moon.android.mondaysally.utils.GlobalConstant
 
 
@@ -213,5 +214,4 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
                 result.data?.getStringExtra("")
             }
         }
-
 }
