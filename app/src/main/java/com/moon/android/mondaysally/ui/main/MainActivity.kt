@@ -17,6 +17,7 @@ import com.moon.android.mondaysally.data.repository.SharedPrefRepository
 import com.moon.android.mondaysally.databinding.ActivityMainBinding
 import com.moon.android.mondaysally.ui.BaseActivity
 import com.moon.android.mondaysally.ui.main.auth.MyPageActivity
+import com.moon.android.mondaysally.ui.main.auth.qr_camera.QRCameraActivity
 import com.moon.android.mondaysally.ui.main.gift.gift_history.GiftHistoryActivity
 import com.moon.android.mondaysally.ui.main.twinkle.twinkle_detail.TwinkleDetailActivity
 import com.moon.android.mondaysally.ui.main.twinkle.twinkle_post.TwinklePostActivity
@@ -42,6 +43,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         mainViewModel.goMyPage.observe(this, { goMyPage ->
             if (goMyPage)
                 startNextActivity(MyPageActivity::class.java)
+        })
+
+        mainViewModel.goQR.observe(this, { goQR ->
+            if (goQR)
+                startNextActivity(QRCameraActivity::class.java)
         })
     }
 

@@ -21,6 +21,7 @@
     <string name="clover_history">클로버 히스토리</string>
     <string name="mypage">마이페이지</string>
     <string name="profile_edit">프로필수정</string>
+    <string name="qr_camera">출퇴근 인증</string>
 
     <!--에러처리-->
     <string name="default_fail">네트워크연결이 원활하지 않습니다</string>
@@ -152,6 +153,13 @@
     <string name="mypage_email">이메일</string>
     <string name="mypage_email_hint">이메일을 입력해주세요.</string>
     <string name="profile_edit_check">프로필을 수정하시겠습니까?</string>
+
+    <!--QR-->
+    <string name="qr_guide_1">현재 퇴근 상태로\n하단에 QR 코드를 인식시키면</string>
+    <string name="qr_status_in">출근</string>
+    <string name="qr_status_out">퇴근</string>
+    <string name="qr_guide_2">이 됩니다.</string>
+    <string name="qr_guide_3">* QR코드를 인식시켜주세요.</string>
 
 
 </resources>

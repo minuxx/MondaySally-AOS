@@ -59,6 +59,7 @@
         <activity android:name=".ui.main.clover.clover_history.CloverHistoryActivity"/>
         <activity android:name=".ui.main.auth.MyPageActivity"/>
         <activity android:name=".ui.main.auth.ProfileEditActivity"/>
+        <activity android:name=".ui.main.auth.qr_camera.QRCameraActivity"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"

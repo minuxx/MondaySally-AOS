@@ -13,9 +13,14 @@ class MainViewModel(private val authNetworkRepository: AuthNetworkRepository) : 
 
     var navigationFlag: MutableLiveData<Int> = MutableLiveData()
     var goMyPage: MutableLiveData<Boolean> = MutableLiveData()
+    var goQR: MutableLiveData<Boolean> = MutableLiveData()
 
-    fun whenTvMyPage() {
+    fun whenMyPageClicked() {
         goMyPage.value = true
+    }
+
+    fun whenQRClicked() {
+        goQR.value = true
     }
 
     fun postFcmToken(token: String) = viewModelScope.launch {
