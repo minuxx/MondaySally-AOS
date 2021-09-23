@@ -2,8 +2,9 @@ package com.moon.android.mondaysally.data.entities
 
 import android.net.Uri
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
-data class TwinkleResult(
+data class TwinkleResult (
     @SerializedName(value = "giftLogs") val giftLogs: ArrayList<MyTwinkle>?,
     @SerializedName(value = "twinkles") val twinkles: ArrayList<Twinkle>?,
 
@@ -22,7 +23,7 @@ data class TwinkleResult(
     @SerializedName(value = "commentNum") val commentNum: Int,
     @SerializedName(value = "commentLists") val commentLists: ArrayList<TwinkleComment>,
     @SerializedName(value = "isPrivated") val isPrivated: String,
-)
+) : Serializable
 
 data class MyTwinkle(
     @SerializedName(value = "usedClover") val usedClover: Int,
@@ -30,7 +31,7 @@ data class MyTwinkle(
     @SerializedName(value = "name") val name: String,
     @SerializedName(value = "imgUrl") val imgUrl: String,
     @SerializedName(value = "idx") val idx: Int,
-)
+): Serializable
 
 data class Twinkle(
     @SerializedName(value = "usedClover") val usedClover: Int,
@@ -56,7 +57,7 @@ data class Twinkle(
 //"content": "그동안 열심히 한 보람이 있네요! 드디어 쌓아왔던 포인트로 가족들에게 쐈습니다 ㅎㅎ 덕분에 가족들에게 좋은 소리들었네요! 다들 포인트 잘 활용해보세요~!",
 //"likenum": 2,
 //"commentnum": 3
-)
+): Serializable
 
 data class TwinkleRank(
     @SerializedName(value = "ranking") val ranking: Int,
@@ -72,7 +73,7 @@ data class TwinkleComment(
     @SerializedName(value = "commentContent") val commentContent: String,
     @SerializedName(value = "commentCreatedAt") val commentCreatedAt: String,
     @SerializedName(value = "isCommentWrited") val isCommentWrited: String,
-)
+): Serializable
 
 data class CommentPostBody(
     @SerializedName(value = "content") val content: String,
@@ -88,4 +89,16 @@ data class TwinklePostBody  (
     @SerializedName(value = "content") val content: String,
     @SerializedName(value = "receiptImgUrl") val receiptImgUrl: String,
     @SerializedName(value = "twinkleImgList") val twinkleImgList: ArrayList<String>,
+)
+
+data class TwinkleImageUpload  (
+    var uploaded: Boolean,
+    var firebaseUploaded: Boolean,
+)
+
+
+data class TwinklePatchBody  (
+    @SerializedName(value = "content") val content: String,
+    @SerializedName(value = "receiptImgUrl") val receiptImgUrl: String,
+    @SerializedName(value = "updateTwinkleImgList") val twinkleImgList: ArrayList<String>,
 )

@@ -1,6 +1,7 @@
 package com.moon.android.mondaysally.data.remote.twinkke
 
 import com.moon.android.mondaysally.data.entities.CommentPostBody
+import com.moon.android.mondaysally.data.entities.TwinklePatchBody
 import com.moon.android.mondaysally.data.entities.TwinklePostBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -20,6 +21,9 @@ interface TwinkleService {
 
     @POST("/twinkle")
     suspend fun postTwinkle(@Body twinklePostBody: TwinklePostBody): Response<TwinkleResponse>
+
+    @PATCH("/twinkle/{idx}")
+    suspend fun patchTwinkle(@Body twinklePatchBody: TwinklePatchBody, @Path("idx") idx: Int): Response<TwinkleResponse>
 
     @POST("/like/{idx}")
     suspend fun postLike(@Path("idx") idx: Int): Response<TwinkleResponse>

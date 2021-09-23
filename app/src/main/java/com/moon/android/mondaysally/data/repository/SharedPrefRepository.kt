@@ -6,6 +6,9 @@ import com.moon.android.mondaysally.utils.GlobalConstant
 import com.moon.android.mondaysally.utils.GlobalConstant.Companion.NOTIFICATION_CATEGORY
 import com.moon.android.mondaysally.utils.GlobalConstant.Companion.NOTIFICATION_PERMISSION
 import com.moon.android.mondaysally.utils.GlobalConstant.Companion.NOTIFICATION_TWINKLE_IDX
+import com.moon.android.mondaysally.utils.GlobalConstant.Companion.WORK_STATUS
+import com.moon.android.mondaysally.utils.GlobalConstant.Companion.WORK_STATUS_OFF
+import com.moon.android.mondaysally.utils.GlobalConstant.Companion.WORK_STATUS_ON
 import com.moon.android.mondaysally.utils.GlobalConstant.Companion.X_ACCESS_TOKEN
 
 class SharedPrefRepository(private val context: Context) {
@@ -82,4 +85,14 @@ class SharedPrefRepository(private val context: Context) {
     val notificationCategory: String? = getSharedPreferences()
         .getString(NOTIFICATION_CATEGORY, null)
 
+    fun saveWorkStatus(status: String?) {
+        val spf = getSharedPreferences()
+        val editor = spf.edit()
+        editor.putString(WORK_STATUS, status)
+        editor.apply()
+    }
+
+    fun getWorkState() : String? {
+        return getSharedPreferences().getString(NOTIFICATION_CATEGORY, WORK_STATUS_OFF)
+    }
 }

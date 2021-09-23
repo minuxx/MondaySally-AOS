@@ -10,6 +10,9 @@ import android.view.View.GONE
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
 import androidx.core.widget.NestedScrollView
 import androidx.viewpager2.widget.ViewPager2
@@ -18,6 +21,8 @@ import com.moon.android.mondaysally.databinding.ActivityTwinkleDetailBinding
 import com.moon.android.mondaysally.ui.BaseActivity
 import com.moon.android.mondaysally.ui.main.twinkle.BottomSheetDialogFragment
 import com.moon.android.mondaysally.ui.main.twinkle.TwinkleViewModel
+import com.moon.android.mondaysally.ui.main.twinkle.twinkle_post.TwinklePostActivity
+import com.moon.android.mondaysally.utils.GlobalConstant.Companion.EDIT_MODE
 import me.relex.circleindicator.CircleIndicator3
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -32,6 +37,13 @@ class TwinkleDetailActivity : BaseActivity<ActivityTwinkleDetailBinding>() {
     lateinit var viewPagerAdapter: ImageViewpagerAdapter
 
     override fun getLayoutResId() = R.layout.activity_twinkle_detail
+
+    private val twinkleEditActivityLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == RESULT_OK) {
+                twinkleViewModel.getTwinkleDetail(twinkleViewModel.twinkleIndex.value!!)
+            }
+        }
 
     override fun initDataBinding() {
         context = this;
@@ -61,6 +73,16 @@ class TwinkleDetailActivity : BaseActivity<ActivityTwinkleDetailBinding>() {
         twinkleViewModel.bottomSheetOpen.observe(this, { bottomSheetOpen ->
             if (bottomSheetOpen) {
                 val bottomDialogFragment = BottomSheetDialogFragment()
+                bottomDialogFragment.setOnEditClickListener {
+                    val intent = Intent(context, TwinklePostActivity::class.java)
+                    intent.putExtra("twinkleResult", twinkleViewModel.twinkleResult.value)
+                    intent.putExtra("mode", EDIT_MODE)
+                    intent.putExtra("idx", twinkleViewModel.twinkleIndex.value!!)
+                    intent.putExtra("name", twinkleViewModel.twinkleResult.value?.giftName)
+                    intent.putExtra("usedClover", twinkleViewModel.twinkleResult.value?.option)
+                    twinkleEditActivityLauncher.launch(intent)
+                    bottomDialogFragment.dismiss()
+                }
                 bottomDialogFragment.show(supportFragmentManager, bottomDialogFragment.tag)
                 twinkleViewModel.bottomSheetOpen.value = false
             }

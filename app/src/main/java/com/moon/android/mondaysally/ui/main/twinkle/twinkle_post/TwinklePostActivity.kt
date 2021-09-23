@@ -8,7 +8,7 @@ import android.content.pm.ResolveInfo
 import android.graphics.Bitmap
 import android.net.Uri
 import android.provider.MediaStore
-import android.widget.Toast
+import android.text.Editable
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -16,11 +16,15 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import com.moon.android.mondaysally.BR
 import com.moon.android.mondaysally.R
+import com.moon.android.mondaysally.data.entities.TwinkleImageUpload
+import com.moon.android.mondaysally.data.entities.TwinkleResult
 import com.moon.android.mondaysally.databinding.ActivityTwinklePostBinding
 import com.moon.android.mondaysally.ui.BaseActivity
 import com.moon.android.mondaysally.ui.SallyDialog
 import com.moon.android.mondaysally.ui.main.MainActivity
 import com.moon.android.mondaysally.ui.main.twinkle.TwinkleViewModel
+import com.moon.android.mondaysally.ui.main.twinkle.twinkle_detail.TwinkleDetailActivity
+import com.moon.android.mondaysally.utils.GlobalConstant
 import com.moon.android.mondaysally.utils.GlobalConstant.Companion.RECEIPT_IMAGE_MODE
 import com.moon.android.mondaysally.utils.GlobalConstant.Companion.TWINKLE_IMAGE_MODE
 import com.moon.android.mondaysally.utils.GlobalConstant.Companion.VALIDATE_RECEIPT_PHOTO
@@ -40,6 +44,7 @@ class TwinklePostActivity : BaseActivity<ActivityTwinklePostBinding>() {
     private var imageMode: Int = 0
 
     private val permission = android.Manifest.permission.READ_EXTERNAL_STORAGE
+    private lateinit var twinkleResult: TwinkleResult
 
     private val twinkleImageFromGalleryLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
@@ -54,6 +59,8 @@ class TwinklePostActivity : BaseActivity<ActivityTwinklePostBinding>() {
 
             } else {
                 //권한미동의시
+                finish()
+                showToast("미디어 엑세스 허용이 필요합니다.")
             }
         }
 
@@ -63,14 +70,16 @@ class TwinklePostActivity : BaseActivity<ActivityTwinklePostBinding>() {
                 RESULT_OK -> {
                     if (imageMode == TWINKLE_IMAGE_MODE) {
                         result.data?.data?.let {
-                            if (twinkleViewModel.photoCount < 3) twinkleViewModel.photoCount++
+                            twinkleViewModel.twinkleImageUploadFlag[twinkleViewModel.selectedPhotoIndex.value!!] = TwinkleImageUpload(true, false)
                             twinkleViewModel._twinkleImgList.get()?.set(twinkleViewModel.selectedPhotoIndex.value!!, it)
                             twinkleViewModel._twinkleImgList.notifyPropertyChanged(BR._all)
+                            twinkleViewModel.editTwinkleImgList[twinkleViewModel.selectedPhotoIndex.value!!] = true
                         }
                     } else {
                         result.data?.data?.let {
                             twinkleViewModel._receiptImgUrl.set(it)
                             twinkleViewModel._receiptImgUrl.notifyPropertyChanged(BR._all)
+                            twinkleViewModel.editReceiptImgUrl = true
                         }
                     }
                 }
@@ -95,6 +104,15 @@ class TwinklePostActivity : BaseActivity<ActivityTwinklePostBinding>() {
         twinkleViewModel.hideKeyboard.observe(this, { hideKeyboard ->
             if (hideKeyboard)
                 hideKeyboard(binding.activityTwinklePostEtContent)
+        })
+
+        twinkleViewModel.firebaseUploadSuccess.observe(this, { firebaseUploadSuccess ->
+            if (firebaseUploadSuccess)
+                if (intent.getStringExtra("mode") == GlobalConstant.EDIT_MODE) {
+                    twinkleViewModel.patchTwinkle()
+                } else {
+                    twinkleViewModel.postTwinkle()
+                }
         })
 
         twinkleViewModel.getTwinklePhoto.observe(this, { getPhoto ->
@@ -123,6 +141,14 @@ class TwinklePostActivity : BaseActivity<ActivityTwinklePostBinding>() {
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
                 intent.putExtra("navigation","twinkle")
                 startActivity(intent)
+                finish()
+            }
+        })
+
+        twinkleViewModel.twinklePatchSuccess.observe(this, { twinklePatchSuccess ->
+            if (twinklePatchSuccess) {
+                val intent = Intent(context, TwinklePostActivity::class.java)
+                setResult(RESULT_OK, intent)
                 finish()
             }
         })
@@ -187,6 +213,25 @@ class TwinklePostActivity : BaseActivity<ActivityTwinklePostBinding>() {
         binding.activityTwinklePostTvClover.text = intent.getIntExtra("usedClover", 0).toString()
         twinkleViewModel.twinkleIndex.value = intent.getIntExtra("idx", 0)
         permissionLauncher.launch(permission)
+
+        if (intent.getStringExtra("mode") == GlobalConstant.EDIT_MODE) {
+            setEditMode()
+        }
+    }
+
+    private fun setEditMode(){
+        twinkleResult = intent.getSerializableExtra("twinkleResult") as TwinkleResult
+        binding.activityTwinklePostBtnDone.text = getString(R.string.modify)
+        binding.activityTwinklePostTitle.text = getString(R.string.twinkle_edit)
+        twinkleViewModel.editTextContentString.set(twinkleResult.content)
+
+        twinkleResult.twinkleImglists.forEachIndexed { index, url ->
+            twinkleViewModel.twinkleImgList[index] = url
+            twinkleViewModel.twinkleImageUploadFlag[index] = TwinkleImageUpload(true, true)
+//            twinkleViewModel.photoCount++
+//            twinkleViewModel.uploadDoneCount++
+        }
+        twinkleViewModel.receiptImgUrl = twinkleResult.receiptImgUrl
     }
 
     @SuppressLint("SimpleDateFormat", "QueryPermissionsNeeded")

@@ -22,6 +22,8 @@
     <string name="mypage">마이페이지</string>
     <string name="profile_edit">프로필수정</string>
     <string name="qr_camera">출퇴근 인증</string>
+    <string name="twinkle_post">내 트윙클 추가하기</string>
+    <string name="twinkle_edit">내 트윙클 수정하기</string>
 
     <!--에러처리-->
     <string name="default_fail">네트워크연결이 원활하지 않습니다</string>
@@ -111,7 +113,6 @@
     <!--트윙클-->
     <string name="twinkle_my_twinkle">내 트윙클 현황</string>
     <string name="twinkle_comment_hint">댓글을 입력해주세요. </string>
-    <string name="twinkle_post">내 트윙클 추가하기</string>
     <string name="twinkle_post_btn">게시</string>
     <string name="twinkle_gift_name">기프트 명</string>
     <string name="twinkle_clover_photo">클로버 사용 증명사진</string>
@@ -156,10 +157,12 @@
 
     <!--QR-->
     <string name="qr_guide_1">현재 퇴근 상태로\n하단에 QR 코드를 인식시키면</string>
-    <string name="qr_status_in">출근</string>
-    <string name="qr_status_out">퇴근</string>
+    <string name="qr_status_on">출근</string>
+    <string name="qr_status_off">퇴근</string>
     <string name="qr_guide_2">이 됩니다.</string>
     <string name="qr_guide_3">* QR코드를 인식시켜주세요.</string>
+    <string name="qr_on_message">출근처리 되었습니다</string>
+    <string name="qr_off_message">퇴근처리 되었습니다</string>
 
 
 </resources>

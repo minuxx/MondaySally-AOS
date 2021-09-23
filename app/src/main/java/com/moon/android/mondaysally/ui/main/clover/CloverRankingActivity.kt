@@ -39,7 +39,7 @@ class CloverRankingActivity : BaseActivity<ActivityCloverRankingBinding>() {
             if (rankingList.isNotEmpty()) {
                 binding.activityCloverRankingTvFirstRankNickname.text = rankingList[0].nickname
                 binding.activityCloverRankingTvFirstRankClover.text = DecimalFormat("#,###").format(rankingList[0].currentClover)
-                setCircleImageByGlide(
+                setCircleImageByUrl(
                     binding.activityCloverRankingIvFirstRankProfile,
                     rankingList[0].imgUrl
                 )
@@ -76,7 +76,7 @@ class CloverRankingActivity : BaseActivity<ActivityCloverRankingBinding>() {
             val formatted = current.format(formatter)
             binding.activityCloverRankingTvDate.text = "$formatted 기준"
         } else {
-            TODO("VERSION.SDK_INT < O")
+//            TODO("VERSION.SDK_INT < O")
         }
         cloverViewModel._getRankingList()
         loadData()

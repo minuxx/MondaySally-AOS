@@ -24,4 +24,7 @@ interface AuthService {
 
     @POST("/firebase")
     suspend fun postFcmToken(@Body fcmBody: FcmBody): Response<AuthResponse>
+
+    @POST("/work")
+    suspend fun postWork(): Response<AuthResponse>
 }

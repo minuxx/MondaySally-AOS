@@ -21,6 +21,7 @@ class GlobalConstant {
         const val NOTIFICATION_TWINKLE_IDX = "NOTIFICATION_TWINKLE_IDX"
         const val NOTIFICATION_PERMISSION = "NOTIFICATION_PERMISSION"
         const val NOTIFICATION_CATEGORY = "NOTIFICATION_CATEGORY"
+        const val WORK_STATUS = "WORK_STATUS"
 
         //Animation
         const val FREQ = 1.5f
@@ -44,6 +45,10 @@ class GlobalConstant {
         const val VALIDATE_TWINKLE_PHOTO = 1
         const val VALIDATE_RECEIPT_PHOTO = 2
         const val VALIDATE_TWINKLE_CONTENT = 3
+
+        const val WORK_STATUS_ON = "ON"
+        const val WORK_STATUS_OFF = "OFF"
+        const val EDIT_MODE = "EDIT"
     }
 
 }

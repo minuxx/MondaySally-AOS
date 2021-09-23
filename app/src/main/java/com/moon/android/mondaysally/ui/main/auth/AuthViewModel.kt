@@ -45,6 +45,10 @@ class AuthViewModel(
     var editTextBankString = ObservableField("")
     var editTextEmailString = ObservableField("")
 
+    //QR
+    var postWorkSuccess: MutableLiveData<Boolean> = MutableLiveData()
+    var qrPossibleStatusForDelay: Boolean = true
+
     fun getMyPageData() = viewModelScope.launch {
         try {
             val authResponse = authNetworkRepository.getMyPage()
@@ -83,6 +87,22 @@ class AuthViewModel(
             fail.value = Fail(e.message!!, 404)
         } catch (e: Exception) {
             Log.d("네트워크", e.toString())
+            fail.value = Fail(e.message!!, 404)
+        }
+    }
+
+    fun postWork() = viewModelScope.launch {
+        try {
+            val authResponse = authNetworkRepository.postWork()
+            Log.d("네트워크", authResponse.toString())
+            if (authResponse.code == 200) {
+                postWorkSuccess.value = true
+            } else {
+                fail.value = Fail(authResponse.message, authResponse.code)
+            }
+        } catch (e: Exception) {
+            fail.value = Fail(e.message!!, 404)
+        } catch (e: Exception) {
             fail.value = Fail(e.message!!, 404)
         }
     }

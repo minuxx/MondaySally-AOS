@@ -10,11 +10,11 @@
             type="com.moon.android.mondaysally.ui.main.auth.AuthViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".ui.main.MainActivity">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/activity_my_page_top_bar"
@@ -51,322 +51,333 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ImageView
-            android:id="@+id/activity_my_page_iv_profile"
-            bind_profile_image_circle="@{viewModel.authResult.imgUrl}"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="18dp"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/illust_sally_blank_circle"
-            app:layout_constraintBottom_toBottomOf="@id/activity_my_page_tv_email"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/activity_my_page_top_bar" />
-
-        <TextView
-            android:id="@+id/activity_my_page_tv_nickname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="22dp"
-            android:fontFamily="@font/roboto_medium"
-            android:text="@{viewModel.authResult.nickname}"
-            android:textColor="@color/black"
-            android:textSize="19sp"
-            app:layout_constraintStart_toEndOf="@+id/activity_my_page_iv_profile"
-            app:layout_constraintTop_toTopOf="@+id/activity_my_page_iv_profile"
-            tools:text="미누스" />
-
-        <TextView
-            android:id="@+id/activity_my_page_tv_profile_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="3dp"
-            android:fontFamily="@font/roboto_light"
-            android:paddingTop="18dp"
-            android:paddingBottom="20dp"
-            android:text="@string/mypage_profile_edit"
-            android:onClick="@{() -> viewModel.whenProfileEditClicked()}"
-            android:textColor="@color/greyish_brown"
-            android:textSize="13sp"
-            app:layout_constraintEnd_toStartOf="@+id/activity_my_page_iv_profile_edit"
-            app:layout_constraintTop_toBottomOf="@id/activity_my_page_top_bar" />
-
-        <ImageView
-            android:id="@+id/activity_my_page_iv_profile_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/ic_chevron_right_gray"
-            app:layout_constraintBottom_toBottomOf="@+id/activity_my_page_tv_profile_edit"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/activity_my_page_tv_profile_edit" />
-
-        <TextView
-            android:id="@+id/activity_my_page_tv_company"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:fontFamily="@font/roboto_regular"
-            android:text="@{viewModel.authResult.companyName}"
-            android:textColor="@color/greyish_brown"
-            android:textSize="13sp"
-            app:layout_constraintStart_toStartOf="@+id/activity_my_page_tv_nickname"
-            app:layout_constraintTop_toBottomOf="@+id/activity_my_page_tv_nickname"
-            tools:text="회사명 " />
-
-        <TextView
-            android:id="@+id/activity_my_page_tv_part"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="4dp"
-            android:fontFamily="@font/roboto_regular"
-            android:text="@{viewModel.authResult.department}"
-            android:textColor="@color/greyish_brown"
-            android:textSize="13sp"
-            app:layout_constraintStart_toEndOf="@+id/activity_my_page_tv_company"
-            app:layout_constraintTop_toBottomOf="@+id/activity_my_page_tv_nickname"
-            tools:text="부서 " />
-
-        <TextView
-            android:id="@+id/activity_my_page_tv_rank"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:fontFamily="@font/roboto_regular"
-            android:text="@{viewModel.authResult.position}"
-            android:textColor="@color/greyish_brown"
-            android:textSize="13sp"
-            app:layout_constraintStart_toStartOf="@+id/activity_my_page_tv_nickname"
-            app:layout_constraintTop_toBottomOf="@+id/activity_my_page_tv_company"
-            tools:text="직급" />
-
-        <View
-            android:id="@+id/activity_my_page_line_1"
-            android:layout_width="0.6000000238418579dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="3dp"
-            android:background="@color/greyish_brown"
-            app:layout_constraintBottom_toBottomOf="@+id/activity_my_page_tv_rank"
-            app:layout_constraintStart_toEndOf="@+id/activity_my_page_tv_rank"
-            app:layout_constraintTop_toTopOf="@+id/activity_my_page_tv_rank" />
-
-        <TextView
-            android:id="@+id/activity_my_page_tv_years"
-            bind_my_page_working_year="@{viewModel.authResult.workingYear}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:fontFamily="@font/roboto_regular"
-            android:textColor="@color/greyish_brown"
-            android:textSize="13sp"
-            app:layout_constraintStart_toEndOf="@+id/activity_my_page_line_1"
-            app:layout_constraintTop_toTopOf="@+id/activity_my_page_tv_rank"
-            tools:text="근속연수" />
-
-        <TextView
-            android:id="@+id/activity_my_page_tv_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
-            android:fontFamily="@font/roboto_regular"
-            android:text="@{viewModel.authResult.email}"
-            android:textColor="@color/greyish_brown"
-            android:textSize="13sp"
-            app:layout_constraintStart_toStartOf="@+id/activity_my_page_tv_rank"
-            app:layout_constraintTop_toBottomOf="@+id/activity_my_page_tv_rank"
-            tools:text="email" />
-
-        <View
-            android:id="@+id/activity_my_page_line_2"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="7dp"
-            android:layout_marginTop="17dp"
-            android:background="@color/heavy_line_grey"
-            app:layout_constraintTop_toBottomOf="@id/activity_my_page_tv_email" />
+            android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/activity_my_page_line_2">
-
-            <TextView
-                android:id="@+id/activity_my_page_tv_my_clover"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:paddingStart="16dp"
-                android:paddingTop="21dp"
-                android:paddingBottom="21dp"
-                android:text="@string/mypage_my_clover"
-                android:textColor="@color/black"
-                android:onClick="@{()->viewModel.whenMenuClicked(1)}"
-                android:textSize="15sp" />
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:context=".ui.main.MainActivity">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.8dp"
-                android:layout_marginHorizontal="16dp"
-                android:background="@color/very_light_gray" />
+                <ImageView
+                    android:id="@+id/activity_my_page_iv_profile"
+                    bind_profile_image_circle="@{viewModel.authResult.imgUrl}"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="18dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/illust_sally_blank_circle"
+                    app:layout_constraintBottom_toBottomOf="@id/activity_my_page_tv_email"
+                    app:layout_constraintDimensionRatio="1:1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/activity_my_page_tv_gift_history"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:paddingStart="16dp"
-                android:paddingTop="21dp"
-                android:paddingBottom="21dp"
-                android:onClick="@{()->viewModel.whenMenuClicked(2)}"
-                android:text="@string/mypage_gift_history"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/activity_my_page_tv_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="22dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="@{viewModel.authResult.nickname}"
+                    android:textColor="@color/black"
+                    android:textSize="19sp"
+                    app:layout_constraintStart_toEndOf="@+id/activity_my_page_iv_profile"
+                    app:layout_constraintTop_toTopOf="@+id/activity_my_page_iv_profile"
+                    tools:text="미누스" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.8dp"
-                android:layout_marginHorizontal="16dp"
-                android:background="@color/very_light_gray" />
+                <TextView
+                    android:id="@+id/activity_my_page_tv_profile_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="3dp"
+                    android:fontFamily="@font/roboto_light"
+                    android:onClick="@{() -> viewModel.whenProfileEditClicked()}"
+                    android:paddingTop="18dp"
+                    android:paddingBottom="20dp"
+                    android:text="@string/mypage_profile_edit"
+                    android:textColor="@color/greyish_brown"
+                    android:textSize="13sp"
+                    app:layout_constraintEnd_toStartOf="@+id/activity_my_page_iv_profile_edit"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/activity_my_page_tv_inquiry"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:paddingStart="16dp"
-                android:paddingTop="21dp"
-                android:paddingBottom="21dp"
-                android:text="@string/mypage_inquiry"
-                android:textColor="@color/black"
-                android:onClick="@{()->viewModel.whenMenuClicked(3)}"
-                android:textSize="15sp" />
+                <ImageView
+                    android:id="@+id/activity_my_page_iv_profile_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/ic_chevron_right_gray"
+                    app:layout_constraintBottom_toBottomOf="@+id/activity_my_page_tv_profile_edit"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/activity_my_page_tv_profile_edit" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.8dp"
-                android:layout_marginHorizontal="16dp"
-                android:background="@color/very_light_gray" />
+                <TextView
+                    android:id="@+id/activity_my_page_tv_company"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="@{viewModel.authResult.companyName}"
+                    android:textColor="@color/greyish_brown"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/activity_my_page_tv_nickname"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_my_page_tv_nickname"
+                    tools:text="회사명 " />
 
-            <TextView
-                android:id="@+id/activity_my_page_tv_on_boarding"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:paddingStart="16dp"
-                android:paddingTop="21dp"
-                android:paddingBottom="21dp"
-                android:text="@string/mypage_on_boarding"
-                android:textColor="@color/black"
-                android:onClick="@{()->viewModel.whenMenuClicked(4)}"
-                android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/activity_my_page_tv_part"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="@{viewModel.authResult.department}"
+                    android:textColor="@color/greyish_brown"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toEndOf="@+id/activity_my_page_tv_company"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_my_page_tv_nickname"
+                    tools:text="부서 " />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.8dp"
-                android:layout_marginHorizontal="16dp"
-                android:background="@color/very_light_gray" />
+                <TextView
+                    android:id="@+id/activity_my_page_tv_rank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="@{viewModel.authResult.position}"
+                    android:textColor="@color/greyish_brown"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/activity_my_page_tv_nickname"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_my_page_tv_company"
+                    tools:text="직급" />
 
-            <TextView
-                android:id="@+id/activity_my_page_tv_open_source"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:paddingStart="16dp"
-                android:paddingTop="21dp"
-                android:paddingBottom="21dp"
-                android:text="@string/mypage_open_source"
-                android:textColor="@color/black"
-                android:onClick="@{()->viewModel.whenMenuClicked(5)}"
-                android:textSize="15sp" />
+                <View
+                    android:id="@+id/activity_my_page_line_1"
+                    android:layout_width="0.6000000238418579dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="3dp"
+                    android:background="@color/greyish_brown"
+                    app:layout_constraintBottom_toBottomOf="@+id/activity_my_page_tv_rank"
+                    app:layout_constraintStart_toEndOf="@+id/activity_my_page_tv_rank"
+                    app:layout_constraintTop_toTopOf="@+id/activity_my_page_tv_rank" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.8dp"
-                android:layout_marginHorizontal="16dp"
-                android:background="@color/very_light_gray" />
+                <TextView
+                    android:id="@+id/activity_my_page_tv_years"
+                    bind_my_page_working_year="@{viewModel.authResult.workingYear}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textColor="@color/greyish_brown"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toEndOf="@+id/activity_my_page_line_1"
+                    app:layout_constraintTop_toTopOf="@+id/activity_my_page_tv_rank"
+                    tools:text="근속연수" />
 
-            <TextView
-                android:id="@+id/activity_my_page_tv_terms"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:paddingStart="16dp"
-                android:paddingTop="21dp"
-                android:paddingBottom="21dp"
-                android:text="@string/mypage_terms"
-                android:textColor="@color/black"
-                android:onClick="@{()->viewModel.whenMenuClicked(6)}"
-                android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/activity_my_page_tv_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="@{viewModel.authResult.email}"
+                    android:textColor="@color/greyish_brown"
+                    android:textSize="13sp"
+                    app:layout_constraintStart_toStartOf="@+id/activity_my_page_tv_rank"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_my_page_tv_rank"
+                    tools:text="email" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.8dp"
-                android:layout_marginHorizontal="16dp"
-                android:background="@color/very_light_gray" />
+                <View
+                    android:id="@+id/activity_my_page_line_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="7dp"
+                    android:layout_marginTop="17dp"
+                    android:background="@color/heavy_line_grey"
+                    app:layout_constraintTop_toBottomOf="@id/activity_my_page_tv_email" />
 
-            <TextView
-                android:id="@+id/activity_my_page_tv_version"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:paddingStart="16dp"
-                android:paddingTop="21dp"
-                android:paddingBottom="21dp"
-                android:text="@string/mypage_version"
-                android:textColor="@color/black"
-                android:onClick="@{()->viewModel.whenMenuClicked(7)}"
-                android:textSize="15sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/activity_my_page_line_2">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.8dp"
-                android:layout_marginHorizontal="16dp"
-                android:background="@color/very_light_gray" />
+                    <TextView
+                        android:id="@+id/activity_my_page_tv_my_clover"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:onClick="@{()->viewModel.whenMenuClicked(1)}"
+                        android:paddingStart="16dp"
+                        android:paddingTop="21dp"
+                        android:paddingBottom="21dp"
+                        android:text="@string/mypage_my_clover"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
 
-            <TextView
-                android:id="@+id/activity_my_page_tv_resignation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:paddingStart="16dp"
-                android:paddingTop="21dp"
-                android:paddingBottom="21dp"
-                android:text="@string/mypage_resignation"
-                android:textColor="@color/black"
-                android:onClick="@{()->viewModel.whenMenuClicked(8)}"
-                android:textSize="15sp" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.8dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:background="@color/very_light_gray" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.8dp"
-                android:layout_marginHorizontal="16dp"
-                android:background="@color/very_light_gray" />
+                    <TextView
+                        android:id="@+id/activity_my_page_tv_gift_history"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:onClick="@{()->viewModel.whenMenuClicked(2)}"
+                        android:paddingStart="16dp"
+                        android:paddingTop="21dp"
+                        android:paddingBottom="21dp"
+                        android:text="@string/mypage_gift_history"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
 
-            <TextView
-                android:id="@+id/activity_my_page_tv_logout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_regular"
-                android:paddingStart="16dp"
-                android:paddingTop="21dp"
-                android:paddingBottom="21dp"
-                android:text="@string/mypage_logout"
-                android:onClick="@{()->viewModel.whenMenuClicked(9)}"
-                android:textColor="@color/black"
-                android:textSize="15sp" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.8dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:background="@color/very_light_gray" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.8dp"
-                android:layout_marginHorizontal="16dp"
-                android:background="@color/very_light_gray" />
+                    <TextView
+                        android:id="@+id/activity_my_page_tv_inquiry"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:onClick="@{()->viewModel.whenMenuClicked(3)}"
+                        android:paddingStart="16dp"
+                        android:paddingTop="21dp"
+                        android:paddingBottom="21dp"
+                        android:text="@string/mypage_inquiry"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.8dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:background="@color/very_light_gray" />
+
+                    <TextView
+                        android:id="@+id/activity_my_page_tv_on_boarding"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:onClick="@{()->viewModel.whenMenuClicked(4)}"
+                        android:paddingStart="16dp"
+                        android:paddingTop="21dp"
+                        android:paddingBottom="21dp"
+                        android:text="@string/mypage_on_boarding"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.8dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:background="@color/very_light_gray" />
+
+                    <TextView
+                        android:id="@+id/activity_my_page_tv_open_source"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:onClick="@{()->viewModel.whenMenuClicked(5)}"
+                        android:paddingStart="16dp"
+                        android:paddingTop="21dp"
+                        android:paddingBottom="21dp"
+                        android:text="@string/mypage_open_source"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.8dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:background="@color/very_light_gray" />
+
+                    <TextView
+                        android:id="@+id/activity_my_page_tv_terms"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:onClick="@{()->viewModel.whenMenuClicked(6)}"
+                        android:paddingStart="16dp"
+                        android:paddingTop="21dp"
+                        android:paddingBottom="21dp"
+                        android:text="@string/mypage_terms"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.8dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:background="@color/very_light_gray" />
+
+                    <TextView
+                        android:id="@+id/activity_my_page_tv_version"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:onClick="@{()->viewModel.whenMenuClicked(7)}"
+                        android:paddingStart="16dp"
+                        android:paddingTop="21dp"
+                        android:paddingBottom="21dp"
+                        android:text="@string/mypage_version"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.8dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:background="@color/very_light_gray" />
+
+                    <TextView
+                        android:id="@+id/activity_my_page_tv_resignation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:onClick="@{()->viewModel.whenMenuClicked(8)}"
+                        android:paddingStart="16dp"
+                        android:paddingTop="21dp"
+                        android:paddingBottom="21dp"
+                        android:text="@string/mypage_resignation"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.8dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:background="@color/very_light_gray" />
+
+                    <TextView
+                        android:id="@+id/activity_my_page_tv_logout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_regular"
+                        android:onClick="@{()->viewModel.whenMenuClicked(9)}"
+                        android:paddingStart="16dp"
+                        android:paddingTop="21dp"
+                        android:paddingBottom="21dp"
+                        android:text="@string/mypage_logout"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.8dp"
+                        android:layout_marginHorizontal="16dp"
+                        android:background="@color/very_light_gray" />
 
 
-        </LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </LinearLayout>
 </layout>

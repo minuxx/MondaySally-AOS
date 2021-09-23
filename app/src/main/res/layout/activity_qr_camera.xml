@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_bold"
                 android:gravity="center_horizontal"
-                android:text="@string/qr_status_in"
+                android:text="@string/qr_status_on"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 

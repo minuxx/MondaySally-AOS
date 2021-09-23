@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.text.Editable
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
@@ -38,6 +39,8 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
 
     protected lateinit var binding: T
         private set
+
+    fun String.toEditable(): Editable =  Editable.Factory.getInstance().newEditable(this)
 
     fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
@@ -163,6 +166,19 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         }
     }
 
+    fun setLargeImageFromUrl(url: String?, imageView: ImageView) {
+        url.let {
+            Glide.with(this)
+                .load(url)
+                .override(400, 400)
+                .error(R.drawable.illust_sally_blank_1_1)
+                .centerCrop()
+                .thumbnail(0.2f)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(imageView)
+        }
+    }
+
     fun setCircleImageFromUri(url: Uri?, imageView: ImageView) {
         url.let {
             Glide.with(this)
@@ -176,7 +192,7 @@ abstract class BaseActivity<T : ViewDataBinding> : AppCompatActivity() {
         }
     }
 
-    fun setCircleImageByGlide(iv: ImageView, url: String) {
+    fun setCircleImageByUrl(iv: ImageView, url: String) {
         Glide.with(this)
             .load(url).placeholder(R.drawable.bg_round_white_gray)
             .error(R.drawable.illust_sally_profile_blank)

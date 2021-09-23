@@ -13,9 +13,12 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.common.util.concurrent.ListenableFuture
 import com.moon.android.mondaysally.R
+import com.moon.android.mondaysally.data.repository.SharedPrefRepository
 import com.moon.android.mondaysally.databinding.ActivityQrCameraBinding
 import com.moon.android.mondaysally.ui.BaseActivity
 import com.moon.android.mondaysally.ui.main.auth.AuthViewModel
+import com.moon.android.mondaysally.utils.GlobalConstant.Companion.WORK_STATUS_OFF
+import com.moon.android.mondaysally.utils.GlobalConstant.Companion.WORK_STATUS_ON
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.concurrent.Executors
 
@@ -25,6 +28,7 @@ private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
 class QRCameraActivity : BaseActivity<ActivityQrCameraBinding>() {
 
     private val authViewModel: AuthViewModel by viewModel()
+    private lateinit var sharedPrefRepository: SharedPrefRepository
 
     private lateinit var cameraProviderFuture: ListenableFuture<ProcessCameraProvider>
     private val cameraExecutor = Executors.newSingleThreadExecutor()
@@ -33,6 +37,8 @@ class QRCameraActivity : BaseActivity<ActivityQrCameraBinding>() {
     override fun getLayoutResId() = R.layout.activity_qr_camera
 
     override fun initDataBinding() {
+        sharedPrefRepository = SharedPrefRepository(this)
+
         binding.lifecycleOwner = this
         binding.viewModel = authViewModel
 
@@ -42,24 +48,41 @@ class QRCameraActivity : BaseActivity<ActivityQrCameraBinding>() {
             }
         })
 
-        authViewModel.fail.observe(this,
+        authViewModel.postWorkSuccess.observe(this, { postWorkSuccess ->
+            if (postWorkSuccess) {
+                if (sharedPrefRepository.getWorkState() == WORK_STATUS_OFF) {
+                    sharedPrefRepository.saveWorkStatus(WORK_STATUS_ON)
+                    showToast(getString(R.string.qr_on_message))
+                } else {
+                    sharedPrefRepository.saveWorkStatus(WORK_STATUS_OFF)
+                    showToast(getString(R.string.qr_off_message))
+                }
+                finish()
+            }
+        })
+
+        authViewModel.fail.observe(
+            this,
             { fail ->
 //            341	"존재하지 않는 사용자입니다."
 //            378	"코드 형식을 정확하게 입력해주세요."
 //            378	"코드를 입력해주세요."
 //            404	"네트워크 오류가 발생했습니다."
                 when (fail.code) {
-                    341, 402, 378 -> {
-                        showToast(fail.message)
-                    }
                     else -> {
                         showToast(getString(R.string.default_fail))
                     }
                 }
+                authViewModel.qrPossibleStatusForDelay = true;
             })
     }
 
     override fun initAfterBinding() {
+        if (sharedPrefRepository.getWorkState() == WORK_STATUS_OFF) {
+            binding.activityQrCameraTvStatus.text = getString(R.string.qr_status_off)
+        } else {
+            binding.activityQrCameraTvStatus.text = getString(R.string.qr_status_on)
+        }
         cameraProviderFuture = ProcessCameraProvider.getInstance(this)
 
         // Request camera permissions
@@ -107,7 +130,10 @@ class QRCameraActivity : BaseActivity<ActivityQrCameraBinding>() {
                 it.setAnalyzer(cameraExecutor, QrCodeAnalyzer { qrResult ->
                     binding.activityQrCameraPreview.post {
                         Log.d("QRCodeAnalyzer", "Barcode scanned: ${qrResult.text}")
-                        finish()
+                        if(authViewModel.qrPossibleStatusForDelay){
+                            authViewModel.postWork()
+                            authViewModel.qrPossibleStatusForDelay = false;
+                        }
                     }
                 })
             }
@@ -128,11 +154,6 @@ class QRCameraActivity : BaseActivity<ActivityQrCameraBinding>() {
                 cameraProvider()
             } else {
                 showToast("카메라 권한 허용이 필요합니다")
-//                Toast.makeText(
-//                    this,
-//                    "Permissions not granted by the user.",
-//                    Toast.LENGTH_SHORT
-//                ).show()
                 finish()
             }
         }

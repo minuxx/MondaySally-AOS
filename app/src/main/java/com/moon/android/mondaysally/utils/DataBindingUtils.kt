@@ -244,18 +244,29 @@ object DataBindingUtils {
         textView.text = spannable
     }
 
-    @BindingAdapter("bind_twinkle_post_photo")
+    @BindingAdapter("bind_twinkle_post_photo_uri", "bind_twinkle_post_photo_url")
     @JvmStatic
-    fun ImageView.setTwinklePostPhoto(uri: Uri?) {
-        uri.let {
-            Glide.with(this)
+    fun bindTwinklePostPhoto(imageView: ImageView, uri: Uri?, url: String?) {
+        if (uri != null) {
+            Glide.with(imageView)
                 .load(uri)
                 .override(700, 700)
                 .error(R.drawable.button_photo_add)
                 .centerCrop()
                 .thumbnail(0.2f)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(this)
+                .into(imageView)
+        } else{
+            url.let {
+                Glide.with(imageView)
+                    .load(url)
+                    .override(700, 700)
+                    .error(R.drawable.button_photo_add)
+                    .centerCrop()
+                    .thumbnail(0.2f)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(imageView)
+            }
         }
     }
 

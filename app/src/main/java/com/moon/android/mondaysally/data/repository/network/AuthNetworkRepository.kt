@@ -28,4 +28,8 @@ class AuthNetworkRepository(private val authService: AuthService) : BaseNetworkR
     suspend fun postFcmToken(fcmBody: FcmBody): AuthResponse {
         return apiRequest { authService.postFcmToken(fcmBody) }
     }
+
+    suspend fun postWork(): AuthResponse {
+        return apiRequest { authService.postWork() }
+    }
 }
