@@ -26,6 +26,10 @@ class TwinkleNetworkRepository(val twinkleService: TwinkleService) :
         return apiRequest { twinkleService.postComment(index, commentPostBody) }
     }
 
+    suspend fun deleteComment(index: Int): TwinkleResponse {
+        return apiRequest { twinkleService.deleteComment(index) }
+    }
+
     suspend fun postTwinkle(twinklePostBody: TwinklePostBody): TwinkleResponse {
         return apiRequest { twinkleService.postTwinkle(twinklePostBody) }
     }

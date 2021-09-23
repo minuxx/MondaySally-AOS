@@ -78,7 +78,7 @@
                         tool:text="답글" />
 
                     <TextView
-                        android:id="@+id/item_comment_tv_update"
+                        android:id="@+id/item_comment_tv_delete"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_regular"
@@ -87,11 +87,12 @@
                         android:paddingEnd="4dp"
                         android:paddingBottom="13.6dp"
                         android:textColor="@color/twinkle_date_grey"
+                        bind_comment_delete_visibility="@{model.isCommentWrited()}"
                         android:textSize="13sp"
-                        tool:text="삭제" />
+                        android:text="@string/delete" />
 
                     <TextView
-                        android:id="@+id/item_comment_tv_d"
+                        android:id="@+id/item_comment_tv_edit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_regular"
@@ -100,8 +101,9 @@
                         android:paddingEnd="8dp"
                         android:paddingBottom="13.6dp"
                         android:textColor="@color/twinkle_date_grey"
+                        android:visibility="invisible"
                         android:textSize="13sp"
-                        tool:text="수정" />
+                        android:text="@string/modify" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

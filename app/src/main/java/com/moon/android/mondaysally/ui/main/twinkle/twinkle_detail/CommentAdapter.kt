@@ -35,21 +35,31 @@ class CommentAdapter() : ListAdapter<TwinkleComment, CommentAdapter.ViewHolder>(
 
     inner class ViewHolder(private val binding: ItemCommentBindingImpl) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(TwinkleComment: TwinkleComment) {
-            binding.model = TwinkleComment
+        fun bind(twinkleComment: TwinkleComment) {
+            binding.model = twinkleComment
             binding.executePendingBindings() //데이터가 수정되면 즉각 바인딩
-//            binding.itemTwinkleCommentIv.setOnClickListener {
-//                onItemClickListener?.let { click ->
-//                    click(TwinkleComment)
-//                }
-//            }
+            binding.itemCommentTvDelete.setOnClickListener {
+                onTvDeleteClickListener?.let { click ->
+                    click(twinkleComment, layoutPosition)
+                }
+            }
+            binding.itemCommentTvEdit.setOnClickListener {
+                onTvEditClickListener?.let { click ->
+                    click(twinkleComment, layoutPosition)
+                }
+            }
         }
     }
 
-    private var onItemClickListener: ((TwinkleComment) -> Unit)? = null
+    private var onTvDeleteClickListener: ((TwinkleComment, Int) -> Unit)? = null
+    private var onTvEditClickListener: ((TwinkleComment, Int) -> Unit)? = null
 
-    fun setOnItemClickListener(listener: (TwinkleComment) -> Unit) {
-        onItemClickListener = listener
+    fun setCommentDeleteClickListener(listener: (TwinkleComment, Int) -> Unit) {
+        onTvDeleteClickListener = listener
+    }
+
+    fun setCommentEditClickListener(listener: (TwinkleComment, Int) -> Unit) {
+        onTvEditClickListener = listener
     }
 
     companion object TwinkleCommentDiffUtil : DiffUtil.ItemCallback<TwinkleComment>() {

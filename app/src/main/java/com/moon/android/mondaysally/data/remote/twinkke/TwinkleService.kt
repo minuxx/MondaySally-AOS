@@ -19,6 +19,9 @@ interface TwinkleService {
     @POST("/comment/{idx}")
     suspend fun postComment(@Path("idx") idx: Int, @Body commentPostBody: CommentPostBody): Response<TwinkleResponse>
 
+    @PATCH("/comment/out/{idx}")
+    suspend fun deleteComment(@Path("idx") idx: Int): Response<TwinkleResponse>
+
     @POST("/twinkle")
     suspend fun postTwinkle(@Body twinklePostBody: TwinklePostBody): Response<TwinkleResponse>
 

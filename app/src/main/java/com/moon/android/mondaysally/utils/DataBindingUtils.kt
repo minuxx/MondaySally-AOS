@@ -26,6 +26,7 @@ import com.moon.android.mondaysally.ui.main.clover.CloverRankingAdapter
 import com.moon.android.mondaysally.ui.main.home.GiftHistoryAdapter
 import com.moon.android.mondaysally.ui.main.home.MemberListAdapter
 import com.moon.android.mondaysally.ui.main.twinkle.twinkle_detail.CommentAdapter
+import org.w3c.dom.Text
 import java.text.DecimalFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -366,5 +367,14 @@ object DataBindingUtils {
     fun bindMyPageWorkingYear(textView: TextView, workingYear: Int) {
         val text = "${workingYear}년"
         textView.text = text
+    }
+
+    @BindingAdapter("bind_comment_delete_visibility")
+    @JvmStatic
+    fun bindCommentDeleteVisibility(textView: TextView, isCommentWrited: String) {
+        if (isCommentWrited == "Y")
+            textView.visibility = VISIBLE
+        else
+            textView.visibility = GONE
     }
 }

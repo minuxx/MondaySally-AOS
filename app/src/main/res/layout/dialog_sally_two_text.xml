@@ -37,8 +37,7 @@
                 android:gravity="center"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                tools:ignore="NestedWeights"
-                tools:text="댓글을 삭제하시겠습니까?" />
+                android:text="@string/comment_delete_check" />
 
             <TextView
                 android:id="@+id/dialog_sally_content_tv"
@@ -50,7 +49,7 @@
                 android:textColor="@color/brown_grey"
                 android:textSize="13sp"
                 tools:ignore="NestedWeights"
-                tools:text="삭제된 댓글은 복구가 불가능합니다." />
+                android:text="@string/comment_delete_check_guide" />
         </LinearLayout>
 
         <TextView
@@ -63,7 +62,7 @@
             android:gravity="center"
             android:textColor="@color/white"
             android:textSize="15sp"
-            tools:text="확인" />
+            android:text="@string/ok" />
 
     </LinearLayout>
 

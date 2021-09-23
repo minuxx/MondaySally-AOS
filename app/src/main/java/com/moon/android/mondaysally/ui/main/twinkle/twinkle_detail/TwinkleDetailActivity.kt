@@ -12,13 +12,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
 import androidx.core.widget.NestedScrollView
 import androidx.viewpager2.widget.ViewPager2
 import com.moon.android.mondaysally.R
 import com.moon.android.mondaysally.databinding.ActivityTwinkleDetailBinding
 import com.moon.android.mondaysally.ui.BaseActivity
+import com.moon.android.mondaysally.ui.SallyDialogTwoText
 import com.moon.android.mondaysally.ui.main.twinkle.BottomSheetDialogFragment
 import com.moon.android.mondaysally.ui.main.twinkle.TwinkleViewModel
 import com.moon.android.mondaysally.ui.main.twinkle.twinkle_post.TwinklePostActivity
@@ -35,6 +35,7 @@ class TwinkleDetailActivity : BaseActivity<ActivityTwinkleDetailBinding>() {
     lateinit var imageViewPager: ViewPager2
     lateinit var indicator: CircleIndicator3
     lateinit var viewPagerAdapter: ImageViewpagerAdapter
+    lateinit var commentAdapter: CommentAdapter
 
     override fun getLayoutResId() = R.layout.activity_twinkle_detail
 
@@ -108,6 +109,11 @@ class TwinkleDetailActivity : BaseActivity<ActivityTwinkleDetailBinding>() {
             }
         })
 
+        twinkleViewModel.commentDeleteSuccess.observe(this, { deletedPosition ->
+            commentAdapter.items.removeAt(deletedPosition)
+            commentAdapter.notifyItemRemoved(deletedPosition)
+        })
+
         twinkleViewModel.twinkleResult.observe(this, { twinkleResult ->
             viewPagerAdapter = ImageViewpagerAdapter(this, twinkleResult.twinkleImglists)
             imageViewPager.adapter = viewPagerAdapter
@@ -144,6 +150,23 @@ class TwinkleDetailActivity : BaseActivity<ActivityTwinkleDetailBinding>() {
     }
 
     override fun initAfterBinding() {
+        commentAdapter = CommentAdapter()
+        commentAdapter.setCommentDeleteClickListener { twinkleComment, position ->
+            showSallyDialogTwoText(
+                this,
+                getString(R.string.comment_delete_check),
+                getString(R.string.comment_delete_check_guide),
+                getString(R.string.ok),
+                object : SallyDialogTwoText.DialogClickListener {
+                    override fun onOKClicked() {
+                        twinkleViewModel.deleteComment(twinkleComment.idx, position)
+                    }
+                })
+        }
+        commentAdapter.setCommentEditClickListener { twinkleComment, position ->
+
+        }
+        binding.activityShopDetailRvComment.adapter = commentAdapter
         twinkleViewModel.twinkleIndex.value = intent.getIntExtra("idx", 0)
         twinkleViewModel.getTwinkleDetail(twinkleViewModel.twinkleIndex.value!!)
     }

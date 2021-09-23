@@ -41,6 +41,7 @@ class TwinkleViewModel(
     //TwinkleDetail
     var twinkleResult: MutableLiveData<TwinkleResult> = MutableLiveData()
     var commentPostSuccess: MutableLiveData<Boolean> = MutableLiveData()
+    var commentDeleteSuccess: MutableLiveData<Int> = MutableLiveData()
     var likePostSuccess: MutableLiveData<Boolean> = MutableLiveData()
     var hideKeyboard: MutableLiveData<Boolean> = MutableLiveData()
     var commentRefresh: MutableLiveData<Boolean> = MutableLiveData()
@@ -125,6 +126,27 @@ class TwinkleViewModel(
             fail.value = Fail(e.message!!, 404)
         }
     }
+
+    fun deleteComment(commentIndex: Int, position: Int) = viewModelScope.launch {
+        try {
+            if (twinkleIndex.value == null) {
+                fail.value = Fail("", 404)
+                return@launch
+            }
+            val twinkleResponse = twinkleNetworkRepository.deleteComment(commentIndex)
+            Log.d("네트워크", twinkleResponse.toString())
+            if (twinkleResponse.code == 200) {
+                commentDeleteSuccess.value = position
+            } else {
+                fail.value = Fail(twinkleResponse.message, twinkleResponse.code)
+            }
+        } catch (e: ApiException) {
+            fail.value = Fail(e.message!!, 404)
+        } catch (e: Exception) {
+            fail.value = Fail(e.message!!, 404)
+        }
+    }
+
 
     fun postTwinkle() = viewModelScope.launch {
         val twinkleImgArrayList = ArrayList<String>()

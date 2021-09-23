@@ -67,11 +67,11 @@ class ShopFragment() :
         }
 
         //TODO 아래코드가 두번돌지않게 변경필요
-        GridItemDecoration_15_15(binding.fragmentShopRvGift.context).let {
-            binding.fragmentShopRvGift.addItemDecoration(
-                it
-            )
-        }
+//        GridItemDecoration_15_15(binding.fragmentShopRvGift.context).let {
+//            binding.fragmentShopRvGift.addItemDecoration(
+//                it
+//            )
+//        }
 
 //        context?.let { GridItemDecoration_15_15(it) }?.let {
 //            binding.fragmentShopRvGift.addItemDecoration(

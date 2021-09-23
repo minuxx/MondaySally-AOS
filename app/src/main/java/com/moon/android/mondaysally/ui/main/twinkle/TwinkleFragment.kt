@@ -76,6 +76,7 @@ class TwinkleFragment() :
 
     @SuppressLint("SetTextI18n")
     override fun initAfterBinding() {
+        Log.d("체크", "1")
         twinkleAdapter = TwinkleAdapter()
         myTwinkleAdapter = MyTwinkleAdapter()
 
